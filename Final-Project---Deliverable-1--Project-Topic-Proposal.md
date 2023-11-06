@@ -65,4 +65,4 @@ Completed xxxxxxxxx XX\]
 
 Please also submit (only once per team) a list of your team’s UNIs using
 this form. Doing so will help us keep track of teams.\[Submission
-Completed Mon. November 6, 2023 JO\]
+Completed Mon. November 6, 2023 JO \]
