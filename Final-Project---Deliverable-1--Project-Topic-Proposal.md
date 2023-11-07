@@ -2,7 +2,7 @@ Final Project - Deliverable 1 - Team Registration and Project Topic
 Proposal
 ================
 Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy Turner
-2023-11-06
+Monday, November 06, 2023 07:16 PM
 
 ########################################################################## 
 

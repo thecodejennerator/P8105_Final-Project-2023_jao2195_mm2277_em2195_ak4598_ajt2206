@@ -1,7 +1,7 @@
 ---
 title: "Final Project - Deliverable 1 - Team Registration and Project Topic Proposal"
 author: "Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy Turner"
-date: "2023-11-06"
+date:  "`r format(Sys.time(), '%A, %B %d, %Y %I:%M %p')`"
 output: github_document
 ---
 ##########################################################################
