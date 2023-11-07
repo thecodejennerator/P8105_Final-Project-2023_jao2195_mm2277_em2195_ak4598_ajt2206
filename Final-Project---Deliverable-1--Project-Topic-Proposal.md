@@ -3,7 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner <br>
-**Date:** Tuesday, November 07, 2023 12:44 PM
+**Date:** Tuesday, November 07, 2023 12:50 PM
 
 ### General Instructions: Deliverables & Submissions
 
@@ -23,8 +23,6 @@ this form. Doing so will help us keep track of teams.<br> \[Submission
 Completed Mon. November 6, 2023 JO \]
 
 ### Deliverable 1: Team Registration and Project Topic Proposal
-
-#### Team registration and proposal
 
 First, you will define your teams and propose a project. <br> This
 proposal should be a half-page to a page in length and include:

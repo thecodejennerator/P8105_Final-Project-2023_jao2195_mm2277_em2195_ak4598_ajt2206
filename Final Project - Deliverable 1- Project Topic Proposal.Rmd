@@ -15,7 +15,6 @@ There should be one proposal per group, written collaboratively using .Rmd (rend
 Please also submit (only once per team) a list of your team’s UNIs using this form. Doing so will help us keep track of teams.<br> [Submission Completed Mon. November 6, 2023 JO ]
 
 ### Deliverable 1: Team Registration and Project Topic Proposal 
-#### Team registration and proposal
 First, you will define your teams and propose a project. <br>
 This proposal should be a half-page to a page in length and include:
 
