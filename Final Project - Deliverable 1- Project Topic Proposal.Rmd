@@ -1,61 +1,62 @@
 ---
-title: "Final Project - Deliverable 1 - Team Registration and Project Topic Proposal"
-author: "Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy Turner"
-date:  "`r format(Sys.time(), '%A, %B %d, %Y %I:%M %p')`"
+title: "Final Project <br> Deliverable 1: Team Registration and Project Topic Proposal"
+author: "**Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy Turner <br>" 
+date:  "**Date:** `r format(Sys.time(), '%A, %B %d, %Y %I:%M %p')`"
 output: github_document
+editor_options: 
+  chunk_output_type: inline
 ---
-##########################################################################
-### Deliverable 1 - Team Registration and Project Topic Proposal 
-##########################################################################
+### General Instructions: Deliverables & Submissions
+Other than peer assessments, each deliverable will appear online (as e.g. a GH repo or youtube video). 
+Links should be submitted via Courseworks by one team member (not necessarily the same person for each deliverable).
 
-#### Deliverables (General)
-#### Submissions
+There should be one proposal per group, written collaboratively using .Rmd (rendering to a GH document) in a dedicated GitHub repo. This is intended to describe a project that is in the planning stages. Only one team member should submit this proposal via Canvas.<br> [Submission Completed xxxxxxxxx XX]
 
-Other than peer assessments, each deliverable will appear online (as e.g. a GH repo or youtube video). Links should be submitted via Courseworks by one team member (not necessarily the same person for each deliverable).
+Please also submit (only once per team) a list of your team’s UNIs using this form. Doing so will help us keep track of teams.<br> [Submission Completed Mon. November 6, 2023 JO ]
 
+### Deliverable 1: Team Registration and Project Topic Proposal 
 #### Team registration and proposal
-First, you will define your teams and propose a project. 
+First, you will define your teams and propose a project. <br>
 This proposal should be a half-page to a page in length and include:
 
-1. The group members (names and UNIs)
-
+**1.The group members (names and UNIs)**
 ```{r, echo = FALSE, message = FALSE}
 library(tidyverse)
+library(kableExtra)
 
-#Creating Tibble for Kable Table.
-our_team = tibble (Group_Members = c("Jennifer Osei", "Melike Aksoy","Emily Murphy", "Aleya Khalifa", "Andy Turner"), 
+#Creating Tibble for Kable Table - Group Member Names & UNIs
+our_team = tibble (Group_Member_Names = c("Jennifer Osei", "Melike Aksoy","Emily Murphy", "Aleya Khalifa", "Andy Turner"), 
                 UNIs = c("jao2195", "mma2277", "erm2195", "ak4598", "ajt2206"))
 
 #Creating Neat Table, with Left Alignment for both columns.
-knitr::kable(our_team, caption = "Table 1: Team Members and UNIs ", align = "ll")
+knitr::kable(our_team, caption = "*Table 1: Team Members and UNIs*", align = "ll")
 
 ```
 
-2. The tentative project title
+**2. The tentative project title**
 
-3. The motivation for this project
+**3. The motivation for this project**
 
-4. The intended final products
+**4. The intended final products**
 
-5. The anticipated data sources
+**5. The anticipated data sources**
 
-6. The planned analyses / visualizations / coding challenges
+**6. The planned analyses / visualizations / coding challenges**
 
-
-7. The planned timeline
+**7. The planned timeline**
 ```{r, echo=FALSE}
+#Creating Tibble for Kable Table - Our Plan for Timeline
 our_plan = tibble (Deliverable_Number = c(1:4) , Day = c("Friday", "Friday", "Saturday", "Thursday"),
                 Date = c("November 10, 2023","November 17, 2023","December 9, 2023","December 14, 2023") ,  
                                Time_Due = c("1:00pm", "TBD", "11:59pm", "10am - 11:20pm"), 
-                               Description = c("Form a Team and Submit a Proposal", "Project Review Meeting", "Report| Webpage & Screencast | Peer Assessment ", "In Class Discussion of Final Projects"), 
+                               Description = c("Form a Team and Submit a Proposal", "Project Review Meeting", "Report| Webpage & Screencast | Peer   Assessment ", "In Class Discussion of Final Projects"), 
                               Canvas_Submission = c("YES", "NO", "YES", "NO"), 
                                Type = c("Github Document", "Zoom Meeting", "Github Document | Website | Github Document", "NONE"),
                                Deliverable = c("Written Proposal Document", "NONE: Zoom Meeting", "Written Report Giving Detailed Project Description | Webpage Overview of Project with Short Explanatory Video (Published Online) | Brief Assessment of Your Teammates Contributions (as a Short Document)", "NONE: Enjoy Hearing about Projects! (and also get Hex Stickers)"))
 
-knitr::kable(our_plan, caption = "Table 2: Team Project Timeline", align = "cllclcll")
+#Creating Neat Table, with visually appropriate alignments for all columns.
+knitr::kable(our_plan, caption = "*Table 2: Team Project Timeline*", align = "cllclcll")
 ```
 
-There should be one proposal per group, written collaboratively using .Rmd (rendering to a GH document) in a dedicated GitHub repo. This is intended to describe a project that is in the planning stages. Only one team member should submit this proposal via Canvas. [Submission Completed xxxxxxxxx XX]
 
-Please also submit (only once per team) a list of your team’s UNIs using this form. Doing so will help us keep track of teams.[Submission Completed Mon. November 6, 2023 JO ]
 
