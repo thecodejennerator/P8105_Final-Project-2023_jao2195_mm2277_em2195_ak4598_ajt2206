@@ -1,6 +1,6 @@
 ---
 title: "Final Project <br> Deliverable 1: Team Registration and Project Topic Proposal"
-author: "**Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy Turner <br>" 
+author: "**Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy Turner, Diana Hernandez <br>" 
 date:  "**Date:** `r format(Sys.time(), '%A, %B %d, %Y %I:%M %p')`"
 output: github_document
 editor_options: 
@@ -24,8 +24,8 @@ library(tidyverse)
 library(kableExtra)
 
 #Creating Tibble for Kable Table - Group Member Names & UNIs
-our_team = tibble (Group_Member_Names = c("Jennifer Osei", "Melike Aksoy","Emily Murphy", "Aleya Khalifa", "Andy Turner"), 
-                UNIs = c("jao2195", "mma2277", "erm2195", "ak4598", "ajt2206"))
+our_team = tibble (Group_Member_Names = c("Jennifer Osei", "Melike Aksoy","Emily Murphy", "Aleya Khalifa", "Andy Turner", "Diana Hernandez"), 
+                UNIs = c("jao2195", "mma2277", "erm2195", "ak4598", "ajt2206", "dmh2228"))
 
 #Creating Neat Table, with Left Alignment for both columns.
 knitr::kable(our_team, caption = "*Table 1: Team Members and UNIs*", align = "ll")

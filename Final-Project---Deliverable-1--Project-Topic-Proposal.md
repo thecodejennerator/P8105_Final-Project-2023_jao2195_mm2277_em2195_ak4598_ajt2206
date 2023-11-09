@@ -2,8 +2,8 @@ Final Project <br> Deliverable 1: Team Registration and Project Topic
 Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
-Turner <br>
-**Date:** Thursday, November 09, 2023 06:22 PM
+Turner, Diana Hernandez <br>
+**Date:** Thursday, November 09, 2023 05:28 PM
 
 ### General Instructions: Deliverables & Submissions
 
@@ -84,6 +84,14 @@ Andy Turner
 ajt2206
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+Diana Hernandez
+</td>
+<td style="text-align:left;">
+dmh2228
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -142,6 +150,8 @@ visualizations and a description of our analyses.
 - handling missing data when aggregating data by category
 
 ## 7. The planned timeline
+
+Add: - cleaned dataset - visualizations drafted
 
 <table>
 <caption>
