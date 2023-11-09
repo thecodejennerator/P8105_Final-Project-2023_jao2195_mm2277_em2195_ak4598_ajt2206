@@ -3,7 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner <br>
-**Date:** Tuesday, November 07, 2023 12:50 PM
+**Date:** Thursday, November 09, 2023 06:22 PM
 
 ### General Instructions: Deliverables & Submissions
 
@@ -22,12 +22,13 @@ Please also submit (only once per team) a list of your team’s UNIs using
 this form. Doing so will help us keep track of teams.<br> \[Submission
 Completed Mon. November 6, 2023 JO \]
 
-### Deliverable 1: Team Registration and Project Topic Proposal
+# Deliverable 1: Team Registration and Project Topic Proposal
 
 First, you will define your teams and propose a project. <br> This
 proposal should be a half-page to a page in length and include:
 
-**1.The group members (names and UNIs)**
+## 1.The group members (names and UNIs)
+
 <table>
 <caption>
 *Table 1: Team Members and UNIs*
@@ -86,17 +87,62 @@ ajt2206
 </tbody>
 </table>
 
-**2. The tentative project title**
+## 2. The tentative project title
 
-**3. The motivation for this project**
+**Data Science is Art: Exploring the Origins The Met’s Collections**
 
-**4. The intended final products**
+## 3. The motivation for this project
 
-**5. The anticipated data sources**
+The Met is the largest museum in the United States as such it would take
+days of visits to see all the pieces of art on display. To help fight
+the sensory overload (and exposure to dry air) that comes with repeated
+visits, we will be analyzing the Met’s collections. Breaking down
+artifacts by country and culture of origin, creating a timeline of Met
+artifacts, and creating visualizations worthy of the Met itself will all
+be part of the project. These data explorations and visualizations will
+provide Met visitors with a deeper understanding of its collections -
+both before and after their visits to the museum.
 
-**6. The planned analyses / visualizations / coding challenges**
+*Where does art come from in terms of culture, period, gender, and
+beyond?*
 
-**7. The planned timeline**
+## 4. The intended final products
+
+We will create a website with dashboard that hosts multiple data
+visualizations and a description of our analyses.
+
+## 5. The anticipated data sources
+
+\[The Met Museum\] (<https://metmuseum.github.io/>)
+
+## 6. The planned analyses / visualizations / coding challenges
+
+### Planned analyses
+
+- number of artefacts by dynasty
+- number of artefacts by culture over time
+- trends in the numbers of types of art (e.g., painting, sculpture,
+  etc.)
+- medium of the art by gender of the artist, and whether that differs by
+  highlighted and non-highlighted objects
+- relationship between an artwork being in the public domain and being
+  highlighted
+
+### Visualizations
+
+- world map
+- sankey plot to visualize flows from where artefact originated and
+  where the excavator was from
+- bar chart
+- timeline using line chart
+
+### Coding challenges
+
+- working with string variables
+- handling missing data when aggregating data by category
+
+## 7. The planned timeline
+
 <table>
 <caption>
 *Table 2: Team Project Timeline*
