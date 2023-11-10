@@ -3,7 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner, Diana Hernandez <br>
-**Date:** Friday, November 10, 2023 09:21 AM
+**Date:** Friday, November 10, 2023 11:38 AM
 
 ### General Instructions: Deliverables & Submissions
 
@@ -97,7 +97,7 @@ dmh2228
 
 ## 2. The tentative project title
 
-**Data Science is Art: Exploring the Origins The Met’s Collections**
+**The Art of Data Science: Exploring the Origins The Met’s Collections**
 
 ## 3. The motivation for this project
 
@@ -127,14 +127,15 @@ visualizations and a description of our analyses.
 
 ### Planned analyses
 
-- number of artefacts by dynasty
+- number of artefacts by dynasty and reign
 - number of artefacts by culture over time
-- trends in the numbers of types of art (e.g., painting, sculpture,
-  etc.)
+- trends in the counts of different types of art (e.g., painting,
+  sculpture, etc.) acquired by the MET
 - medium of the art by gender of the artist, and whether that differs by
   highlighted and non-highlighted objects
 - relationship between an artwork being in the public domain and being
   highlighted
+- rivers depicted most frequently/rarely
 
 ### Visualizations
 
@@ -146,7 +147,8 @@ visualizations and a description of our analyses.
 
 ### Coding challenges
 
-- working with string variables
+- working with almost string variables, some of which needed to be
+  recoded
 - handling missing data when aggregating data by category
 - not all categories will pertain to all artefacts, like `reign`, since
   artefacts may be from more recent periods
@@ -155,7 +157,7 @@ visualizations and a description of our analyses.
 
 ## 7. The planned timeline
 
-Add: - cleaned dataset - visualizations drafted
+Add: - cleaned dataset
 
 <table>
 <caption>
@@ -250,13 +252,65 @@ NONE: Zoom Meeting
 Saturday
 </td>
 <td style="text-align:left;">
+November 25, 2023
+</td>
+<td style="text-align:center;">
+11:59pm
+</td>
+<td style="text-align:left;">
+Vizualizations Drafted
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:left;">
+Github Document
+</td>
+<td style="text-align:left;">
+Drafted Github Code and Visualizations
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:left;">
+Saturday
+</td>
+<td style="text-align:left;">
+December 2, 2023
+</td>
+<td style="text-align:center;">
+11:59pm
+</td>
+<td style="text-align:left;">
+Vizualizations Finalized
+</td>
+<td style="text-align:center;">
+NO
+</td>
+<td style="text-align:left;">
+Github Document
+</td>
+<td style="text-align:left;">
+Clean and Finished Github Code and Visualizations
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:left;">
+Saturday
+</td>
+<td style="text-align:left;">
 December 9, 2023
 </td>
 <td style="text-align:center;">
 11:59pm
 </td>
 <td style="text-align:left;">
-Report\| Webpage & Screencast \| Peer Assessment
+Report \| Webpage & Screencast \| Peer Assessment
 </td>
 <td style="text-align:center;">
 YES
@@ -272,7 +326,7 @@ Assessment of Your Teammates Contributions (as a Short Document)
 </tr>
 <tr>
 <td style="text-align:center;">
-4
+6
 </td>
 <td style="text-align:left;">
 Thursday

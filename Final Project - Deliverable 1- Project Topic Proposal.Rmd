@@ -34,7 +34,7 @@ knitr::kable(our_team, caption = "*Table 1: Team Members and UNIs*", align = "ll
 
 ## 2. The tentative project title
 
-**Data Science is Art: Exploring the Origins The Met's Collections**
+**The Art of Data Science: Exploring the Origins The Met's Collections**
 
 
 ## 3. The motivation for this project
@@ -55,11 +55,12 @@ We will create a website with dashboard that hosts multiple data visualizations 
 
 ### Planned analyses
 
--   number of artefacts by dynasty
+-   number of artefacts by dynasty and reign
 -   number of artefacts by culture over time
--   trends in the numbers of types of art (e.g., painting, sculpture, etc.)
+-   trends in the counts of different types of art (e.g., painting, sculpture, etc.) acquired by the MET
 -   medium of the art by gender of the artist, and whether that differs by highlighted and non-highlighted objects
 -   relationship between an artwork being in the public domain and being highlighted
+-   rivers depicted most frequently/rarely
 
 ### Visualizations
 
@@ -70,7 +71,7 @@ We will create a website with dashboard that hosts multiple data visualizations 
 
 ### Coding challenges
 
--   working with string variables
+-   working with almost string variables, some of which needed to be recoded
 -   handling missing data when aggregating data by category
 -   not all categories will pertain to all artefacts, like `reign`, since artefacts may be from more recent periods
 -   working with such a large dataset, we'll have to decide how to filter especially when using dashboard
@@ -80,17 +81,16 @@ We will create a website with dashboard that hosts multiple data visualizations 
 
 Add:
 -   cleaned dataset
--   visualizations drafted
 
 ```{r, echo=FALSE}
 #Creating Tibble for Kable Table - Our Plan for Timeline
-our_plan = tibble (Deliverable_Number = c(1:4) , Day = c("Friday", "Friday", "Saturday", "Thursday"),
-                Date = c("November 10, 2023","November 17, 2023","December 9, 2023","December 14, 2023") ,  
-                               Time_Due = c("1:00pm", "TBD", "11:59pm", "10am - 11:20pm"), 
-                               Description = c("Form a Team and Submit a Proposal", "Project Review Meeting", "Report| Webpage & Screencast | Peer   Assessment ", "In Class Discussion of Final Projects"), 
-                              Canvas_Submission = c("YES", "NO", "YES", "NO"), 
-                               Type = c("Github Document", "Zoom Meeting", "Github Document | Website | Github Document", "NONE"),
-                               Deliverable = c("Written Proposal Document", "NONE: Zoom Meeting", "Written Report Giving Detailed Project Description | Webpage Overview of Project with Short Explanatory Video (Published Online) | Brief Assessment of Your Teammates Contributions (as a Short Document)", "NONE: Enjoy Hearing about Projects! (and also get Hex Stickers)"))
+our_plan = tibble (Deliverable_Number = c(1:6) , Day = c("Friday", "Friday", "Saturday", "Saturday", "Saturday", "Thursday"),
+                Date = c("November 10, 2023","November 17, 2023", "November 25, 2023", "December 2, 2023", "December 9, 2023","December 14, 2023") ,  
+                               Time_Due = c("1:00pm", "TBD", "11:59pm", "11:59pm", "11:59pm", "10am - 11:20pm"), 
+                               Description = c("Form a Team and Submit a Proposal", "Project Review Meeting", "Vizualizations Drafted", "Vizualizations Finalized", "Report | Webpage & Screencast | Peer Assessment ", "In Class Discussion of Final Projects"), 
+                              Canvas_Submission = c("YES", "NO", "NO", "NO", "YES", "NO"), 
+                               Type = c("Github Document", "Zoom Meeting", "Github Document", "Github Document", "Github Document | Website | Github Document", "NONE"),
+                               Deliverable = c("Written Proposal Document", "NONE: Zoom Meeting", "Drafted Github Code and Visualizations", "Clean and Finished Github Code and Visualizations", "Written Report Giving Detailed Project Description | Webpage Overview of Project with Short Explanatory Video (Published Online) | Brief Assessment of Your Teammates Contributions (as a Short Document)", "NONE: Enjoy Hearing about Projects! (and also get Hex Stickers)"))
 
 #Creating Neat Table, with visually appropriate alignments for all columns.
 knitr::kable(our_plan, caption = "*Table 2: Team Project Timeline*", align = "cllclcll")
