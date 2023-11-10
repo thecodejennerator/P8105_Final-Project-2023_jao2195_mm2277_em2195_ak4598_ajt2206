@@ -3,7 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner, Diana Hernandez <br>
-**Date:** Thursday, November 09, 2023 05:28 PM
+**Date:** Friday, November 10, 2023 09:21 AM
 
 ### General Instructions: Deliverables & Submissions
 
@@ -148,6 +148,10 @@ visualizations and a description of our analyses.
 
 - working with string variables
 - handling missing data when aggregating data by category
+- not all categories will pertain to all artefacts, like `reign`, since
+  artefacts may be from more recent periods
+- working with such a large dataset, we’ll have to decide how to filter
+  especially when using dashboard
 
 ## 7. The planned timeline
 

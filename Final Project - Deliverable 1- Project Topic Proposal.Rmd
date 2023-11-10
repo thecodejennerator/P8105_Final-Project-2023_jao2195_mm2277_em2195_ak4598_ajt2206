@@ -73,6 +73,7 @@ We will create a website with dashboard that hosts multiple data visualizations 
 -   working with string variables
 -   handling missing data when aggregating data by category
 -   not all categories will pertain to all artefacts, like `reign`, since artefacts may be from more recent periods
+-   working with such a large dataset, we'll have to decide how to filter especially when using dashboard
 
 
 ## 7. The planned timeline
