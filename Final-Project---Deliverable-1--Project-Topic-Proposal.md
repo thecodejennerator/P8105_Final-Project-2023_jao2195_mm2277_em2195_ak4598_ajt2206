@@ -3,7 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner, Diana Hernandez <br>
-**Date:** Friday, November 10, 2023 11:38 AM
+**Date:** Friday, November 10, 2023 08:48 PM
 
 ### General Instructions: Deliverables & Submissions
 
@@ -159,6 +159,172 @@ visualizations and a description of our analyses.
 
 Add: - cleaned dataset
 
+<table>
+<caption>
+*Table 2: Team Project Timeline*
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Task_Number
+</th>
+<th style="text-align:left;">
+Day
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:center;">
+Description
+</th>
+<th style="text-align:left;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+Thursday
+</td>
+<td style="text-align:left;">
+November 9, 2023
+</td>
+<td style="text-align:center;">
+First team meeting for discussing the ideas, choosing the topic,and
+completing the proposal
+</td>
+<td style="text-align:left;">
+Zoom Meeting
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:left;">
+Saturday
+</td>
+<td style="text-align:left;">
+November 18, 2023
+</td>
+<td style="text-align:center;">
+Team meeting after the Project Review for Coding and Visualizations
+draft
+</td>
+<td style="text-align:left;">
+Zoom Meeting
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:left;">
+Sunday-Wednesday
+</td>
+<td style="text-align:left;">
+November 19, 2023-November 22, 2023
+</td>
+<td style="text-align:center;">
+Working on coding and visualizations
+</td>
+<td style="text-align:left;">
+Github Document
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:left;">
+Monday
+</td>
+<td style="text-align:left;">
+November 27, 2023
+</td>
+<td style="text-align:center;">
+Team meeting for Vizualizations Finalized
+</td>
+<td style="text-align:left;">
+Zoom Meeting
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:left;">
+Monday-Friday
+</td>
+<td style="text-align:left;">
+November 27, 2023-December 1, 2023
+</td>
+<td style="text-align:center;">
+Finalizing the cleaning the code and visualizations
+</td>
+<td style="text-align:left;">
+Github Document
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:left;">
+Monday
+</td>
+<td style="text-align:left;">
+December 4, 2023
+</td>
+<td style="text-align:center;">
+Team meeting for Report, Webpage & Screencast
+</td>
+<td style="text-align:left;">
+Zoom Meeting
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:left;">
+Monday-Friday
+</td>
+<td style="text-align:left;">
+December 4, 2023-December 8, 2023
+</td>
+<td style="text-align:center;">
+Completing the Written Report Giving Detailed Project Description,
+Webpage Overview of Project with Short Explanatory Video, Brief
+Assessment of Teammates Contributions
+</td>
+<td style="text-align:left;">
+Github Document and Website
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:left;">
+Saturday-Thursday
+</td>
+<td style="text-align:left;">
+December 9, 2023- December 14,
+</td>
+<td style="text-align:center;">
+Preparing for In Class Discussion of Final Project
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
 <table>
 <caption>
 *Table 2: Team Project Timeline*

@@ -82,6 +82,23 @@ We will create a website with dashboard that hosts multiple data visualizations 
 Add:
 -   cleaned dataset
 
+
+```{r, echo=FALSE}
+#Creating Tibble for Kable Table - Our Plan for Timeline
+our_plan = tibble (Task_Number = c(1:8) , Day = c("Thursday", "Saturday", "Sunday-Wednesday", "Monday", "Monday-Friday", "Monday", "Monday-Friday", "Saturday-Thursday"),
+                Date = c("November 9, 2023","November 18, 2023", "November 19, 2023-November 22, 2023", "November 27, 2023", "November 27, 2023-December 1, 2023", "December 4, 2023","December 4, 2023-December 8, 2023","December 9, 2023- December 14,") ,  
+                               Description = c("First team meeting for discussing the ideas, choosing the topic,and completing the proposal", "Team meeting after the Project Review for Coding and Visualizations draft", "Working on coding and visualizations", "Team meeting for Vizualizations Finalized","Finalizing the cleaning the code and visualizations" ,"Team meeting for Report, Webpage & Screencast ","Completing the Written Report Giving Detailed Project Description, Webpage Overview of Project with Short Explanatory Video, Brief Assessment of Teammates Contributions", "Preparing for In Class Discussion of Final Project"), 
+                              
+                               Type = c("Zoom Meeting", "Zoom Meeting", "Github Document", "Zoom Meeting", "Github Document", "Zoom Meeting", "Github Document and Website", "None"))
+
+#Creating Neat Table, with visually appropriate alignments for all columns.
+knitr::kable(our_plan, caption = "*Table 2: Team Project Timeline*", align = "cllclcll")
+```
+
+
+
+
+
 ```{r, echo=FALSE}
 #Creating Tibble for Kable Table - Our Plan for Timeline
 our_plan = tibble (Deliverable_Number = c(1:6) , Day = c("Friday", "Friday", "Saturday", "Saturday", "Saturday", "Thursday"),
