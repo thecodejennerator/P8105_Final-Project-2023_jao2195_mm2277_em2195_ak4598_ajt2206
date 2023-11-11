@@ -26,12 +26,12 @@ knitr::kable(our_team, caption = "*Table 1: Team Members and UNIs*", align = "ll
 
 ## 2. The tentative project title
 
-**The Art of Data Science: Exploring the Origins The Met's Collections**
+**The Art of Data Science: Exploring the Origins of The Met's Collections**
 
 
 ## 3. The motivation for this project
 
-The Met is the largest museum in the United States as such it would take days of visits to see all the pieces of art on display. To help fight the sensory overload (and exposure to dry air) that comes with repeated visits, we will be analyzing the Met's collections. Breaking down artifacts by country and culture of origin, creating a timeline of Met artifacts, and creating visualizations worthy of the Met itself will all be part of the project. These data explorations and visualizations will provide Met visitors with a deeper understanding of its collections - both before and after their visits to the museum.
+The Met is the largest museum in the Americas as such it would take days of visits to see all the pieces of art on display. To help fight the sensory overload (and exposure to dry air) that comes with repeated visits, we will be analyzing the Met's collections. Breaking down artifacts by country and culture of origin, creating a timeline of Met artifacts, and creating visualizations worthy of the Met itself will all be part of the project. These data explorations and visualizations will provide Met visitors with a deeper understanding of its collections - both before and after their visits to the museum.
 
 _Where does art come from in terms of culture, period, gender, and beyond?_
 
@@ -56,14 +56,14 @@ We will create a website with dashboard that hosts multiple data visualizations 
 
 ### Visualizations
 
--   world map
+-   world map: maybe a little GIS action
 -   sankey plot to visualize flows from where artefact originated and where the excavator was from
 -   bar chart
 -   timeline using line chart
 
 ### Coding challenges
 
--   working with almost string variables, some of which needed to be recoded
+-   working with mostly string variables, some of which needed to be recoded
 -   handling missing data when aggregating data by category
 -   not all categories will pertain to all artefacts, like `reign`, since artefacts may be from more recent periods
 -   working with such a large dataset, we'll have to decide how to filter especially when using dashboard
