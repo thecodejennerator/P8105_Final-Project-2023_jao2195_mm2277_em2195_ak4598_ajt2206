@@ -3,7 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner, Diana Hernandez <br>
-**Date:** Friday, November 10, 2023 08:48 PM
+**Date:** Saturday, November 11, 2023 09:47 AM
 
 ### General Instructions: Deliverables & Submissions
 
@@ -16,7 +16,7 @@ There should be one proposal per group, written collaboratively using
 .Rmd (rendering to a GH document) in a dedicated GitHub repo. This is
 intended to describe a project that is in the planning stages. Only one
 team member should submit this proposal via Canvas.<br> \[Submission
-Completed xxxxxxxxx XX\]
+Completed Saturday, November 11, 2023 DH\]
 
 Please also submit (only once per team) a list of your team’s UNIs using
 this form. Doing so will help us keep track of teams.<br> \[Submission
@@ -321,199 +321,6 @@ Preparing for In Class Discussion of Final Project
 </td>
 <td style="text-align:left;">
 None
-</td>
-</tr>
-</tbody>
-</table>
-<table>
-<caption>
-*Table 2: Team Project Timeline*
-</caption>
-<thead>
-<tr>
-<th style="text-align:center;">
-Deliverable_Number
-</th>
-<th style="text-align:left;">
-Day
-</th>
-<th style="text-align:left;">
-Date
-</th>
-<th style="text-align:center;">
-Time_Due
-</th>
-<th style="text-align:left;">
-Description
-</th>
-<th style="text-align:center;">
-Canvas_Submission
-</th>
-<th style="text-align:left;">
-Type
-</th>
-<th style="text-align:left;">
-Deliverable
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:left;">
-Friday
-</td>
-<td style="text-align:left;">
-November 10, 2023
-</td>
-<td style="text-align:center;">
-1:00pm
-</td>
-<td style="text-align:left;">
-Form a Team and Submit a Proposal
-</td>
-<td style="text-align:center;">
-YES
-</td>
-<td style="text-align:left;">
-Github Document
-</td>
-<td style="text-align:left;">
-Written Proposal Document
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:left;">
-Friday
-</td>
-<td style="text-align:left;">
-November 17, 2023
-</td>
-<td style="text-align:center;">
-TBD
-</td>
-<td style="text-align:left;">
-Project Review Meeting
-</td>
-<td style="text-align:center;">
-NO
-</td>
-<td style="text-align:left;">
-Zoom Meeting
-</td>
-<td style="text-align:left;">
-NONE: Zoom Meeting
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-3
-</td>
-<td style="text-align:left;">
-Saturday
-</td>
-<td style="text-align:left;">
-November 25, 2023
-</td>
-<td style="text-align:center;">
-11:59pm
-</td>
-<td style="text-align:left;">
-Vizualizations Drafted
-</td>
-<td style="text-align:center;">
-NO
-</td>
-<td style="text-align:left;">
-Github Document
-</td>
-<td style="text-align:left;">
-Drafted Github Code and Visualizations
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:left;">
-Saturday
-</td>
-<td style="text-align:left;">
-December 2, 2023
-</td>
-<td style="text-align:center;">
-11:59pm
-</td>
-<td style="text-align:left;">
-Vizualizations Finalized
-</td>
-<td style="text-align:center;">
-NO
-</td>
-<td style="text-align:left;">
-Github Document
-</td>
-<td style="text-align:left;">
-Clean and Finished Github Code and Visualizations
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5
-</td>
-<td style="text-align:left;">
-Saturday
-</td>
-<td style="text-align:left;">
-December 9, 2023
-</td>
-<td style="text-align:center;">
-11:59pm
-</td>
-<td style="text-align:left;">
-Report \| Webpage & Screencast \| Peer Assessment
-</td>
-<td style="text-align:center;">
-YES
-</td>
-<td style="text-align:left;">
-Github Document \| Website \| Github Document
-</td>
-<td style="text-align:left;">
-Written Report Giving Detailed Project Description \| Webpage Overview
-of Project with Short Explanatory Video (Published Online) \| Brief
-Assessment of Your Teammates Contributions (as a Short Document)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-6
-</td>
-<td style="text-align:left;">
-Thursday
-</td>
-<td style="text-align:left;">
-December 14, 2023
-</td>
-<td style="text-align:center;">
-10am - 11:20pm
-</td>
-<td style="text-align:left;">
-In Class Discussion of Final Projects
-</td>
-<td style="text-align:center;">
-NO
-</td>
-<td style="text-align:left;">
-NONE
-</td>
-<td style="text-align:left;">
-NONE: Enjoy Hearing about Projects! (and also get Hex Stickers)
 </td>
 </tr>
 </tbody>
