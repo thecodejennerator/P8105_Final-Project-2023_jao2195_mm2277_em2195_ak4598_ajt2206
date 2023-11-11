@@ -6,14 +6,6 @@ output: github_document
 editor_options: 
   chunk_output_type: inline
 ---
-### General Instructions: Deliverables & Submissions
-Other than peer assessments, each deliverable will appear online (as e.g. a GH repo or youtube video). 
-Links should be submitted via Courseworks by one team member (not necessarily the same person for each deliverable).
-
-There should be one proposal per group, written collaboratively using .Rmd (rendering to a GH document) in a dedicated GitHub repo. This is intended to describe a project that is in the planning stages. Only one team member should submit this proposal via Canvas.<br> [Submission Completed Saturday, November 11, 2023 DH]
-
-Please also submit (only once per team) a list of your team’s UNIs using this form. Doing so will help us keep track of teams.<br> [Submission Completed Mon. November 6, 2023 JO ]
-
 # Deliverable 1: Team Registration and Project Topic Proposal 
 First, you will define your teams and propose a project. <br>
 This proposal should be a half-page to a page in length and include:
@@ -79,9 +71,6 @@ We will create a website with dashboard that hosts multiple data visualizations 
 
 ## 7. The planned timeline
 
-Add:
--   cleaned dataset
-
 ```{r, echo=FALSE}
 #Creating Tibble for Kable Table - Our Plan for Timeline
 our_plan = tibble (Task_Number = c(1:8) , Day = c("Thursday", "Saturday", "Sunday-Wednesday", "Monday", "Monday-Friday", "Monday", "Monday-Friday", "Saturday-Thursday"),
@@ -93,6 +82,8 @@ our_plan = tibble (Task_Number = c(1:8) , Day = c("Thursday", "Saturday", "Sunda
 #Creating Neat Table, with visually appropriate alignments for all columns.
 knitr::kable(our_plan, caption = "*Table 2: Team Project Timeline*", align = "cllclcll")
 ```
+
+
 
 
 
