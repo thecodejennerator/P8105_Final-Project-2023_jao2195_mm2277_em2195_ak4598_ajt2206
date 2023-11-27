@@ -1,0 +1,85 @@
+
+# Setup
+
+```{r libraries}
+library(tidyverse)
+library(plotly)
+
+```
+
+# Importing Full Dataset
+
+```{r}
+all_objects = 
+  read_csv("data/MetObjects.csv") |> 
+  janitor::clean_names()
+
+```
+
+# Most Common Object Classifiations
+
+## Prepping Data for Analysis
+
+* Filtering to only include objects with a `classification` value, then trying to group objects into specific types.
+* This needs to be cleaned up further, as there are still semi-duplicate categories.
+
+```{r}
+with_classification = 
+  all_objects |> 
+  filter(!is.na(classification) & classification != "(not assigned)") |> 
+  mutate(
+    classification = str_remove(classification, "[-|].*")
+  )
+
+with_classification |> 
+  group_by(classification) |> 
+  summarize(
+    classification_n = n()
+  ) |> 
+  knitr::kable()
+  
+```
+
+## Plotting the Cumulative Sum of Objects Acquired Over Time, by Classification
+
+* For readability, I limited the plot to only include classifications with more than 3000 total acquisitions by 2023. Without doing this, there are a ton of less common categories hanging out at the very bottom and cluttering up the plot.
+* This could be improved by modifying the legend to have the classifications listed by popularity in 2023 in the legend.
+
+```{r}
+
+cumulative_classification = 
+  with_classification |> 
+  group_by(classification, accession_year) |> 
+  summarize(
+    count = n()
+  ) |> 
+  group_by(classification) |> 
+  mutate(
+    cumulative_count = cumsum(count)
+  ) |> 
+  arrange(desc(cumulative_count))
+
+most_acquired_classifications =
+  cumulative_classification |> 
+  group_by(classification) |> 
+  arrange(desc(accession_year)) |> 
+  filter(row_number() == 1 & cumulative_count > 3000)
+
+
+cumulative_classification |> 
+  filter(classification %in% most_acquired_classifications$classification) |> 
+  plot_ly(
+    x = ~accession_year, y = ~cumulative_count, type = "scatter", mode = "line", 
+    color = ~classification, colors = "viridis") |>
+  layout(
+    xaxis = list(title = "Year"), 
+    yaxis = list(title = "Total Acquired")
+  )  
+
+```
+
+
+
+
+
+
