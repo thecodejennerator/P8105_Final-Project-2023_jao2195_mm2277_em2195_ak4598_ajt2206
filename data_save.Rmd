@@ -1,0 +1,74 @@
+---
+title: "Subsetting and Saving Data"
+author: "Aleya Khalifa"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, include = FALSE}
+library(tidyverse)
+library(readr)
+```
+
+## Import data
+
+```{r}
+met <- read_delim("/Users/aleya/Library/CloudStorage/OneDrive-cumc.columbia.edu/Coursework/Data Science I/data/MetObjects.txt") %>%  
+  janitor::clean_names()
+```
+
+
+### Check missingness
+
+The variable `accession_year` has high completeness. And `culture` has moderate completeness. Here is a table of the % rows with missing values by selected column:
+
+```{r}
+sapply(met, function(x) sum(is.na(x))/nrow(met))
+```
+
+
+### Clean up object types to create more general classes
+
+Note that the `object_name` variable can be more detailed than is necessary. Here, I try to create more general categories of objects.
+
+```{r}
+met <- met %>%
+  mutate(object_name = ifelse(
+    grepl("Textile", object_name), "Textile",
+    ifelse(grepl("Painting", object_name), "Painting",
+    ifelse(grepl("Relief", object_name), "Relief",
+    ifelse(grepl("Print", object_name), "Print", 
+           ifelse(grepl("aseball card", object_name), "Baseball card", 
+                  ifelse(grepl("Vase", object_name), "Vase", 
+                         ifelse(grepl("rnament", object_name), "Vase", 
+                                ifelse(grepl("arring", object_name), "Earring", 
+                                       ifelse(grepl("ecklace", object_name), "Necklace", 
+                                              ifelse(grepl("hotograph", object_name), "Photograph", 
+                                                     ifelse(grepl("tatue", object_name), "Statue", 
+           object_name))))))))))))
+```
+
+## Examine different subsets
+
+| Subset scenario                                                                              | Number of rows                                                                                         | Notes                                  |
+|---------------------------------------|-----------------|------------------|
+| Random 10% sample                                                                            | `r nrow(sample_n(met,nrow(met)*.10))`                                                                  |                                        |
+| Observations with complete data for `object_name` and `accession_year`                       | `r nrow(filter(met,!is.na(object_name) & !is.na(accession_year)))`                                     |                                        |
+| Random 10% of sample with complete data for `object_name` and `accession_year`               | `r nrow(sample_n(filter(met,!is.na(object_name) & !is.na(accession_year)),nrow(met)*.10))`             | Might be best                          |
+| Observations with complete data for `object_name` , `accession_year` , `culture`             | `r nrow(filter(met,!is.na(object_name) & !is.na(accession_year) & !is.na(culture)))`                   | Different picture of objects over time |
+| Observations with complete data for `object_name` , `accession_year` , `culture` , `country` | `r nrow(filter(met,!is.na(object_name) & !is.na(accession_year) & !is.na(culture) & !is.na(country)))` | Different picture of objects over time |
+
+: Subsetting scenarios
+
+## Save R data file
+
+Chosen subset: Random 10% of sample with complete data for `object_name` and `accession_year` 
+
+```{r}
+met_subset <- met %>%
+  filter(!is.na(object_name) & !is.na(accession_year)) %>%
+  sample_n(nrow(met)*.10)
+  
+save(met_subset, 
+     file = "data/met.RData")
+```
