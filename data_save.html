@@ -374,9 +374,72 @@ display: none;
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div id="check-missingness" class="section level3">
+<h3>Check missingness</h3>
+<p>The variable <code>accession_year</code> has high completeness. And
+<code>culture</code> has moderate completeness. Here is a table of the %
+rows with missing values by selected column:</p>
+<pre class="r"><code>sapply(met, function(x) sum(is.na(x))/nrow(met))</code></pre>
+<pre><code>##           object_number            is_highlight        is_timeline_work 
+##             0.000000000             0.000000000             0.000000000 
+##        is_public_domain               object_id          gallery_number 
+##             0.000000000             0.000000000             0.897844341 
+##              department          accession_year             object_name 
+##             0.000000000             0.008046091             0.004672589 
+##                   title                 culture                  period 
+##             0.059106393             0.570703322             0.812059238 
+##                 dynasty                   reign               portfolio 
+##             0.952158546             0.976830888             0.945326999 
+##          constituent_id             artist_role           artist_prefix 
+##             0.417446119             0.417446119             0.417446119 
+##     artist_display_name      artist_display_bio           artist_suffix 
+##             0.417446119             0.421755788             0.417545097 
+##       artist_alpha_sort      artist_nationality       artist_begin_date 
+##             0.417446119             0.417446119             0.417446119 
+##         artist_end_date           artist_gender         artist_ulan_url 
+##             0.417446119             0.780429565             0.531006937 
+##     artist_wikidata_url             object_date       object_begin_date 
+##             0.537685893             0.027695296             0.000000000 
+##         object_end_date                  medium              dimensions 
+##             0.000000000             0.014875576             0.154770742 
+##             credit_line          geography_type                    city 
+##             0.001342390             0.876361979             0.932459852 
+##                   state                  county                 country 
+##             0.994595386             0.982350976             0.843270317 
+##                  region               subregion                  locale 
+##             0.935045654             0.954340188             0.967545509 
+##                   locus              excavation                   river 
+##             0.984497563             0.965829890             0.995686207 
+##          classification rights_and_reproduction           link_resource 
+##             0.162317819             0.949420154             0.000000000 
+##     object_wikidata_url           metadata_date              repository 
+##             0.857401496             1.000000000             0.000000000 
+##                    tags            tags_aat_url       tags_wikidata_url 
+##             0.603149564             0.603149564             0.603149564</code></pre>
 </div>
-<div id="different-subsets" class="section level2">
-<h2>Different subsets</h2>
+<div id="clean-up-object-types-to-create-more-general-classes" class="section level3">
+<h3>Clean up object types to create more general classes</h3>
+<p>Note that the <code>object_name</code> variable can be more detailed
+than is necessary. Here, I try to create more general categories of
+objects.</p>
+<pre class="r"><code>met &lt;- met %&gt;%
+  mutate(object_name = ifelse(
+    grepl(&quot;Textile&quot;, object_name), &quot;Textile&quot;,
+    ifelse(grepl(&quot;Painting&quot;, object_name), &quot;Painting&quot;,
+    ifelse(grepl(&quot;Relief&quot;, object_name), &quot;Relief&quot;,
+    ifelse(grepl(&quot;Print&quot;, object_name), &quot;Print&quot;, 
+           ifelse(grepl(&quot;aseball card&quot;, object_name), &quot;Baseball card&quot;, 
+                  ifelse(grepl(&quot;Vase&quot;, object_name), &quot;Vase&quot;, 
+                         ifelse(grepl(&quot;rnament&quot;, object_name), &quot;Vase&quot;, 
+                                ifelse(grepl(&quot;arring&quot;, object_name), &quot;Earring&quot;, 
+                                       ifelse(grepl(&quot;ecklace&quot;, object_name), &quot;Necklace&quot;, 
+                                              ifelse(grepl(&quot;hotograph&quot;, object_name), &quot;Photograph&quot;, 
+                                                     ifelse(grepl(&quot;tatue&quot;, object_name), &quot;Statue&quot;, 
+           object_name))))))))))))</code></pre>
+</div>
+</div>
+<div id="examine-different-subsets" class="section level2">
+<h2>Examine different subsets</h2>
 <table>
 <caption>Subsetting scenarios</caption>
 <colgroup>
@@ -427,6 +490,14 @@ and <code>accession_year</code></td>
 </div>
 <div id="save-r-data-file" class="section level2">
 <h2>Save R data file</h2>
+<p>Chosen subset: Random 10% of sample with complete data for
+<code>object_name</code> and <code>accession_year</code></p>
+<pre class="r"><code>met &lt;- met %&gt;%
+  filter(!is.na(object_name) &amp; !is.na(accession_year)) %&gt;%
+  sample_n(nrow(met)*.10)
+  
+save(met, 
+     file = &quot;data/met.RData&quot;)</code></pre>
 </div>
 
 

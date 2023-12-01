@@ -65,10 +65,10 @@ met <- met %>%
 Chosen subset: Random 10% of sample with complete data for `object_name` and `accession_year` 
 
 ```{r}
-met_subset <- met %>%
+met <- met %>%
   filter(!is.na(object_name) & !is.na(accession_year)) %>%
   sample_n(nrow(met)*.10)
   
-save(met_subset, 
+save(met, 
      file = "data/met.RData")
 ```
