@@ -15,4 +15,44 @@ Final Project for P8105 Data Science
 * Divide out responsibilities: 2 on cleaning data and making plots, 2 on writing up the narrative about the results, 2 on making the website
 
 
+# 12/1 Check-In
 
+* Use a .txt extension to load the datafile so that it works for everyone
+
+## Categories
+
+* Aleya: The Met's growing collection / changes in the Met over time
+^ How does the Met acquire art?
+
+* Diana: Arists/Departments (not geolocated stuff)
+^ Example: Objects by department 
+
+* Melike: One big page that's just a big interactive map of art by countries
+^ Diana's going send the link of a prior project's Github which did something like this
+
+* Andy: Diving into Egypt specifically
+
+* Anyone: zooming in on a particularly momentous year for Met (1963?)
+^ Pull any weird things that come out from our individual analyses
+
+* Jennifer & Emily: website
+- Diana can also help with writing portion on the website 
+
+## Focus on Complete Categories
+
+* `years` are very complete
+* 50% of the objects had a defined `culture`
+* `department` and `classification` are really complete
+
+# Chunking out the Data
+
+* Create an R datafile with just all of observations that have non-missing years, culture, department, and classification. How small does does this make the dataset?
+
+## Due Dates
+
+By EOD Wednesday: finish draft of site
+Thursday afternoon: meet for a Zoom call
+- Everyone free 4:30 to 5:30pm to Zoom
+By EOD Thursday: review site and fix any last minute things
+Friday: Emily works on screencast, send to everyone for review 
+Saturday: submit!
