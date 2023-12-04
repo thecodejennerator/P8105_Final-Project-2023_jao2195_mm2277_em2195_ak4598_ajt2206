@@ -256,13 +256,13 @@ $(document).ready(function () {
   <a href="the_data.html">Exhibition A: The Data</a>
 </li>
 <li>
-  <a href="c_exhibit_b_the_art.html">Exhibition B: Exploring the Met's Department</a>
+  <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
 </li>
 <li>
-  <a href="d_exhibit_c_taods_the_analysis.html">Exhibition C: The Met's Growing Collection</a>
+  <a href="growing_collection.html">Exhibition C: The Met's Growing Collection</a>
 </li>
 <li>
-  <a href="e_exhibit_d_world_art.html">Exhibition D: Art Around the World</a>
+  <a href="around_the_world.html">Exhibition D: Art Around the World</a>
 </li>
 <li>
   <a href="f_exhibit_e_select_exhibits.html">Special Exhibitions</a>
@@ -311,12 +311,12 @@ $(document).ready(function () {
 <h2>Import data</h2>
 <pre class="r"><code>met &lt;- read_delim(&quot;data/MetObjectsTxt.txt&quot;) %&gt;%  
   janitor::clean_names()</code></pre>
-<pre><code>## Warning: One or more parsing issues, call `problems()` on your data frame for
-## details, e.g.:
+<pre><code>## Warning: One or more parsing issues, call `problems()` on your
+## data frame for details, e.g.:
 ##   dat &lt;- vroom(...)
 ##   problems(dat)</code></pre>
 <pre><code>## Rows: 484956 Columns: 54
-## ── Column specification ──────────────────────────────────────────────────
+## ── Column specification ──────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (45): Object Number, Gallery Number, Department, Object Name, Title, Cul...
 ## dbl  (5): Object ID, AccessionYear, Constituent ID, Object Begin Date, Objec...
