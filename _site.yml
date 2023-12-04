@@ -1,4 +1,4 @@
-name: "Welcome to The Art of Data Science: The Met Museum"
+name: "The Art of Data Science: The Met Museum"
 output_dir: "."
 navbar:
   title: "Home"
