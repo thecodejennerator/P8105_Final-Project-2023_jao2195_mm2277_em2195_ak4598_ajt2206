@@ -1,0 +1,122 @@
+---
+title: "Exhibition A: The Data"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+library(viridis)
+```
+
+-----------------------------------------------------------------------
+
+### Chart A - Bar Plot
+
+```{r, echo = FALSE}
+#options
+knitr::opts_chunk$set(
+	echo = TRUE,
+	warning = FALSE,
+	fig.width = 8, 
+  fig.height = 6,
+  out.width = "90%"
+)
+
+#themeset
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+#themecolor palette
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+
+```
+
+```{r, echo = FALSE}
+
+instacart_pd = 
+  instacart %>% filter(department == "produce")
+
+
+hour_freq <- instacart_pd %>%
+  group_by(order_hour_of_day) %>%
+  summarize(frequency = n()) %>%
+  arrange(desc(frequency))
+
+
+# Assuming your dataset is named 'instacart_data'
+# library(dplyr)  # Load the dplyr package for data manipulation
+# library(viridis)  # Load the viridis package for the magma color palette
+
+# Calculate the frequency of each order_hour_of_day
+hour_freq <- instacart_pd %>%
+  group_by(order_hour_of_day) %>%
+  summarize(frequency = n()) %>%
+  arrange(desc(frequency))
+
+# Create the bar plot with the magma color palette
+insta_barplot = ggplot(hour_freq, aes(x = order_hour_of_day, y = frequency, fill = frequency)) +
+  geom_bar(stat = "identity") +
+  scale_fill_viridis_c(option = "plasma", direction = -1) +  # Set the magma color palette
+  labs(title = "Order Hour of Day Frequency - Produce Section",
+       x = "Order Hour of Day",
+       y = "Frequency")
+
+ggplotly(insta_barplot)
+
+
+```
+
+
+-----------------------------------------------------------------------
+
+### Chart B - Box Plot
+
+```{r, echo = FALSE}
+
+# Create a box plot for each aisle
+box_ggplot = ggplot(instacart_pd, aes(x = aisle, y = order_hour_of_day, fill = aisle)) +
+  geom_boxplot() +
+    scale_fill_viridis_d(option = "plasma") +
+  labs(title = "Box Plots of Days Since Prior Order by Aisle _ Produce Section",
+       x = "Aisle",
+       y = "Days Since Prior Order") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+ggplotly(box_ggplot)
+```
+
+### Chart C - Line Plot 
+
+
+```{r, echo = FALSE, message=FALSE}
+
+# Calculate the frequency of your variable
+frequency_data <- instacart_pd %>%
+  group_by(add_to_cart_order, aisle) %>%
+  summarize(frequency = n())
+
+# Create a line plot
+myline = ggplot(frequency_data, aes(x = add_to_cart_order, y = frequency, color = aisle)) +
+  geom_line() +
+  scale_fill_viridis_c() +
+  labs(
+    title = "Frequency of Add to Cart Order by Aisle",
+    x = "Add to Cart Order",
+    y = "Frequency / Number Added to Cart"
+  ) + theme(legend.position = "bottom") 
+
+ggplotly(myline)
+```
+
