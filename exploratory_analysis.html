@@ -13,7 +13,7 @@
 
 <title>exploratory_analysis.knit</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -32,11 +32,11 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="site_libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="site_libs/htmlwidgets-1.6.3/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 <link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
@@ -270,13 +270,13 @@ $(document).ready(function () {
   <a href="around_the_world.html">Exhibition D: Art Around the World</a>
 </li>
 <li>
-  <a href="f_exhibit_e_select_exhibits.html">Special Exhibitions</a>
+  <a href="special_exhibitions.html">Special Exhibitions</a>
 </li>
 <li>
-  <a href="g_the_final_exposition.html">Project Report</a>
+  <a href="project_report.html">Project Report</a>
 </li>
 <li>
-  <a href="h_the_artists.html">Curators</a>
+  <a href="curators.html">Curators</a>
 </li>
 <li>
   <a href="https://www.metmuseum.org/">
@@ -311,8 +311,36 @@ $(document).ready(function () {
 
 <div id="setup" class="section level1">
 <h1>Setup</h1>
-<pre class="r"><code>library(tidyverse)
-library(plotly)</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(plotly)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;plotly&#39;
+## 
+## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     last_plot
+## 
+## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter
+## 
+## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     layout</code></pre>
+<pre class="r"><code>library(sf)</code></pre>
+<pre><code>## Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+<pre class="r"><code>library(rnaturalearth)</code></pre>
+<pre><code>## Support for Spatial objects (`sp`) will be deprecated in {rnaturalearth} and will be removed in a future release of the package. Please use `sf` objects with {rnaturalearth}. For example: `ne_download(returnclass = &#39;sf&#39;)`</code></pre>
 </div>
 <div id="importing-full-dataset" class="section level1">
 <h1>Importing Full Dataset</h1>
@@ -1072,8 +1100,8 @@ classifications listed by popularity in 2023 in the legend.</li>
     cumulative_count = cumsum(count)
   ) |&gt; 
   arrange(desc(cumulative_count))</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;classification&#39;. You
-## can override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;classification&#39;. You can override using
+## the `.groups` argument.</code></pre>
 <pre class="r"><code>most_acquired_classifications =
   cumulative_classification |&gt; 
   group_by(classification) |&gt; 
@@ -1090,8 +1118,179 @@ cumulative_classification |&gt;
     xaxis = list(title = &quot;Year&quot;), 
     yaxis = list(title = &quot;Total Acquired&quot;)
   )  </code></pre>
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-464e41d808071b0025e1" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-464e41d808071b0025e1">{"x":{"visdat":{"f9a14bdffc67":["function () ","plotlyVisDat"]},"cur_data":"f9a14bdffc67","attrs":{"f9a14bdffc67":{"x":{},"y":{},"mode":"line","color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Total Acquired"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980,1979,1978,1977,1976,1975,1974,1973,1972,1971,1970,1969,1968,1967,1966,1965,1964,1963,1962,1961,1960,1959,1958,1957,1956,1955,1954,1953,1952,1951,1950,1949,1948,1947,1946,1944,1943,1941,1940,1939,1938,1937,1936,1933,1930,1929,1918],"y":[3757,3727,3703,3673,3628,3586,3516,3492,3409,3388,3340,3306,3272,3264,3240,3227,3189,3177,2810,2776,2762,2742,2725,2695,2573,2560,2538,2508,2492,2428,2412,2389,2359,2341,2326,2306,2214,2168,2135,2112,2072,2021,1965,1953,1937,1903,1878,1835,1792,1742,1717,1664,1647,1519,1507,1495,1467,1460,1454,1445,356,325,313,306,291,279,273,267,260,253,251,240,222,221,205,194,185,149,145,132,122,119,118,116,86,80,3,2,1],"mode":"line","type":"scatter","name":"Photographs","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980,1979,1978,1977,1976,1975,1974,1973,1972,1971,1970,1969,1968,1967,1966,1965,1964,1963,1962,1961,1960,1959,1958,1957,1956,1955,1954,1953,1952,1951,1950,1949,1948,1947,1946,1945,1944,1943,1942,1941,1940,1939,1938,1937,1936,1935,1934,1933,1932,1931,1930,1929,1928,1927,1926,1925,1924,1923,1922,1921,1920,1919,1918,1917,1916,1914,1913,1912,1911,1910,1907,1906,1891,1883],"y":[11939,11927,11903,11892,11885,11804,11776,11752,11644,11623,11574,11556,11373,11253,11244,11227,11221,11158,11136,11116,11112,11079,11057,11017,10983,10944,10920,10909,10904,10878,10788,10762,10747,10722,10706,10678,10660,10647,10533,10464,10388,10353,10319,10291,10261,10212,10163,10121,10081,10032,10004,9980,9913,9875,9806,9769,9678,9596,9500,9441,9401,6577,6289,6187,6069,5678,5596,5384,5324,5254,5128,4700,4592,4187,4141,3832,3784,3676,3534,3485,3463,3302,3203,2879,2823,2763,2745,2702,2622,2589,2570,2405,2333,2250,2162,2002,1889,1754,1553,1509,1288,1179,1009,937,820,741,597,126,123,64,61,59,45,44,43,41,30],"mode":"line","type":"scatter","name":"Prints","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2005,2004,2003,2002,2001,2000,1999,1998,1997,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980,1979,1978,1977,1976,1975,1974,1973,1972,1971,1970,1969,1968,1967,1966,1965,1964,1963,1962,1961,1960,1959,1958,1957,1956,1955,1954,1953,1952,1951,1950,1949,1948,1947,1946,1945,1944,1943,1942,1941,1940,1939,1938,1937,1936,1935,1934,1933,1932,1931,1930,1929,1928,1927,1926,1925,1924,1923,1922,1921,1920,1919,1918,1917,1916,1915,1914,1913,1912,1911,1910,1909,1908,1907,1906,1900,1896,1891,1890,1889,1888,1882,1879],"y":[3200,3196,3192,3191,3188,3180,3166,3163,3153,3150,3144,3142,3131,3129,3087,3078,3077,3075,3074,3072,2980,2975,2957,2929,2925,2916,2914,2895,2894,2892,2889,2876,2874,2864,2848,2843,2828,2807,2798,2793,2777,2771,2744,2739,2727,2714,2675,2660,2643,2629,2614,2589,2581,2575,2559,2551,2540,2522,2513,2504,2493,2483,2474,2469,2395,2389,2373,2364,2350,2343,2333,2326,2308,2296,2294,2247,2239,2222,2192,2172,2146,2143,2137,2117,2093,1818,1808,1800,1733,1718,1702,1625,1612,1600,1569,1526,1519,1511,1495,1480,1458,1253,1226,1224,1204,1197,1181,1168,1144,1139,1106,1072,720,436,414,376,374,176,172,82,39,31,28],"mode":"line","type":"scatter","name":"Textiles","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-4e64e9470d8a09007d50" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-4e64e9470d8a09007d50">{"x":{"visdat":{"83638cc69c1":["function () ","plotlyVisDat"]},"cur_data":"83638cc69c1","attrs":{"83638cc69c1":{"x":{},"y":{},"mode":"line","color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Year"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Total Acquired"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980,1979,1978,1977,1976,1975,1974,1973,1972,1971,1970,1969,1968,1967,1966,1965,1964,1963,1962,1961,1960,1959,1958,1957,1956,1955,1954,1953,1952,1951,1950,1949,1948,1947,1946,1944,1943,1941,1940,1939,1938,1937,1936,1933,1930,1929,1918],"y":[3757,3727,3703,3673,3628,3586,3516,3492,3409,3388,3340,3306,3272,3264,3240,3227,3189,3177,2810,2776,2762,2742,2725,2695,2573,2560,2538,2508,2492,2428,2412,2389,2359,2341,2326,2306,2214,2168,2135,2112,2072,2021,1965,1953,1937,1903,1878,1835,1792,1742,1717,1664,1647,1519,1507,1495,1467,1460,1454,1445,356,325,313,306,291,279,273,267,260,253,251,240,222,221,205,194,185,149,145,132,122,119,118,116,86,80,3,2,1],"mode":"line","type":"scatter","name":"Photographs","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2023,2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980,1979,1978,1977,1976,1975,1974,1973,1972,1971,1970,1969,1968,1967,1966,1965,1964,1963,1962,1961,1960,1959,1958,1957,1956,1955,1954,1953,1952,1951,1950,1949,1948,1947,1946,1945,1944,1943,1942,1941,1940,1939,1938,1937,1936,1935,1934,1933,1932,1931,1930,1929,1928,1927,1926,1925,1924,1923,1922,1921,1920,1919,1918,1917,1916,1914,1913,1912,1911,1910,1907,1906,1891,1883],"y":[11939,11927,11903,11892,11885,11804,11776,11752,11644,11623,11574,11556,11373,11253,11244,11227,11221,11158,11136,11116,11112,11079,11057,11017,10983,10944,10920,10909,10904,10878,10788,10762,10747,10722,10706,10678,10660,10647,10533,10464,10388,10353,10319,10291,10261,10212,10163,10121,10081,10032,10004,9980,9913,9875,9806,9769,9678,9596,9500,9441,9401,6577,6289,6187,6069,5678,5596,5384,5324,5254,5128,4700,4592,4187,4141,3832,3784,3676,3534,3485,3463,3302,3203,2879,2823,2763,2745,2702,2622,2589,2570,2405,2333,2250,2162,2002,1889,1754,1553,1509,1288,1179,1009,937,820,741,597,126,123,64,61,59,45,44,43,41,30],"mode":"line","type":"scatter","name":"Prints","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2022,2021,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2005,2004,2003,2002,2001,2000,1999,1998,1997,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980,1979,1978,1977,1976,1975,1974,1973,1972,1971,1970,1969,1968,1967,1966,1965,1964,1963,1962,1961,1960,1959,1958,1957,1956,1955,1954,1953,1952,1951,1950,1949,1948,1947,1946,1945,1944,1943,1942,1941,1940,1939,1938,1937,1936,1935,1934,1933,1932,1931,1930,1929,1928,1927,1926,1925,1924,1923,1922,1921,1920,1919,1918,1917,1916,1915,1914,1913,1912,1911,1910,1909,1908,1907,1906,1900,1896,1891,1890,1889,1888,1882,1879],"y":[3200,3196,3192,3191,3188,3180,3166,3163,3153,3150,3144,3142,3131,3129,3087,3078,3077,3075,3074,3072,2980,2975,2957,2929,2925,2916,2914,2895,2894,2892,2889,2876,2874,2864,2848,2843,2828,2807,2798,2793,2777,2771,2744,2739,2727,2714,2675,2660,2643,2629,2614,2589,2581,2575,2559,2551,2540,2522,2513,2504,2493,2483,2474,2469,2395,2389,2373,2364,2350,2343,2333,2326,2308,2296,2294,2247,2239,2222,2192,2172,2146,2143,2137,2117,2093,1818,1808,1800,1733,1718,1702,1625,1612,1600,1569,1526,1519,1511,1495,1480,1458,1253,1226,1224,1204,1197,1181,1168,1144,1139,1106,1072,720,436,414,376,374,176,172,82,39,31,28],"mode":"line","type":"scatter","name":"Textiles","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>met &lt;- met |&gt;
+  select(department, accession_year, object_name, culture, country, reign, artist_gender, dynasty, is_public_domain) |&gt; 
+  mutate_all(~ifelse(. == &quot;&quot;, &quot;unknown&quot;, .)) |&gt; 
+  filter(!is.na(accession_year), accession_year &gt;= 1940, accession_year &lt;= 2023)</code></pre>
+<pre class="r"><code>top_years_culture &lt;- met |&gt; 
+  group_by(accession_year, object_name, culture) |&gt; 
+  summarize(count = n()) |&gt; 
+  arrange(desc(count)) |&gt; 
+  ungroup() |&gt; 
+  top_n(15)
+
+print(top_years_culture)</code></pre>
+<pre><code>## # A tibble: 15 × 4
+##    accession_year object_name    culture      count
+##             &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;        &lt;int&gt;
+##  1           1963 Print          &lt;NA&gt;          2551
+##  2           2011 Kylix fragment Greek, Attic   882
+##  3           1963 Photograph     &lt;NA&gt;           809
+##  4           1994 Negative       &lt;NA&gt;           589
+##  5           1963 Baseball card  &lt;NA&gt;           492
+##  6           1953 Print          &lt;NA&gt;           450
+##  7           1951 Print          &lt;NA&gt;           406
+##  8           1959 Print          &lt;NA&gt;           379
+##  9           1941 Print          &lt;NA&gt;           312
+## 10           1949 Print          &lt;NA&gt;           310
+## 11           2005 Photograph     &lt;NA&gt;           306
+## 12           1962 Print          &lt;NA&gt;           292
+## 13           1957 Print          &lt;NA&gt;           222
+## 14           1948 Fragment       &lt;NA&gt;           189
+## 15           2012 Print          &lt;NA&gt;           178</code></pre>
+<pre class="r"><code>country_dist &lt;- met |&gt; 
+  group_by(country, accession_year) |&gt; 
+  summarize(count = n()) |&gt; 
+  arrange(desc(count)) |&gt; 
+  ungroup()
+
+print(country_dist)</code></pre>
+<pre><code>## # A tibble: 976 × 3
+##    country accession_year count
+##    &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;
+##  1 &lt;NA&gt;              1963  4161
+##  2 &lt;NA&gt;              2011  1900
+##  3 &lt;NA&gt;              1994   961
+##  4 &lt;NA&gt;              2009   942
+##  5 &lt;NA&gt;              1953   684
+##  6 &lt;NA&gt;              1941   672
+##  7 &lt;NA&gt;              1951   600
+##  8 &lt;NA&gt;              1959   563
+##  9 &lt;NA&gt;              1975   538
+## 10 &lt;NA&gt;              1949   535
+## # ℹ 966 more rows</code></pre>
+<pre class="r"><code>met &lt;- met |&gt;
+  select(department, accession_year, object_name, culture, country) |&gt; 
+  mutate_all(~ifelse(. == &quot;&quot;, &quot;unknown&quot;, .)) |&gt; 
+  filter(!is.na(accession_year), accession_year &gt;= 1940, accession_year &lt;= 2023)</code></pre>
+<pre class="r"><code>met |&gt;
+  group_by(department) |&gt;
+  summarize(count = n()) |&gt; 
+  arrange(desc(count)) |&gt; 
+  knitr::kable(digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">department</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Drawings and Prints</td>
+<td align="right">13387</td>
+</tr>
+<tr class="even">
+<td align="left">Photographs</td>
+<td align="right">3542</td>
+</tr>
+<tr class="odd">
+<td align="left">Costume Institute</td>
+<td align="right">3051</td>
+</tr>
+<tr class="even">
+<td align="left">Greek and Roman Art</td>
+<td align="right">1986</td>
+</tr>
+<tr class="odd">
+<td align="left">Asian Art</td>
+<td align="right">1715</td>
+</tr>
+<tr class="even">
+<td align="left">European Sculpture and Decorative Arts</td>
+<td align="right">1661</td>
+</tr>
+<tr class="odd">
+<td align="left">Modern and Contemporary Art</td>
+<td align="right">1347</td>
+</tr>
+<tr class="even">
+<td align="left">The American Wing</td>
+<td align="right">1252</td>
+</tr>
+<tr class="odd">
+<td align="left">Arts of Africa, Oceania, and the Americas</td>
+<td align="right">1150</td>
+</tr>
+<tr class="even">
+<td align="left">Islamic Art</td>
+<td align="right">735</td>
+</tr>
+<tr class="odd">
+<td align="left">Ancient Near Eastern Art</td>
+<td align="right">392</td>
+</tr>
+<tr class="even">
+<td align="left">Arms and Armor</td>
+<td align="right">313</td>
+</tr>
+<tr class="odd">
+<td align="left">Robert Lehman Collection</td>
+<td align="right">241</td>
+</tr>
+<tr class="even">
+<td align="left">Egyptian Art</td>
+<td align="right">216</td>
+</tr>
+<tr class="odd">
+<td align="left">Musical Instruments</td>
+<td align="right">186</td>
+</tr>
+<tr class="even">
+<td align="left">European Paintings</td>
+<td align="right">157</td>
+</tr>
+<tr class="odd">
+<td align="left">Medieval Art</td>
+<td align="right">152</td>
+</tr>
+<tr class="even">
+<td align="left">The Cloisters</td>
+<td align="right">122</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>met |&gt; 
+  count(department) |&gt; 
+  mutate(department = fct_reorder(department, n)) |&gt; 
+  plot_ly(x = ~department, y = ~n, color = ~department, type = &quot;bar&quot;, colors = &quot;viridis&quot;)</code></pre>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-402ce6f4f8515eb7c791" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-402ce6f4f8515eb7c791">{"x":{"visdat":{"8366893552b":["function () ","plotlyVisDat"]},"cur_data":"8366893552b","attrs":{"8366893552b":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"department","type":"category","categoryorder":"array","categoryarray":["The Cloisters","Medieval Art","European Paintings","Musical Instruments","Egyptian Art","Robert Lehman Collection","Arms and Armor","Ancient Near Eastern Art","Islamic Art","Arts of Africa, Oceania, and the Americas","The American Wing","Modern and Contemporary Art","European Sculpture and Decorative Arts","Asian Art","Greek and Roman Art","Costume Institute","Photographs","Drawings and Prints"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"n"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["The Cloisters"],"y":[122],"type":"bar","name":"The Cloisters","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Medieval Art"],"y":[152],"type":"bar","name":"Medieval Art","marker":{"color":"rgba(72,23,105,1)","line":{"color":"rgba(72,23,105,1)"}},"textfont":{"color":"rgba(72,23,105,1)"},"error_y":{"color":"rgba(72,23,105,1)"},"error_x":{"color":"rgba(72,23,105,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["European Paintings"],"y":[157],"type":"bar","name":"European Paintings","marker":{"color":"rgba(71,42,122,1)","line":{"color":"rgba(71,42,122,1)"}},"textfont":{"color":"rgba(71,42,122,1)"},"error_y":{"color":"rgba(71,42,122,1)"},"error_x":{"color":"rgba(71,42,122,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Musical Instruments"],"y":[186],"type":"bar","name":"Musical Instruments","marker":{"color":"rgba(67,61,132,1)","line":{"color":"rgba(67,61,132,1)"}},"textfont":{"color":"rgba(67,61,132,1)"},"error_y":{"color":"rgba(67,61,132,1)"},"error_x":{"color":"rgba(67,61,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Egyptian Art"],"y":[216],"type":"bar","name":"Egyptian Art","marker":{"color":"rgba(61,78,138,1)","line":{"color":"rgba(61,78,138,1)"}},"textfont":{"color":"rgba(61,78,138,1)"},"error_y":{"color":"rgba(61,78,138,1)"},"error_x":{"color":"rgba(61,78,138,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Robert Lehman Collection"],"y":[241],"type":"bar","name":"Robert Lehman Collection","marker":{"color":"rgba(53,94,141,1)","line":{"color":"rgba(53,94,141,1)"}},"textfont":{"color":"rgba(53,94,141,1)"},"error_y":{"color":"rgba(53,94,141,1)"},"error_x":{"color":"rgba(53,94,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Arms and Armor"],"y":[313],"type":"bar","name":"Arms and Armor","marker":{"color":"rgba(46,109,142,1)","line":{"color":"rgba(46,109,142,1)"}},"textfont":{"color":"rgba(46,109,142,1)"},"error_y":{"color":"rgba(46,109,142,1)"},"error_x":{"color":"rgba(46,109,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Ancient Near Eastern Art"],"y":[392],"type":"bar","name":"Ancient Near Eastern Art","marker":{"color":"rgba(41,123,142,1)","line":{"color":"rgba(41,123,142,1)"}},"textfont":{"color":"rgba(41,123,142,1)"},"error_y":{"color":"rgba(41,123,142,1)"},"error_x":{"color":"rgba(41,123,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Islamic Art"],"y":[735],"type":"bar","name":"Islamic Art","marker":{"color":"rgba(35,137,142,1)","line":{"color":"rgba(35,137,142,1)"}},"textfont":{"color":"rgba(35,137,142,1)"},"error_y":{"color":"rgba(35,137,142,1)"},"error_x":{"color":"rgba(35,137,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Arts of Africa, Oceania, and the Americas"],"y":[1150],"type":"bar","name":"Arts of Africa, Oceania, and the Americas","marker":{"color":"rgba(31,151,139,1)","line":{"color":"rgba(31,151,139,1)"}},"textfont":{"color":"rgba(31,151,139,1)"},"error_y":{"color":"rgba(31,151,139,1)"},"error_x":{"color":"rgba(31,151,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["The American Wing"],"y":[1252],"type":"bar","name":"The American Wing","marker":{"color":"rgba(33,165,133,1)","line":{"color":"rgba(33,165,133,1)"}},"textfont":{"color":"rgba(33,165,133,1)"},"error_y":{"color":"rgba(33,165,133,1)"},"error_x":{"color":"rgba(33,165,133,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Modern and Contemporary Art"],"y":[1347],"type":"bar","name":"Modern and Contemporary Art","marker":{"color":"rgba(46,179,124,1)","line":{"color":"rgba(46,179,124,1)"}},"textfont":{"color":"rgba(46,179,124,1)"},"error_y":{"color":"rgba(46,179,124,1)"},"error_x":{"color":"rgba(46,179,124,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["European Sculpture and Decorative Arts"],"y":[1661],"type":"bar","name":"European Sculpture and Decorative Arts","marker":{"color":"rgba(70,192,111,1)","line":{"color":"rgba(70,192,111,1)"}},"textfont":{"color":"rgba(70,192,111,1)"},"error_y":{"color":"rgba(70,192,111,1)"},"error_x":{"color":"rgba(70,192,111,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Asian Art"],"y":[1715],"type":"bar","name":"Asian Art","marker":{"color":"rgba(101,203,94,1)","line":{"color":"rgba(101,203,94,1)"}},"textfont":{"color":"rgba(101,203,94,1)"},"error_y":{"color":"rgba(101,203,94,1)"},"error_x":{"color":"rgba(101,203,94,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Greek and Roman Art"],"y":[1986],"type":"bar","name":"Greek and Roman Art","marker":{"color":"rgba(137,213,72,1)","line":{"color":"rgba(137,213,72,1)"}},"textfont":{"color":"rgba(137,213,72,1)"},"error_y":{"color":"rgba(137,213,72,1)"},"error_x":{"color":"rgba(137,213,72,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Costume Institute"],"y":[3051],"type":"bar","name":"Costume Institute","marker":{"color":"rgba(176,221,47,1)","line":{"color":"rgba(176,221,47,1)"}},"textfont":{"color":"rgba(176,221,47,1)"},"error_y":{"color":"rgba(176,221,47,1)"},"error_x":{"color":"rgba(176,221,47,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Photographs"],"y":[3542],"type":"bar","name":"Photographs","marker":{"color":"rgba(216,226,25,1)","line":{"color":"rgba(216,226,25,1)"}},"textfont":{"color":"rgba(216,226,25,1)"},"error_y":{"color":"rgba(216,226,25,1)"},"error_x":{"color":"rgba(216,226,25,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Drawings and Prints"],"y":[13387],"type":"bar","name":"Drawings and Prints","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>met |&gt; 
+  count(object_name) |&gt; 
+  top_n(15, n) |&gt; 
+  mutate(object_name = fct_reorder(object_name, n)) |&gt; 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = &quot;bar&quot;, colors = &quot;viridis&quot;)</code></pre>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-b9358e2a25de984bef8d" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-b9358e2a25de984bef8d">{"x":{"visdat":{"83643b25c9a":["function () ","plotlyVisDat"]},"cur_data":"83643b25c9a","attrs":{"83643b25c9a":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"object_name","type":"category","categoryorder":"array","categoryarray":["Evening dress","Ensemble","Textile","Figure","Dress","Fragment","Painting","Negative","Baseball card","Kylix fragment","Vase","Book","Drawing","Photograph","Print"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"n"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Evening dress"],"y":[196],"type":"bar","name":"Evening dress","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Ensemble"],"y":[209],"type":"bar","name":"Ensemble","marker":{"color":"rgba(72,27,109,1)","line":{"color":"rgba(72,27,109,1)"}},"textfont":{"color":"rgba(72,27,109,1)"},"error_y":{"color":"rgba(72,27,109,1)"},"error_x":{"color":"rgba(72,27,109,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Textile"],"y":[211],"type":"bar","name":"Textile","marker":{"color":"rgba(70,50,126,1)","line":{"color":"rgba(70,50,126,1)"}},"textfont":{"color":"rgba(70,50,126,1)"},"error_y":{"color":"rgba(70,50,126,1)"},"error_x":{"color":"rgba(70,50,126,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Figure"],"y":[221],"type":"bar","name":"Figure","marker":{"color":"rgba(63,72,137,1)","line":{"color":"rgba(63,72,137,1)"}},"textfont":{"color":"rgba(63,72,137,1)"},"error_y":{"color":"rgba(63,72,137,1)"},"error_x":{"color":"rgba(63,72,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Dress"],"y":[252],"type":"bar","name":"Dress","marker":{"color":"rgba(54,92,141,1)","line":{"color":"rgba(54,92,141,1)"}},"textfont":{"color":"rgba(54,92,141,1)"},"error_y":{"color":"rgba(54,92,141,1)"},"error_x":{"color":"rgba(54,92,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Fragment"],"y":[325],"type":"bar","name":"Fragment","marker":{"color":"rgba(46,110,142,1)","line":{"color":"rgba(46,110,142,1)"}},"textfont":{"color":"rgba(46,110,142,1)"},"error_y":{"color":"rgba(46,110,142,1)"},"error_x":{"color":"rgba(46,110,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Painting"],"y":[551],"type":"bar","name":"Painting","marker":{"color":"rgba(39,127,142,1)","line":{"color":"rgba(39,127,142,1)"}},"textfont":{"color":"rgba(39,127,142,1)"},"error_y":{"color":"rgba(39,127,142,1)"},"error_x":{"color":"rgba(39,127,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Negative"],"y":[605],"type":"bar","name":"Negative","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Baseball card"],"y":[697],"type":"bar","name":"Baseball card","marker":{"color":"rgba(31,161,135,1)","line":{"color":"rgba(31,161,135,1)"}},"textfont":{"color":"rgba(31,161,135,1)"},"error_y":{"color":"rgba(31,161,135,1)"},"error_x":{"color":"rgba(31,161,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Kylix fragment"],"y":[905],"type":"bar","name":"Kylix fragment","marker":{"color":"rgba(45,178,125,1)","line":{"color":"rgba(45,178,125,1)"}},"textfont":{"color":"rgba(45,178,125,1)"},"error_y":{"color":"rgba(45,178,125,1)"},"error_x":{"color":"rgba(45,178,125,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Vase"],"y":[961],"type":"bar","name":"Vase","marker":{"color":"rgba(74,193,109,1)","line":{"color":"rgba(74,193,109,1)"}},"textfont":{"color":"rgba(74,193,109,1)"},"error_y":{"color":"rgba(74,193,109,1)"},"error_x":{"color":"rgba(74,193,109,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Book"],"y":[1071],"type":"bar","name":"Book","marker":{"color":"rgba(113,207,87,1)","line":{"color":"rgba(113,207,87,1)"}},"textfont":{"color":"rgba(113,207,87,1)"},"error_y":{"color":"rgba(113,207,87,1)"},"error_x":{"color":"rgba(113,207,87,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Drawing"],"y":[2067],"type":"bar","name":"Drawing","marker":{"color":"rgba(159,218,58,1)","line":{"color":"rgba(159,218,58,1)"}},"textfont":{"color":"rgba(159,218,58,1)"},"error_y":{"color":"rgba(159,218,58,1)"},"error_x":{"color":"rgba(159,218,58,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Photograph"],"y":[2926],"type":"bar","name":"Photograph","marker":{"color":"rgba(207,225,28,1)","line":{"color":"rgba(207,225,28,1)"}},"textfont":{"color":"rgba(207,225,28,1)"},"error_y":{"color":"rgba(207,225,28,1)"},"error_x":{"color":"rgba(207,225,28,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Print"],"y":[8761],"type":"bar","name":"Print","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>object_counts &lt;- met |&gt; 
+  group_by(country, object_name) |&gt; 
+  summarise(n_objects = n()) |&gt; 
+  group_by(country) |&gt; 
+  summarise(total_objects = sum(n_objects, na.rm = TRUE))
+
+
+world &lt;- ne_countries(scale = &quot;medium&quot;, returnclass = &quot;sf&quot;)
+
+# Merging with world map data
+world_data &lt;- left_join(world, object_counts, by = c(&quot;name&quot; = &quot;country&quot;))
+
+# Plotting the map
+ggplot() +
+  geom_sf(data = world_data, aes(fill = total_objects), color = &quot;white&quot;, size = 0.2) </code></pre>
+<p><img src="exploratory_analysis_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 </div>
 
