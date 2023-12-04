@@ -10,10 +10,7 @@ library(plotly)
 # Importing Full Dataset
 
 ```{r}
-all_objects = 
-  read_csv("data/MetObjects.csv") |> 
-  janitor::clean_names()
-
+load("data/met.RData")
 ```
 
 # Most Common Object Classifiations
@@ -25,7 +22,7 @@ all_objects =
 
 ```{r}
 with_classification = 
-  all_objects |> 
+  met |> 
   filter(!is.na(classification) & classification != "(not assigned)") |> 
   mutate(
     classification = str_remove(classification, "[-|].*")

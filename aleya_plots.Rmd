@@ -20,14 +20,9 @@ library(leaflet)
 ## Import data
 
 ```{r, message = FALSE, warning=FALSE}
-met_plot <- read_delim("/Users/aleya/Library/CloudStorage/OneDrive-cumc.columbia.edu/Coursework/Data Science I/data/MetObjects.txt") %>%  ## change this to a local call later
-  janitor::clean_names() %>%
-  select(object_id, object_name, title, accession_year,
-         culture, period, department, is_highlight,
-         geography_type, city, state, county, country, region, subregion) 
+load("data/met.RData")
 
-
-met_plot <- sample_n(met_plot, 5000) ## decide how much of the data to include, if too heavy
+met_plot = met
 ```
 
 ### Clean up the `object_name`

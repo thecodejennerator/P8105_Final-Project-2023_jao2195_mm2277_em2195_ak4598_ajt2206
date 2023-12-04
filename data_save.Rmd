@@ -13,7 +13,7 @@ library(readr)
 ## Import data
 
 ```{r}
-met <- read_delim("/Users/aleya/Library/CloudStorage/OneDrive-cumc.columbia.edu/Coursework/Data Science I/data/MetObjects.txt") %>%  
+met <- read_delim("data/MetObjectsTxt.txt") %>%  
   janitor::clean_names()
 ```
 
