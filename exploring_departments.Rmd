@@ -20,8 +20,10 @@ mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94",
          "#a7ba42", "#f94f8a", "#DD8D29")
 ```
 
+# Departments
+
 The Met holds many collections from Modern and Contemporary Art to Arms and Armor. 
-Explore the vast departments of the Met and the many objects they contain.
+Explore the vast departments of the Met and the many objects they contain. Click [here](https://www.metmuseum.org/about-the-met/collection-areas) to learn more about each department, or collection area.
 
 ```{r echo = FALSE}
 met |>
@@ -36,7 +38,6 @@ met |>
 
 The most objects can be found in the following departments: 1) Drawings and Prints; 2) European Sculpture and Decorative Arts; and 3) Asian Art.
 
-
 ```{r echo = FALSE}
 met |> 
   count(department) |> 
@@ -48,7 +49,7 @@ met |>
          legend = list(title = list(text ='Department')))
 ```
 
-# Drawings and Prints
+## Drawings and Prints
 
 ```{r echo = FALSE}
 met |>
@@ -72,7 +73,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# European Sculpture and Decorative Arts
+## European Sculpture and Decorative Arts
 
 ```{r echo = FALSE}
 met |>
@@ -96,7 +97,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Photographs
+## Photographs
 
 ```{r echo = FALSE}
 met |>
@@ -120,7 +121,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Asian Art
+## Asian Art
 
 ```{r echo = FALSE}
 met |>
@@ -144,7 +145,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Greek and Roman Art
+## Greek and Roman Art
 
 ```{r echo = FALSE}
 met |>
@@ -168,7 +169,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Costume Institue
+## Costume Institue
 
 ```{r echo = FALSE}
 met |>
@@ -192,7 +193,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Egyptian Art
+## Egyptian Art
 
 ```{r echo = FALSE}
 met |>
@@ -216,7 +217,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# The American Wing
+## The American Wing
 
 ```{r echo = FALSE}
 met |>
@@ -240,7 +241,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Islamic Art
+## Islamic Art
 
 ```{r echo = FALSE}
 met |>
@@ -264,7 +265,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Modern and Contemporary Art
+## Modern and Contemporary Art
 
 ```{r echo = FALSE}
 met |>
@@ -288,7 +289,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Arms and Armor
+## Arms and Armor
 
 ```{r echo = FALSE}
 met |>
@@ -312,7 +313,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Arts of Africa, Oceania, and the Americas
+## Arts of Africa, Oceania, and the Americas
 
 ```{r echo = FALSE}
 met |>
@@ -336,7 +337,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Medieval Art
+## Medieval Art
 
 ```{r echo = FALSE}
 met |>
@@ -360,7 +361,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Ancient Near Eastern Art
+## Ancient Near Eastern Art
 
 ```{r echo = FALSE}
 met |>
@@ -384,7 +385,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Musical Instruments
+## Musical Instruments
 
 ```{r echo = FALSE}
 met |>
@@ -408,7 +409,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# European Paintings
+## European Paintings
 
 ```{r echo = FALSE}
 met |>
@@ -432,7 +433,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# Robert Lehman Collection
+## Robert Lehman Collection
 
 ```{r echo = FALSE}
 met |>
@@ -456,7 +457,7 @@ met |>
          legend = list(title = list(text ='Object Names')))
 ```
 
-# The Cloisters
+## The Cloisters
 
 ```{r echo = FALSE}
 met |>
