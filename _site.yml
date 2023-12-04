@@ -14,11 +14,11 @@ navbar:
     - text: "Exhibition D: Art Around the World"
       href: around_the_world.html
     - text: "Special Exhibitions"
-      href: f_exhibit_e_select_exhibits.html
+      href: special_exhibitions.html
     - text: "Project Report"
-      href: g_the_final_exposition.html
+      href: project_report.html
     - text: "Curators"
-      href: h_the_artists.html
+      href: curators.html
     - icon: fa-link
       href: https://www.metmuseum.org/
     - icon: fa-envelope fa-lg
