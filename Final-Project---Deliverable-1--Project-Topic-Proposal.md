@@ -3,7 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner, Diana Hernandez <br>
-**Date:** Saturday, November 11, 2023 12:39 PM
+**Date:** Monday, December 04, 2023 10:36 AM
 
 # Deliverable 1: Team Registration and Project Topic Proposal
 
@@ -80,13 +80,14 @@ dmh2228
 
 ## 2. The tentative project title
 
-**The Art of Data Science: Exploring the Origins The Met’s Collections**
+**The Art of Data Science: Exploring the Origins of The Met’s
+Collections**
 
 ## 3. The motivation for this project
 
-The Met is the largest museum in the United States as such it would take
-days of visits to see all the pieces of art on display. To help fight
-the sensory overload (and exposure to dry air) that comes with repeated
+The Met is the largest museum in the Americas as such it would take days
+of visits to see all the pieces of art on display. To help fight the
+sensory overload (and exposure to dry air) that comes with repeated
 visits, we will be analyzing the Met’s collections. Breaking down
 artifacts by country and culture of origin, creating a timeline of Met
 artifacts, and creating visualizations worthy of the Met itself will all
@@ -122,7 +123,7 @@ visualizations and a description of our analyses.
 
 ### Visualizations
 
-- world map
+- world map: maybe a little GIS action
 - sankey plot to visualize flows from where artefact originated and
   where the excavator was from
 - bar chart
@@ -130,7 +131,7 @@ visualizations and a description of our analyses.
 
 ### Coding challenges
 
-- working with almost string variables, some of which needed to be
+- working with mostly string variables, some of which needed to be
   recoded
 - handling missing data when aggregating data by category
 - not all categories will pertain to all artefacts, like `reign`, since

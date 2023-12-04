@@ -3,21 +3,21 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "About: Project Motivation and About The Met"
+    - text: "Project 'Met'ivation"
       href: a_about.html
-    - text: "Exhibit A: The Data"
+    - text: "Exhibition A: The Data"
       href: b_exhibit_a_the_data.html
-    - text: "Exhibit B: The Art"
+    - text: "Exhibitation B: Exploring the Met's Department"
       href: c_exhibit_b_the_art.html
-    - text: "Exhibit C: The Art of Data Science: The Analysis"
+    - text: "Exhibition C: The Met's Growing Collection"
       href: d_exhibit_c_taods_the_analysis.html
-    - text: "Exhibit D: Art Around the World"
+    - text: "Exhibitition D: Art Around the World"
       href: e_exhibit_d_world_art.html
-    - text: "Exhibit E: Select Exhibits"
+    - text: "Special Exhibitions"
       href: f_exhibit_e_select_exhibits.html
-    - text: "The Final Exposition"
+    - text: "Project Report"
       href: g_the_final_exposition.html
-    - text: "The Artists"
+    - text: "Curators"
       href: h_the_artists.html
     - icon: fa-link
       href: https://www.metmuseum.org/
