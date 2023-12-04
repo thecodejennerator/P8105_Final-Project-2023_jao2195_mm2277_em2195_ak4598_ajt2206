@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Background Image</title>
+</head>
+
+<body>
+    <h1>Background image</h1>
+</body>
+</html>
+
+h1{
+    text-align: center;
+}
+
+body{
+    background-image: url('entrance_of_the_met.jpg');
+}
+
+body{
+    background: url("entrance_of_the_met.jpg") no-repeat top center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
