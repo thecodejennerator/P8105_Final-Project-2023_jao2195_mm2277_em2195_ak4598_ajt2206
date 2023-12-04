@@ -1,5 +1,5 @@
 ---
-title: "e_exhibit_d_world_art.html"
+title: "Exhibition C: The Met's Growing Collection"
 output: 
   html_document:
     toc: true

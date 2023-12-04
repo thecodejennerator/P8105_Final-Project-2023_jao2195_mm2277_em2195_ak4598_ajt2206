@@ -1,5 +1,5 @@
 ---
-title: "d_exhibit_c_taods_the_analysis.html"
+title: "Exhibition D: Art Around the World"
 output: 
   html_document:
     toc: true
