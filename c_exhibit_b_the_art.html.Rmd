@@ -6,3 +6,299 @@ output:
     toc_float: true
     theme: cosmo
 ---
+
+# Exploring the Met's Departments
+
+```{r include = FALSE}
+library(tidyverse)
+library(plotly)
+
+load("data/met.RData")
+
+mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94", 
+         "#3B9AB2", "#B40F20", "#0B775E", "#F2300F", 
+         "#5BBCD6", "#F98400", "#ab0213", "#E2D200", 
+         "#ff7700", "#46ACC8", "#00A08A", "#78B7C5",
+         "#a7ba42", "#f94f8a", "#DD8D29")
+```
+
+```{r echo = FALSE}
+met |>
+  count(department) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  select(department, n) |> 
+  rename("Department" = department, "Number of Objects" = n) |>
+  knitr::kable()
+```
+
+The most objects can be found in the following departments: 1) Drawings and Prints; 2) European Sculpture and Decorative Arts; and 3) Asian Art.
+
+Explore each department and the number of objects they hold! 
+
+```{r echo = FALSE}
+met |> 
+  count(department) |> 
+  mutate(department = fct_reorder(department, n)) |> 
+  plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
+  layout(xaxis = list(title = 'Department'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Department')))
+```
+
+Objects by Department
+
+* Drawings and Prints
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Drawings and Prints") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* European Sculpture and Decorative Arts
+
+```{r echo = FALSE}
+met |>
+  filter(department == "European Sculpture and Decorative Arts") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Photographs
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Photographs") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Asian Art
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Asian Art") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Greek and Roman Art
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Greek and Roman Art") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Costume Institue
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Costume Institute") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Egyptian Art
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Egyptian Art") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* The American Wing
+
+```{r echo = FALSE}
+met |>
+  filter(department == "The American Wing") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Islamic Art
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Islamic Art") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Modern and Contemporary Art
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Modern and Contemporary Art") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Arms and Armor
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Arms and Armor") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Arts of Africa, Oceania, and the Americas
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Arts of Africa, Oceania, and the Americas") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Medieval Art
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Medieval Art") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Ancient Near Eastern Art
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Ancient Near Eastern Art") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Musical Instruments
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Musical Instruments") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* European Paintings
+
+```{r echo = FALSE}
+met |>
+  filter(department == "European Paintings") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* Robert Lehman Collection
+
+```{r echo = FALSE}
+met |>
+  filter(department == "Robert Lehman Collection") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+* The Cloisters
+
+```{r echo = FALSE}
+met |>
+  filter(department == "The Cloisters") |>
+  count(object_name) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  rename("Object Name" = object_name, "Number of Objects" = n) |>
+  select("Object Name", "Number of Objects") |> 
+  knitr::kable()
+```
+
+
