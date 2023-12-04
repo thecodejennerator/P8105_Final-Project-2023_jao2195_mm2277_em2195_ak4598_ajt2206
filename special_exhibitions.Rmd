@@ -1,5 +1,5 @@
 ---
-title: "h_the_artists.html"
+title: "Special Exhibitions"
 output: 
   html_document:
     toc: true
