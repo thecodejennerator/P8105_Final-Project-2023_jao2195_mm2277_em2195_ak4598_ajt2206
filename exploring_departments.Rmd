@@ -7,8 +7,6 @@ output:
     theme: cosmo
 ---
 
-# Exploring the Met's Departments
-
 ```{r include = FALSE}
 library(tidyverse)
 library(plotly)
@@ -21,6 +19,9 @@ mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94",
          "#ff7700", "#46ACC8", "#00A08A", "#78B7C5",
          "#a7ba42", "#f94f8a", "#DD8D29")
 ```
+
+The Met holds many collections from Modern and Contemporary Art to Arms and Armor. 
+Explore the vast departments of the Met and the many objects they contain.
 
 ```{r echo = FALSE}
 met |>
@@ -35,21 +36,19 @@ met |>
 
 The most objects can be found in the following departments: 1) Drawings and Prints; 2) European Sculpture and Decorative Arts; and 3) Asian Art.
 
-Explore each department and the number of objects they hold! 
 
 ```{r echo = FALSE}
 met |> 
   count(department) |> 
   mutate(department = fct_reorder(department, n)) |> 
   plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
-  layout(xaxis = list(title = 'Department'), 
+  layout(title = 'Explore each department and their number of objects',
+         xaxis = list(title = 'Department'), 
          yaxis = list(title = 'Number of Objects'),
          legend = list(title = list(text ='Department')))
 ```
 
-Objects by Department
-
-* Drawings and Prints
+# Drawings and Prints
 
 ```{r echo = FALSE}
 met |>
@@ -61,9 +60,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Drawings and Prints") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* European Sculpture and Decorative Arts
+# European Sculpture and Decorative Arts
 
 ```{r echo = FALSE}
 met |>
@@ -75,9 +84,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "European Sculpture and Decorative Arts") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Photographs
+# Photographs
 
 ```{r echo = FALSE}
 met |>
@@ -89,9 +108,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Photographs") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Asian Art
+# Asian Art
 
 ```{r echo = FALSE}
 met |>
@@ -103,9 +132,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Asian Art") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Greek and Roman Art
+# Greek and Roman Art
 
 ```{r echo = FALSE}
 met |>
@@ -117,9 +156,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Greek and Roman Art") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Costume Institue
+# Costume Institue
 
 ```{r echo = FALSE}
 met |>
@@ -131,9 +180,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Costume Institute") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Egyptian Art
+# Egyptian Art
 
 ```{r echo = FALSE}
 met |>
@@ -145,9 +204,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Egyptian Art") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* The American Wing
+# The American Wing
 
 ```{r echo = FALSE}
 met |>
@@ -159,9 +228,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "The American Wing") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Islamic Art
+# Islamic Art
 
 ```{r echo = FALSE}
 met |>
@@ -173,9 +252,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Islamic Art") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Modern and Contemporary Art
+# Modern and Contemporary Art
 
 ```{r echo = FALSE}
 met |>
@@ -187,9 +276,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Modern and Contemporary Art") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Arms and Armor
+# Arms and Armor
 
 ```{r echo = FALSE}
 met |>
@@ -201,9 +300,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Arms and Armor") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Arts of Africa, Oceania, and the Americas
+# Arts of Africa, Oceania, and the Americas
 
 ```{r echo = FALSE}
 met |>
@@ -215,9 +324,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Arts of Africa, Oceania, and the Americas") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Medieval Art
+# Medieval Art
 
 ```{r echo = FALSE}
 met |>
@@ -229,9 +348,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Medieval Art") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Ancient Near Eastern Art
+# Ancient Near Eastern Art
 
 ```{r echo = FALSE}
 met |>
@@ -243,9 +372,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Ancient Near Eastern Art") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Musical Instruments
+# Musical Instruments
 
 ```{r echo = FALSE}
 met |>
@@ -257,9 +396,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Musical Instruments") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* European Paintings
+# European Paintings
 
 ```{r echo = FALSE}
 met |>
@@ -271,9 +420,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "European Paintings") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* Robert Lehman Collection
+# Robert Lehman Collection
 
 ```{r echo = FALSE}
 met |>
@@ -285,9 +444,19 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "Robert Lehman Collection") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
-* The Cloisters
+# The Cloisters
 
 ```{r echo = FALSE}
 met |>
@@ -299,6 +468,16 @@ met |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
   knitr::kable()
+
+met |> 
+  filter(department == "The Cloisters") |>
+  count(object_name) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  layout(title = 'Explore the Objects',
+         xaxis = list(title = 'Object Name'), 
+         yaxis = list(title = 'Number of Objects'),
+         legend = list(title = list(text ='Object Names')))
 ```
 
 
