@@ -52,7 +52,7 @@ met |>
 
 ## Drawings and Prints
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Drawings and Prints") |>
   count(object_name) |> 
@@ -67,16 +67,22 @@ met |>
   filter(department == "Drawings and Prints") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 700))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## European Sculpture and Decorative Arts
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "European Sculpture and Decorative Arts") |>
   count(object_name) |> 
@@ -91,16 +97,22 @@ met |>
   filter(department == "European Sculpture and Decorative Arts") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 98))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Photographs
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Photographs") |>
   count(object_name) |> 
@@ -115,16 +127,22 @@ met |>
   filter(department == "Photographs") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 80))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Asian Art
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Asian Art") |>
   count(object_name) |> 
@@ -139,16 +157,22 @@ met |>
   filter(department == "Asian Art") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 130))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Greek and Roman Art
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Greek and Roman Art") |>
   count(object_name) |> 
@@ -163,16 +187,22 @@ met |>
   filter(department == "Greek and Roman Art") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 100))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Costume Institue
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Costume Institute") |>
   count(object_name) |> 
@@ -187,16 +217,22 @@ met |>
   filter(department == "Costume Institute") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 90))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Egyptian Art
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Egyptian Art") |>
   count(object_name) |> 
@@ -211,16 +247,22 @@ met |>
   filter(department == "Egyptian Art") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 62))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## The American Wing
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "The American Wing") |>
   count(object_name) |> 
@@ -235,16 +277,22 @@ met |>
   filter(department == "The American Wing") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 59))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Islamic Art
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Islamic Art") |>
   count(object_name) |> 
@@ -259,16 +307,22 @@ met |>
   filter(department == "Islamic Art") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 42))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Modern and Contemporary Art
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Modern and Contemporary Art") |>
   count(object_name) |> 
@@ -283,16 +337,22 @@ met |>
   filter(department == "Modern and Contemporary Art") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal, 
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 80))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Arms and Armor
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Arms and Armor") |>
   count(object_name) |> 
@@ -307,16 +367,22 @@ met |>
   filter(department == "Arms and Armor") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 20))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Arts of Africa, Oceania, and the Americas
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Arts of Africa, Oceania, and the Americas") |>
   count(object_name) |> 
@@ -331,16 +397,22 @@ met |>
   filter(department == "Arts of Africa, Oceania, and the Americas") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 50))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Medieval Art
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Medieval Art") |>
   count(object_name) |> 
@@ -355,16 +427,22 @@ met |>
   filter(department == "Medieval Art") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 30))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Ancient Near Eastern Art
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Ancient Near Eastern Art") |>
   count(object_name) |> 
@@ -379,16 +457,22 @@ met |>
   filter(department == "Ancient Near Eastern Art") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 30))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Musical Instruments
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Musical Instruments") |>
   count(object_name) |> 
@@ -403,16 +487,22 @@ met |>
   filter(department == "Musical Instruments") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 8))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## European Paintings
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "European Paintings") |>
   count(object_name) |> 
@@ -431,12 +521,12 @@ met |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## Robert Lehman Collection
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "Robert Lehman Collection") |>
   count(object_name) |> 
@@ -451,16 +541,22 @@ met |>
   filter(department == "Robert Lehman Collection") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 6))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 ## The Cloisters
 
-```{r echo = FALSE}
+```{r}
 met |>
   filter(department == "The Cloisters") |>
   count(object_name) |> 
@@ -475,11 +571,17 @@ met |>
   filter(department == "The Cloisters") |>
   count(object_name) |> 
   mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
+          transforms = list(
+          list(
+          type = 'filter',
+          target = 'y',
+          operation = '>',
+          value = 10))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Object Names')))
+         showlegend = FALSE)
 ```
 
 
