@@ -10,7 +10,7 @@ navbar:
     - text: "Exhibition B: Exploring the Met's Departments"
       href: exploring_departments.html
     - text: "Exhibition C: The Met's Growing Collection"
-      href: growing_collection.html
+      href: growing_collection_dashboard.html
     - text: "Exhibition D: Art Around the World"
       href: around_the_world.html
     - text: "Special Exhibitions"
