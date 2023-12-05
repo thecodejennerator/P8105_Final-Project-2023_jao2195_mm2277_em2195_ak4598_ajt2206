@@ -14,7 +14,7 @@ library(tidyverse)
 Note: `met_10` is a random sample of 10% of The Met's original dataset _MetObjects_, which comes in a text file. Here, we clean up the dataset a bit before using it in analysis. The cleaned dataset is named `met`.
 
 ```{r}
-load("met_10.RData")
+load("data/met_10.RData")
 
 met <- met_10 %>%  
   janitor::clean_names()
