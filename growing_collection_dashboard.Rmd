@@ -1,0 +1,88 @@
+---
+title: "The Met's Growing Collection"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    theme: cosmo
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(flexdashboard)
+library(plotly)
+
+load("data/met.RData")
+
+mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94", 
+         "#3B9AB2", "#B40F20", "#0B775E", "#F2300F", 
+         "#5BBCD6", "#F98400", "#ab0213", "#E2D200", 
+         "#ff7700", "#46ACC8", "#00A08A", "#78B7C5",
+         "#a7ba42", "#f94f8a", "#DD8D29")
+```
+
+ 
+Row {data-height=650}
+-------------------------------------
+
+### Object types over time
+
+```{r}
+met %>%
+  group_by(department, accession_year) %>%
+  count(object_name) %>%
+  filter(n > 1) %>%
+  plot_ly(
+    y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~n, color = ~object_name, text = ~object_name, alpha = 0.5) %>%
+  layout(legend = list(orientation = 'h'))
+
+```
+
+Row {data-height=650}
+-------------------------------------
+
+### Cultures represented over time
+
+
+Row {data-height=350}
+-------------------------------------
+    
+### Departments at their largest
+
+```{r}
+met %>%
+  group_by(department, accession_year) %>%
+  summarize(n = n()) %>%
+  select(department, accession_year, n) %>%
+  group_by(department) %>%
+  slice(which.max(n)) %>%
+  plot_ly(
+    y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n*1.5), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Highest number of objects")) %>%
+  hide_legend()
+```
+
+### Departments at their most diverse
+
+```{r}
+met %>%
+  group_by(department, culture, accession_year) %>%
+  summarize(n = n()) %>%
+  select(department, culture, accession_year, n) %>%
+  group_by(department) %>%
+  slice(which.max(n)) %>%
+  plot_ly(
+    y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n*1.5), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Highest number of cultures represented")) %>%
+  hide_legend()
+```
