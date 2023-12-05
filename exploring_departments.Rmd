@@ -5,6 +5,7 @@ output:
     toc: true
     toc_float: true
     theme: cosmo
+    code_folding: hide
 ---
 
 ```{r include = FALSE}
@@ -20,12 +21,12 @@ mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94",
          "#a7ba42", "#f94f8a", "#DD8D29")
 ```
 
-# Departments
+# **Departments**
 
 The Met holds many collections from Modern and Contemporary Art to Arms and Armor. 
 Explore the vast departments of the Met and the many objects they contain. Click [here](https://www.metmuseum.org/about-the-met/collection-areas) to learn more about each department, or collection area.
 
-```{r echo = FALSE}
+```{r}
 met |>
   count(department) |> 
   mutate(rank = min_rank(desc(n))) |> 
@@ -33,12 +34,12 @@ met |>
   arrange(desc(n)) |>
   select(department, n) |> 
   rename("Department" = department, "Number of Objects" = n) |>
-  knitr::kable()
+  knitr::kable(caption = "Top 3 Departments by Number of Objects")
 ```
 
 The most objects can be found in the following departments: 1) Drawings and Prints; 2) European Sculpture and Decorative Arts; and 3) Asian Art.
 
-```{r echo = FALSE}
+```{r}
 met |> 
   count(department) |> 
   mutate(department = fct_reorder(department, n)) |> 
@@ -60,7 +61,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Drawings and Prints") |>
@@ -84,7 +85,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "European Sculpture and Decorative Arts") |>
@@ -108,7 +109,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Photographs") |>
@@ -132,7 +133,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Asian Art") |>
@@ -156,7 +157,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Greek and Roman Art") |>
@@ -180,7 +181,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Costume Institute") |>
@@ -204,7 +205,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Egyptian Art") |>
@@ -228,7 +229,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "The American Wing") |>
@@ -252,7 +253,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Islamic Art") |>
@@ -276,7 +277,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Modern and Contemporary Art") |>
@@ -300,7 +301,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Arms and Armor") |>
@@ -324,7 +325,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Arts of Africa, Oceania, and the Americas") |>
@@ -348,7 +349,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Medieval Art") |>
@@ -372,7 +373,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Ancient Near Eastern Art") |>
@@ -396,7 +397,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Musical Instruments") |>
@@ -420,7 +421,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "European Paintings") |>
@@ -444,7 +445,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "Robert Lehman Collection") |>
@@ -468,7 +469,7 @@ met |>
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
-  knitr::kable()
+  knitr::kable(caption = "Most common objects")
 
 met |> 
   filter(department == "The Cloisters") |>
