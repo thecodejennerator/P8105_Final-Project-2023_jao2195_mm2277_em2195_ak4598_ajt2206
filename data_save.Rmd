@@ -7,13 +7,16 @@ output: html_document
 
 ```{r, include = FALSE}
 library(tidyverse)
-library(readr)
 ```
 
 ## Import data
 
+Note: `met_10` is a random sample of 10% of The Met's original dataset _MetObjects_, which comes in a text file. Here, we clean up the dataset a bit before using it in analysis. The cleaned dataset is named `met`.
+
 ```{r}
-met <- read_delim("data/MetObjectsTxt.txt") %>%  
+load("met_10.RData")
+
+met <- met_10 %>%  
   janitor::clean_names()
 ```
 
@@ -48,26 +51,14 @@ met <- met %>%
            object_name))))))))))))
 ```
 
-## Examine different subsets
-
-| Subset scenario                                                                              | Number of rows                                                                                         | Notes                                  |
-|---------------------------------------|-----------------|------------------|
-| Random 10% sample                                                                            | `r nrow(sample_n(met,nrow(met)*.10))`                                                                  |                                        |
-| Observations with complete data for `object_name` and `accession_year`                       | `r nrow(filter(met,!is.na(object_name) & !is.na(accession_year)))`                                     |                                        |
-| Random 10% of sample with complete data for `object_name` and `accession_year`               | `r nrow(sample_n(filter(met,!is.na(object_name) & !is.na(accession_year)),nrow(met)*.10))`             | Might be best                          |
-| Observations with complete data for `object_name` , `accession_year` , `culture`             | `r nrow(filter(met,!is.na(object_name) & !is.na(accession_year) & !is.na(culture)))`                   | Different picture of objects over time |
-| Observations with complete data for `object_name` , `accession_year` , `culture` , `country` | `r nrow(filter(met,!is.na(object_name) & !is.na(accession_year) & !is.na(culture) & !is.na(country)))` | Different picture of objects over time |
-
-: Subsetting scenarios
 
 ## Save R data file
 
-Chosen subset: Random 10% of sample with complete data for `object_name` and `accession_year` 
+Chosen subset: Objects with complete data for `object_name` and `accession_year` - two crucial variables for our analysis.
 
 ```{r}
 met <- met %>%
-  filter(!is.na(object_name) & !is.na(accession_year)) %>%
-  sample_n(nrow(met)*.10)
+  filter(!is.na(object_name) & !is.na(accession_year)) 
   
 save(met, 
      file = "data/met.RData")
