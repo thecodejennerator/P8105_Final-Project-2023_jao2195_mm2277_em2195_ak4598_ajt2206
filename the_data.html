@@ -380,12 +380,12 @@ div.tocify {
 
 
 <div id="data-source" class="section level1">
-<h1>Data Source</h1>
+<h1><strong>Data Source</strong></h1>
 <p>The Met offers open access to data of its collection. It can be found
 <a href="https://github.com/metmuseum/openaccess">here</a>.</p>
 </div>
 <div id="data-cleaning" class="section level1">
-<h1>Data Cleaning</h1>
+<h1><strong>Data Cleaning</strong></h1>
 <ul>
 <li><p>The Met dataset consists of over 400,000 observations. A dataset
 of this size was far too big to handle.</p></li>
@@ -431,11 +431,20 @@ creating our final dataset of over 40,000 observations.</p></li>
 ##                   41500                   48495                       0 
 ##                    tags            tags_aat_url       tags_wikidata_url 
 ##                   29297                   29297                   29297</code></pre>
+<p>Based on the missing data, we chose the following variables to work
+with:</p>
 <ul>
-<li>Based on the missing data, we chose the following variables to work
-with: <code>is_highlight</code>, <code>department</code>,
-<code>accession_year</code>, <code>culture</code>,
-<code>object_data</code>, and <code>country</code>.</li>
+<li><code>is_highlight</code>: When “true” indicates a popular and
+important artwork in the collection</li>
+<li><code>department</code>: Indicates The Met’s curatorial department
+responsible for the artwork</li>
+<li><code>accession_year</code>: Year the artwork was acquired</li>
+<li><code>culture</code>: Information about the culture, or people from
+which an object was created</li>
+<li><code>object_name</code>: Describes the physical type of the
+object</li>
+<li><code>country</code>: Country where the artwork was created or
+found</li>
 </ul>
 </div>
 
