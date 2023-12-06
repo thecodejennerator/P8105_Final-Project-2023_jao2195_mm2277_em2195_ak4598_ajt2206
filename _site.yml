@@ -13,7 +13,7 @@ navbar:
       href: growing_collection_dashboard.html
     - text: "Exhibition D: Art Around the World"
       href: around_the_world.html
-    - text: "Special Exhibitions: Egypt"
+    - text: "Special Exhibitions"
       href: special_exhibitions.RMD
     - text: "Project Report"
       href: project_report.html
