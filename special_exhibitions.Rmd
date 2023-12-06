@@ -3,6 +3,7 @@ title: "Special Exhibitions: Egypt"
 output: 
   flexdashboard::flex_dashboard:
     vertical_layout: scroll
+    theme: cosmo
 runtime: shiny
 ---
 
@@ -160,6 +161,12 @@ met_egypt = met_egypt |>
       TRUE ~ reign,
       TRUE ~ object_date
     ),
+    object_begin_date = case_when(
+      object_begin_date == 1899 ~ -1479,
+      TRUE ~ object_begin_date),
+    object_end_date = case_when(
+      object_end_date == 1899 ~ -1458,
+      TRUE ~ object_end_date),
     dynasty = ifelse(is.na(dynasty), "No Dynasty Specified", dynasty),
   dynasty = factor(dynasty, levels = c("Dynasty 1", "Dynasty 2", "Dynasty 3", "Dynasty 4", "Dynasty 5", "Dynasty 6", "Dynasty 8", "Dynasty 9", "Dynasty 11", "Dynasty 12", "Dynasty 12-13", "Dynasty 13", "Dynasty 14", "Dynasty 15", "Dynasty 17", "Dynasty 17-18", "Dynasty 18", "Dynasty 19", "Dynasty 19-20", "Dynasty 20", "Dynasty 21", "Dynasty 22", "Dynasty 23", "Dynasty 24", "Dynasty 25", "Dynasty 26", "Dynasty 27", "Dynasty 30", "Dynasty Range", "NA")),
   dyn_number = ifelse(is.na(dynasty), 30, as.numeric(dynasty)))
@@ -198,6 +205,10 @@ brown_shades <- c("#8B4513", "#A0522D", "#CD853F", "#D2691E")
 random_brown_shades <- replicate(nrow(shapefile), sample(brown_shades, 1))
 
 ```
+
+# **Egyptian Art**
+
+The Met holds a vast collection of over 26,000 Egyptian Artifacts in total. Many of which originate directly from archaelogical digs that staff-members carried out during the beginning of the 20th Century. With such an expansive timeline and collection, come and sate your Egyptology curiosities. Click [here](https://www.metmuseum.org/about-the-met/collection-areas/egyptian-art) to learn more about each department, or collection area.
 
 Column {.sidebar}
 -----------------------------------------------------------------------
@@ -240,6 +251,7 @@ renderPlotly({
 
 ```
 
+The early 20th century saw a great expansion in the Mets Egyptian Arts Department corresponding to a larger societal interest in Ancient Egypt in Europe and the United States. The majority of artifacts acquired by the Met during this period come directly from Met led excavations. Additionally, this is a period of great archaeological discoveries even outside of the Met as the Tomb of King Tutankhamen, one of the most important digs of all time, was found in 1922. 
 
 ### Artifacts Approximate Creation Date Over Time
 
@@ -270,6 +282,8 @@ met_egypt |>
 })
 ```
 
+Ancient Egypt expanded throughout centuries and even millennia. The Met themselves house artifacts from the Paleolithic to the Roman period (ca. 300,000 B.C.–A.D. 4th century). Most artifacts housed were created either in the 1900 to 1700 B.C. range or 1500 to 1300 B.C. range - all over 3000 years ago! 
+
 ### Number of Artifacts per Dynasty
 
 ```{r, echo=FALSE, message=FALSE}
@@ -286,6 +300,8 @@ met_egypt |>
     yaxis = list(title = "Frequency"))
 })
 ```
+
+While approximate years can be helpful to understand an objects origins, Dynasties are a common way Egyptologists speak about Ancient Egypts evolution through the years. The Met houses its greatest number of artifacts from 18th Dynasty through the 21st Dynasty and the 11th through 14th Dynasties. The 18th Dynasty or Thutmosid Dynasty is the first dynasty of the New Kingdom of Egypt where Ancient Egypt was at its peak of power. Moreover, this Dynasty includes many of the most well-known pharaohs from Hatsheput and Nefertiti. An important historical consideration: was more art created during this Dynasty because Egypt was at its peak? Or do we simply know more about the time period because so much art and other artifacts survived; thus, making the period more famous?
 
 ### Map of Egyptian Artifact Locations 
     
@@ -336,3 +352,5 @@ renderLeaflet({
   addProviderTiles("Stamen.TonerLite")
 })
 ```
+
+Ancient Egypt was fundamentally Nilotic in nature. The 'subregions' where the vast majority of Egyptian Artifacts were created or found all lie on or near the Nile. Notably we see that there are hubs in both the Upper (Southern Egypt) and Lower (Northern Egypt) Nile. Interestingly when we map where artifacts from individual Dynasties were found, we often see them spread throughout the Nile, Lower and Upper. This could show that Ancient Egypt was geographically expansive, or it may be evidence that artifacts were moved around Egypt throughout its history. Ex: an artifact originating in the 3rd Dynasty may have been a possession of someone in the 13th. 
