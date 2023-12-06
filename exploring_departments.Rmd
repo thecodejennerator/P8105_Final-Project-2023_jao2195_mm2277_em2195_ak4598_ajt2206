@@ -24,7 +24,7 @@ mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94",
 # **Departments**
 
 The Met holds many collections from Modern and Contemporary Art to Arms and Armor. 
-Explore the vast departments of the Met and the many objects they contain. Click [here](https://www.metmuseum.org/about-the-met/collection-areas) to learn more about each department, or collection area.
+Explore the vast departments of the Met and the many objects they contain. Explore the different kinds of objects that each department holds. Click [here](https://www.metmuseum.org/about-the-met/collection-areas) to learn more about each department, or collection area.
 
 ```{r}
 met |>
@@ -37,8 +37,6 @@ met |>
   knitr::kable(caption = "Top 3 Departments by Number of Objects")
 ```
 
-The most objects can be found in the following departments: 1) Drawings and Prints; 2) European Sculpture and Decorative Arts; and 3) Asian Art.
-
 ```{r}
 met |> 
   count(department) |> 
@@ -49,6 +47,33 @@ met |>
          yaxis = list(title = 'Number of Objects'),
          legend = list(title = list(text ='Department')))
 ```
+
+The most objects can be found in the following departments: 1) Drawings and Prints; 2) European Sculpture and Decorative Arts; and 3) Asian Art.
+
+```{r}
+met |>
+  filter(is_highlight == TRUE) |>
+  count(department) |> 
+  mutate(rank = min_rank(desc(n))) |> 
+  filter(rank < 4) |> 
+  arrange(desc(n)) |>
+  select(department, n) |> 
+  rename("Department" = department, "Number of Highlighted Objects" = n) |>
+  knitr::kable(caption = "Top 3 Departments by Number of Highlighted Objects")
+```
+
+```{r}
+met |> 
+  filter(is_highlight == TRUE) |>
+  count(department) |> 
+  mutate(department = fct_reorder(department, n)) |> 
+  plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
+  layout(xaxis = list(title = 'Department'), 
+         yaxis = list(title = 'Number of Highlighted Objects'),
+         legend = list(title = list(text ='Department')))
+```
+
+The most highlighted objects can be found in the following departments: 1) The American Wing; 2) Asian Art; and 3) Costume Institute.
 
 ## Drawings and Prints
 
@@ -73,12 +98,14 @@ met |>
           type = 'filter',
           target = 'y',
           operation = '>',
-          value = 700))) |>
+          value = 740))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In Drawings and Prints, the most common objects are: 1) Print; 2) Drawing; and 3) Book.
 
 ## European Sculpture and Decorative Arts
 
@@ -103,12 +130,14 @@ met |>
           type = 'filter',
           target = 'y',
           operation = '>',
-          value = 98))) |>
+          value = 89))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In European Sculpture and Decorative Arts, the most common objects are: 1) Piece; 2) Fragment; and 3) Vase.
 
 ## Photographs
 
@@ -140,6 +169,8 @@ met |>
          showlegend = FALSE)
 ```
 
+In Photographs, the most common objects are: 1) Photograph; 2) Negative; and 3) Carte-de-visite.
+
 ## Asian Art
 
 ```{r}
@@ -169,6 +200,8 @@ met |>
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In Asian Art, the most common objects are: 1) Piece; 2) Print; and 3) Vase.
 
 ## Greek and Roman Art
 
@@ -200,6 +233,8 @@ met |>
          showlegend = FALSE)
 ```
 
+In Greek and Roman Art, the most common objects are: 1) Kylix fragment; 2) Statue; and 3) Vase.
+
 ## Costume Institue
 
 ```{r}
@@ -229,6 +264,8 @@ met |>
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In Costume Institute, the most common objects are 1) Dress; 2) Ensemble; and 3) Evening dress.
 
 ## Egyptian Art
 
@@ -260,6 +297,8 @@ met |>
          showlegend = FALSE)
 ```
 
+In Egyptian Art, the most common objects are: 1) Relief; 2) Scarab; and 3) Jar Label.
+
 ## The American Wing
 
 ```{r}
@@ -289,6 +328,8 @@ met |>
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In The American Wing, the most common objects are: 1) Drawing; 2) Painting; and 3) Watercolor.
 
 ## Islamic Art
 
@@ -320,6 +361,8 @@ met |>
          showlegend = FALSE)
 ```
 
+In Islamic Art, the most common objects are: 1) Fragment; 2) Textile; and 3) Coin.
+
 ## Modern and Contemporary Art
 
 ```{r}
@@ -350,6 +393,8 @@ met |>
          showlegend = FALSE)
 ```
 
+In Modern and Contemporary Art, the most common objects are: 1) Drawing; 2) Painting; and 3) Textile.
+
 ## Arms and Armor
 
 ```{r}
@@ -373,12 +418,14 @@ met |>
           type = 'filter',
           target = 'y',
           operation = '>',
-          value = 20))) |>
+          value = 25))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In Arms and Armor, the most common objects are: 1) Sword guard (Tsuba); 2) Knife handle (Kozuka); and 3) Arrowhead (Yanone).
 
 ## Arts of Africa, Oceania, and the Americas
 
@@ -403,12 +450,14 @@ met |>
           type = 'filter',
           target = 'y',
           operation = '>',
-          value = 50))) |>
+          value = 35))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In Arts of Africa, Oceania, and the Americas, the most common objects are: 1) Vase; 2) Figure; and 3) Mask.
 
 ## Medieval Art
 
@@ -433,12 +482,14 @@ met |>
           type = 'filter',
           target = 'y',
           operation = '>',
-          value = 30))) |>
+          value = 24))) |>
   layout(title = 'Explore the Objects',
          xaxis = list(title = 'Object Name'), 
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In Medieval Art, the most common objects are: 1) Fragment; 2) Ostrakon; and 3) Brooch.
 
 ## Ancient Near Eastern Art
 
@@ -470,6 +521,8 @@ met |>
          showlegend = FALSE)
 ```
 
+In Ancient Near Eastern Art, the most common objects are: 1) Stamp seal; 2) Cuneiform tablet; and 3) Cylinder seal.
+
 ## Musical Instruments
 
 ```{r}
@@ -500,6 +553,8 @@ met |>
          showlegend = FALSE)
 ```
 
+In Musical Instruments, the most common objects are: 1) Bell; 2) Pottery Whistle; and 3) Rattle.
+
 ## European Paintings
 
 ```{r}
@@ -523,6 +578,8 @@ met |>
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
 ```
+
+In European Paintings, the most common objects are: 1) Painting; and 2) Drawing.
 
 ## Robert Lehman Collection
 
@@ -554,6 +611,8 @@ met |>
          showlegend = FALSE)
 ```
 
+In the Robert Lehman Collection, the most common objects are: 1) Drawing; 2) Frame; and 3) Painting.
+
 ## The Cloisters
 
 ```{r}
@@ -584,4 +643,4 @@ met |>
          showlegend = FALSE)
 ```
 
-
+In The Cloisters, the most common objects are: 1) Panel, 2) Pilgrim's badge; and 3) Capital.
