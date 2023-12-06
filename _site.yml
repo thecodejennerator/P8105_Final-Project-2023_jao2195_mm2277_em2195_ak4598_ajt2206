@@ -1,0 +1,30 @@
+name: "The Art of Data Science: The Met Museum"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - text: "Project 'Met'ivation"
+      href: about.html
+    - text: "Exhibition A: The Data"
+      href: the_data.html
+    - text: "Exhibition B: Exploring the Met's Departments"
+      href: exploring_departments.html
+    - text: "Exhibition C: The Met's Growing Collection"
+      href: growing_collection_dashboard.html
+    - text: "Exhibition D: Art Around the World"
+      href: around_the_world.html
+    - text: "Special Exhibitions"
+      href: special_exhibitions.html
+    - text: "Project Report"
+      href: project_report.html
+    - text: "Curators"
+      href: curators.html
+    - icon: fa-link
+      href: https://www.metmuseum.org/
+    - icon: fa-envelope fa-lg
+      href: jao2195@cumc.columbia.edu
+    - icon: fa-github fa-lg
+      href: https://github.com/thecodejennerator/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206
+output:
+  html_document:
+    theme: cosmo

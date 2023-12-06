@@ -1,0 +1,57 @@
+---
+title: "Welcome to The Art of Data Science: The Met Museum"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Background Image</title>
+
+<style type="text/css">
+  body {
+    color: white;      /* Set the font color to white */
+    font-weight: bold;  /* Make the text bold */
+  }
+</style>
+
+
+</head>
+
+<body>
+    <h1>Background image</h1>
+</body>
+
+
+
+</html>
+<style type="text/css">
+  body {
+    font-family: 'sans_serif', sans-serif; /* Specify the desired font family */
+  }
+<style type="text/css">
+  body {
+    font-size: 25pt;
+    color: white;  
+    font-weight: bold;  
+  }
+</style>
+
+
+## <font size="12"><b> Welcome to The Art of Data Science: The Met Museum </font> 
+
+Overview
+
+##  <font size="12"><b> Exhibits </font> 
+
+
+
+
+
+
+

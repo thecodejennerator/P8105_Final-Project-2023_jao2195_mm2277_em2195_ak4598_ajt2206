@@ -4,16 +4,15 @@
 ```{r libraries}
 library(tidyverse)
 library(plotly)
+library(sf)
+library(rnaturalearth)
 
 ```
 
 # Importing Full Dataset
 
 ```{r}
-all_objects = 
-  read_csv("data/MetObjects.csv") |> 
-  janitor::clean_names()
-
+load("data/met.RData")
 ```
 
 # Most Common Object Classifiations
@@ -25,7 +24,7 @@ all_objects =
 
 ```{r}
 with_classification = 
-  all_objects |> 
+  met |> 
   filter(!is.na(classification) & classification != "(not assigned)") |> 
   mutate(
     classification = str_remove(classification, "[-|].*")
@@ -80,6 +79,92 @@ cumulative_classification |>
 
 
 
+
+
+```{r, message=FALSE, warning=FALSE}
+met <- met |>
+  select(department, accession_year, object_name, culture, country, reign, artist_gender, dynasty, is_public_domain) |> 
+  mutate_all(~ifelse(. == "", "unknown", .)) |> 
+  filter(!is.na(accession_year), accession_year >= 1940, accession_year <= 2023)
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+
+top_years_culture <- met |> 
+  group_by(accession_year, object_name, culture) |> 
+  summarize(count = n()) |> 
+  arrange(desc(count)) |> 
+  ungroup() |> 
+  top_n(15)
+
+print(top_years_culture)
+```
+
+```{r, warning=FALSE, message=FALSE}
+country_dist <- met |> 
+  group_by(country, accession_year) |> 
+  summarize(count = n()) |> 
+  arrange(desc(count)) |> 
+  ungroup()
+
+print(country_dist)
+
+```
+
+
+```{r, warning=FALSE}
+met <- met |>
+  select(department, accession_year, object_name, culture, country) |> 
+  mutate_all(~ifelse(. == "", "unknown", .)) |> 
+  filter(!is.na(accession_year), accession_year >= 1940, accession_year <= 2023)
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+met |>
+  group_by(department) |>
+  summarize(count = n()) |> 
+  arrange(desc(count)) |> 
+  knitr::kable(digits = 3)
+
+```
+
+```{r, warning=FALSE}
+met |> 
+  count(department) |> 
+  mutate(department = fct_reorder(department, n)) |> 
+  plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = "viridis")
+```
+
+
+```{r, warning=FALSE}
+met |> 
+  count(object_name) |> 
+  top_n(15, n) |> 
+  mutate(object_name = fct_reorder(object_name, n)) |> 
+  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = "viridis")
+```
+
+```{r, message=FALSE, warning=FALSE}
+
+object_counts <- met |> 
+  group_by(country, object_name) |> 
+  summarise(n_objects = n()) |> 
+  group_by(country) |> 
+  summarise(total_objects = sum(n_objects, na.rm = TRUE))
+
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# Merging with world map data
+world_data <- left_join(world, object_counts, by = c("name" = "country"))
+
+# Plotting the map
+ggplot() +
+  geom_sf(data = world_data, aes(fill = total_objects), color = "white", size = 0.2) 
+
+```
 
 
 

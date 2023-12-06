@@ -1,0 +1,17 @@
+---
+title: "Project Curators"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+
+The following students collaborated on this site:
+
+* Aleya 
+* Andy
+* Diana
+* Emily Murphy (erm2195)
+* Jennifer
+* Melike

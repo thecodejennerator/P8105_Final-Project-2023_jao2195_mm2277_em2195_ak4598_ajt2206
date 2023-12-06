@@ -1,0 +1,36 @@
+---
+title: "Exhibition A: The Data"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+
+```{r include = FALSE}
+load("data/met.RData")
+```
+
+# **Data Source**
+
+The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess).
+
+# **Data Cleaning**
+
+* The Met dataset consists of over 400,000 observations. A dataset of this size was far too big to handle.
+
+* We took a look at missing data to decide how to subset the dataset into a smaller, more manageable size. The variables `object_name` and `accession_year` were complete. From that information, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations.
+
+```{r echo = FALSE}
+sapply(met, function(x) sum(is.na(x)))
+```
+
+Based on the missing data, we chose the following variables to work with: 
+
+* `is_highlight`: When "true" indicates a popular and important artwork in the collection
+* `department`: Indicates The Met's curatorial department responsible for the artwork
+* `accession_year`: Year the artwork was acquired
+* `culture`: Information about the culture, or people from which an object was created
+* `object_name`: Describes the physical type of the object
+* `country`: Country where the artwork was created or found
+
