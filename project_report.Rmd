@@ -9,7 +9,7 @@ output:
 
 As this will be your only chance to describe your project in detail, make sure that your report is a standalone document that fully describes your process and results. We also expect you to write high-quality code that is understandable to an outside reader.
 
-# Project Motivation & Related Work
+# Emily: Project Motivation & Related Work
 Provide an overview of the project goals and motivation.
 
 Anything that inspired you, such as a paper, a web site, or something we discussed in class.
