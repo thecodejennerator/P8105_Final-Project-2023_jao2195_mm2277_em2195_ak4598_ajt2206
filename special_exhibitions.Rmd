@@ -33,6 +33,8 @@ met_egypt = met |>
   filter(department == "Egyptian Art") |> 
   select(object_id, is_highlight, accession_year, object_name, title, period, dynasty, reign, object_date, object_begin_date, object_end_date, medium, credit_line, region, subregion, locale, excavation, tags)
 
+# ignore line- need to commit
+
 met_egypt = met_egypt |> 
  mutate(
     dynasty = case_when(
