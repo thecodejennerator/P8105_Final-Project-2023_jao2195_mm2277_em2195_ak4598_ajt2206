@@ -36,6 +36,7 @@ met %>%
   group_by(accession_year, department) %>% 
   summarize(n = n()) %>%
   ungroup() %>%
+  arrange(department) %>%
   plot_ly(
     x = ~accession_year, y = ~n, type = 'scatter', mode = 'lines',
     alpha = .9, color = ~department, colors = mypal,
@@ -63,6 +64,7 @@ met %>%
   select(department, accession_year, n) %>%
   group_by(department) %>%
   slice(which.max(n)) %>%
+  arrange(department) %>%
   plot_ly(
     y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
     size = ~I(n*1.5), alpha = .9,
@@ -87,12 +89,13 @@ met %>%
   select(department, accession_year, n) %>%
   group_by(department) %>%
   slice(which.max(n)) %>%
+  arrange(department) %>%
   plot_ly(
     y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
     size = ~I(n*1.5), alpha = .9,
     color = ~department, colors = mypal,
     hoverinfo = 'text',
-    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of cultures: ", n)) %>% 
   layout(xaxis = list(title = "Year"),
          yaxis = list (title = "Number of cultures",
                        tickformat=",")) %>%
@@ -110,6 +113,7 @@ met %>%
     select(department, accession_year, n_woman) %>%
   group_by(department) %>%
   slice(which.max(n_woman)) %>%
+  arrange(department) %>%
   plot_ly(
     y = ~n_woman, x = ~accession_year, type = "scatter", mode = "markers",
     size = ~I(n_woman*2), alpha = .9,
@@ -117,7 +121,7 @@ met %>%
     hoverinfo = 'text',
     text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n_woman)) %>%
   layout(xaxis = list(title = "Year"),
-         yaxis = list (title = "Number of objects by womaen",
+         yaxis = list (title = "Number of objects by women",
                        tickformat=",")) %>%
   hide_legend()
 
