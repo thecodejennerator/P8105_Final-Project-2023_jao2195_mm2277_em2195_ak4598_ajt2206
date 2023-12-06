@@ -209,7 +209,7 @@ random_brown_shades <- replicate(nrow(shapefile), sample(brown_shades, 1))
 
 ```{r, echo=FALSE}
 ui <- fluidPage(
-  titlePanel("Special Exhibitions: Egypt"),
+    titlePanel("Special Exhibitions: Egypt"),
 
   tags$head(
     tags$style(
@@ -218,21 +218,21 @@ ui <- fluidPage(
           margin: 0;  /* Remove default body margin */
         }
         .container-fluid {
-          padding-right: 0px;  /* Adjust the right padding */
-          padding-left: 0px;   /* Adjust the left padding */
+          padding-right: 10px;  /* Adjust the right padding */
+          padding-left: 10px;   /* Adjust the left padding */
         }
         .main-container {
           display: flex;
         }
         .sidebar {
           flex: 0 0 auto;
-          width: 100px;  /* Adjust the width of the sidebar */
-          padding: 10px; /* Adjust the padding as needed */
+          width: 300px;  /* Adjust the width of the sidebar */
+          padding: 20px; /* Adjust the padding as needed */
           background-color: #f8f9fa;  /* Set the background color as needed */
         }
         .main-panel {
           flex: 1;
-          padding: 10px; /* Adjust the padding as needed */
+          padding: 50px; /* Adjust the padding as needed */
         }
       ")
     )
@@ -246,8 +246,7 @@ ui <- fluidPage(
     ),
     column(10,
       fluidRow(
-        column(12, br(), HTML("The Met holds a vast collection of over 26,000 Egyptian Artifacts in total. Many of which originate directly from archaelogical digs that staff-members carried out during the beginning of the 20th Century. With such an expansive timeline and collection, come and sate your Egyptology curiosities. Click [here](https://www.metmuseum.org/about-the-met/collection-areas/egyptian-art) to learn more about each department, or collection area.")),
-        column(12, textOutput("result")),
+        column(12, br(), HTML("The Met holds a vast collection of over 26,000 Egyptian Artifacts in total. Many of which originate directly from archaelogical digs that staff-members carried out during the beginning of the 20th Century. With such an expansive timeline and collection, come and sate your Egyptology curiosities.")),
         column(12, br(), plotlyOutput("plot1")),
         column(12, br(), HTML("<p>The early 20th century saw a great expansion in the Mets Egyptian Arts Department corresponding to a larger societal interest in Ancient Egypt in Europe and the United States. The majority of artifacts acquired by the Met during this period come directly from Met led excavations. Additionally, this is a period of great archaeological discoveries even outside of the Met as the Tomb of King Tutankhamen, one of the most important digs of all time, was found in 1922. .</p>")),
         column(12, br(), plotlyOutput("plot2")),

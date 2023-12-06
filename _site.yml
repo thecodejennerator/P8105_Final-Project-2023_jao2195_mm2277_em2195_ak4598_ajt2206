@@ -14,7 +14,7 @@ navbar:
     - text: "Exhibition D: Art Around the World"
       href: around_the_world.html
     - text: "Special Exhibitions"
-      href: special_exhibitions.Rmd
+      href: special_exhibitions.html
     - text: "Project Report"
       href: project_report.html
     - text: "Curators"
