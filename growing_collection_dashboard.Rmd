@@ -21,32 +21,39 @@ mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94",
 ```
 
  
-Row {data-height=650}
+Row {data-height=50}
 -------------------------------------
 
-### Object types over time
+This line chart shows the number of objects accessed by each department of the Met over time. Double click on a department in the right-hand legend to isolate its trend on the chart. You can also drag your mouse over regions of the timeline that you would like to zoom in on.
+ 
+Row {data-height=600}
+-------------------------------------
+
+### Number of objects by department over time
 
 ```{r}
 met %>%
-  group_by(department, accession_year) %>%
-  count(object_name) %>%
-  filter(n > 1) %>%
+  group_by(accession_year, department) %>% 
+  summarize(n = n()) %>%
+  ungroup() %>%
   plot_ly(
-    y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
-    size = ~n, color = ~object_name, text = ~object_name, alpha = 0.5) %>%
-  layout(legend = list(orientation = 'h'))
-
+    x = ~accession_year, y = ~n, type = 'scatter', mode = 'lines',
+    alpha = .9, color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of objects",
+                       tickformat=","))
 ```
 
-Row {data-height=650}
+Row {data-height=50}
 -------------------------------------
 
-### Cultures represented over time
-
-
-Row {data-height=350}
--------------------------------------
+These three plots show "big" years in which departments at the Met had their highest number of objects, represented the highest number of unique cultures, or represented the highest number of (known) woman artists.
     
+Row {data-height=500}
+-------------------------------------
+
 ### Departments at their largest
 
 ```{r}
@@ -63,17 +70,21 @@ met %>%
     hoverinfo = 'text',
     text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
   layout(xaxis = list(title = "Year"),
-         yaxis = list (title = "Highest number of objects")) %>%
+         yaxis = list (title = "Number of objects",
+                       tickformat=",")) %>%
   hide_legend()
 ```
 
-### Departments at their most diverse
+### Departments at their most culturally diverse
 
 ```{r}
 met %>%
-  group_by(department, culture, accession_year) %>%
-  summarize(n = n()) %>%
-  select(department, culture, accession_year, n) %>%
+  filter(!is.na(culture)) %>%
+  mutate(culture = str_remove(culture, "possibly "),
+         culture = str_remove(culture, "probably ")) %>%
+  group_by(department, accession_year, .drop=FALSE) %>%
+  summarize(n = n_distinct(culture)) %>%
+  select(department, accession_year, n) %>%
   group_by(department) %>%
   slice(which.max(n)) %>%
   plot_ly(
@@ -83,6 +94,32 @@ met %>%
     hoverinfo = 'text',
     text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
   layout(xaxis = list(title = "Year"),
-         yaxis = list (title = "Highest number of cultures represented")) %>%
+         yaxis = list (title = "Number of cultures",
+                       tickformat=",")) %>%
   hide_legend()
 ```
+
+### Departments at their most representative of women artists
+
+```{r}
+met %>%
+  filter(!is.na(artist_gender)) %>%
+  mutate(woman = ifelse(grepl("Female", artist_gender), 1, 0)) %>%
+  group_by(department, accession_year) %>%
+  summarize(n_woman = sum(woman)) %>%
+    select(department, accession_year, n_woman) %>%
+  group_by(department) %>%
+  slice(which.max(n_woman)) %>%
+  plot_ly(
+    y = ~n_woman, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n_woman*2), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n_woman)) %>%
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of objects by womaen",
+                       tickformat=",")) %>%
+  hide_legend()
+
+```
+
