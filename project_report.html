@@ -13,7 +13,7 @@
 
 <title>Project Report</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -491,60 +491,93 @@ of the artworks in storage were also on display. Sadly a dataset of this
 size is too much even for us art aficionados, so we decided to divide
 and conquer (which fittingly is how many of the artifacts from around
 the world ended up in an American Art Museum).</p>
-<p>We took a look at missing data to decide how to subset the dataset
-into a smaller, more manageable size. The variables
-<code>object_name</code> and <code>accession_year</code> were complete.
-From that information, we took a random sample of 10% of the data,
-creating our final dataset of over 40,000 observations.</p>
-<p>The Met dataset consists of over 400,000 observations. A dataset of
-this size is far too big to handle, as any analysis would take an
-excessively long time to process. Given this scale, we decided that it
-would be wise to just work with a smaller, more manageable subset of the
-data.</p>
-<p>To start, we looked into which variables were the most complete, and
-found that nearly every observation in the dataset had a value for the
-<code>object_name</code> and <code>accession_year</code> variables.
-Knowing that these would be important variables for our analyses, we
-restricted the dataset to only include observations with non-missing
-values for both variables. Then, we pulled a random 10% sample, creating
-our final dataset.</p>
-<pre><code>##           object_number            is_highlight        is_timeline_work 
-##                       0                       0                       0 
-##        is_public_domain               object_id          gallery_number 
-##                       0                       0                   42991 
-##              department          accession_year             object_name 
-##                       0                       0                       0 
-##                   title                 culture                  period 
-##                    2826                   27397                   38868 
-##                 dynasty                   reign               portfolio 
-##                   45669                   46910                   45294 
-##          constituent_id             artist_role           artist_prefix 
-##                   20197                   20197                   20197 
-##     artist_display_name      artist_display_bio           artist_suffix 
-##                   20197                   20408                   20200 
-##       artist_alpha_sort      artist_nationality       artist_begin_date 
-##                   20197                   20197                   20197 
-##         artist_end_date           artist_gender         artist_ulan_url 
-##                   20197                   37418                   25643 
-##     artist_wikidata_url             object_date       object_begin_date 
-##                   25948                    1348                       0 
-##         object_end_date                  medium              dimensions 
-##                       0                     645                    7517 
-##             credit_line          geography_type                    city 
-##                      24                   42000                   44789 
-##                   state                  county                 country 
-##                   47722                   47180                   40516 
-##                  region               subregion                  locale 
-##                   44829                   45748                   46402 
-##                   locus              excavation                   river 
-##                   47206                   46317                   47760 
-##          classification rights_and_reproduction           link_resource 
-##                    7805                   45643                       0 
-##     object_wikidata_url           metadata_date              repository 
-##                   41109                   47984                       0 
-##                    tags            tags_aat_url       tags_wikidata_url 
-##                   28866                   28866                   28866</code></pre>
-<p>^ NOT SURE WHAT THIS IS DOING?</p>
+<p>A dataset of this size is far too big to handle, as any analysis
+would take an excessively long time to process. Given this scale, we
+decided that it would be wise to just work with a smaller, more
+manageable subset of the data.</p>
+<p>Using the code below, we took a random sample of 10% of the data,
+creating our final dataset of over 40,000 observations. You can use this
+code to create the same subset we did from The Met’s raw data file
+<code>MetOBjects.txt</code>:</p>
+<pre><code>-   `set.seed(1)`
+
+-   `met_10 &lt;- sample_n(MetOBjects, nrow(MetOBjects)*.10)`
+
+-   `save(met_10, file = &quot;data/met_10.RData&quot;)`</code></pre>
+<p>Once we had our 10% sample, we embarked on some data cleaning.</p>
+<div
+id="first-we-looked-into-which-variables-were-the-most-complete.-the-following-table-shows-the-completeness-for-all-variables."
+class="section level4">
+<h4>First, we looked into which variables were the most complete. The
+following table shows the % completeness for all variables.</h4>
+<p>Across the 48495 observations, <code>object_name</code> and
+<code>accession_year</code> were most complete. <code>department</code>
+was 100% complete. This informed which analytic questions we could
+answer.</p>
+<pre class="r"><code>met_10 &lt;- met_10 %&gt;% 
+  janitor::clean_names()
+
+data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %&gt;%
+  magrittr::set_colnames(&quot;Completeness&quot;)</code></pre>
+<pre><code>##                         Completeness
+## object_number                 100.00
+## is_highlight                  100.00
+## is_timeline_work              100.00
+## is_public_domain              100.00
+## object_id                     100.00
+## gallery_number                 10.40
+## department                    100.00
+## accession_year                 99.28
+## object_name                    99.55
+## title                          94.12
+## culture                        42.74
+## period                         18.97
+## dynasty                         4.84
+## reign                           2.24
+## portfolio                       5.56
+## constituent_id                 57.99
+## artist_role                    57.99
+## artist_prefix                  57.99
+## artist_display_name            57.99
+## artist_display_bio             57.55
+## artist_suffix                  57.98
+## artist_alpha_sort              57.99
+## artist_nationality             57.99
+## artist_begin_date              57.99
+## artist_end_date                57.99
+## artist_gender                  22.12
+## artist_ulan_url                46.65
+## artist_wikidata_url            46.02
+## object_date                    97.19
+## object_begin_date             100.00
+## object_end_date               100.00
+## medium                         98.54
+## dimensions                     84.40
+## credit_line                    99.88
+## geography_type                 12.50
+## city                            6.71
+## state                           0.55
+## county                          1.72
+## country                        15.63
+## region                          6.57
+## subregion                       4.65
+## locale                          3.28
+## locus                           1.61
+## excavation                      3.45
+## river                           0.47
+## classification                 83.66
+## rights_and_reproduction         4.87
+## link_resource                 100.00
+## object_wikidata_url            14.30
+## metadata_date                   0.00
+## repository                    100.00
+## tags                           39.78
+## tags_aat_url                   39.78
+## tags_wikidata_url              39.78</code></pre>
+<p>Based on the missing data table, and our decision to focus on objects
+and years, we once again limited the dataset to those observations with
+complete object and year data - resulting in a final analytic dataset
+with 47984 observations.</p>
 <p>IT WOULD BE NICE TO HAVE SOME INITIAL DESCRIPTORS OF OUR FINAL
 DATASET HERE, INCLUDING THE ROW AND OBSERVATION COUNT.</p>
 <p>Based on the missing data, we chose the following variables to work
@@ -589,6 +622,7 @@ artifact count consecutive dynasties) these were just recoded as Dynasty
 Range. Any other values were coded as NA.</p>
 <p>Some other minor cleaning of the Egyptian data also occurred for
 object creation dates.</p>
+</div>
 </div>
 </div>
 <div id="exploratory-analysis" class="section level1">
@@ -653,10 +687,10 @@ the data can you make?</p>
 
 <br><br>
 <footer>
-  <img src="images/columbia_univ.jpeg" alt="stickers" style="width:10%">
+  <img src="images/columbia_univ.jpeg" alt="stickers" style="width:30%">
   <br>
-    <p class="copyright text-muted" align="center">Copyright &copy; Disclosure: "The Art of Data Science: The Met &Trade" website was created using R Studio by a team of Columbia University in the City of New York Data Science Students (known herein as the "The Curators"), for course BIST P8105: Data Science. Data used to create this site was from The Met Museum publicly available Github (Open Sourse Data). The Curators,  do not make any claimswith the date presented.  are in no way affiliated, associated with, or sponsored by, The Met Museum, or any other entity. 
-"  </p>
+    <p class="copyright text-muted" align="center">Copyright &copy; Disclosure: "The Art of Data Science: The Met (Trademark)" website was created using R Studio by a team of Columbia University in the City of New York Data Science Students (known herein as the "The Curators"), for course BIST P8105: Data Science. Data used to create this site was from The Met Museum publicly available Github (Open Sourse Data). The Curators,  do not make any claimswith the date presented.  are in no way affiliated, associated with, or sponsored by, The Met Museum, or any other entity. 
+""  </p>
   <p class="copyright text-muted" align="center">Copyright &copy; 2023 The Curators: Jennifer A. Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Diana Hernandez, Andy Turner  </p>
 </footer>
 

@@ -73,17 +73,25 @@ Using the code below, we took a random sample of 10% of the data, creating our f
     
 Once we had our 10% sample, we embarked on some data cleaning.
 
-#### First, we looked into which variables were the most complete. The following table shows the % completeness for all variables. Across the `r nrow(met_10)` observations, `object_name`, `accession_year`, and `department` were most complete. This informed which analytic questions we could answer.
+#### First, we looked into which variables were the most complete. The following table shows the % completeness for all variables. 
 
 ```{r include = FALSE}
 load("data/met_10.RData")
+
 load("data/met.RData")
 ```
 
+Across the `r nrow(met_10)` observations, `object_name` and `accession_year` were most complete. `department` was 100% complete. This informed which analytic questions we could answer.
+
 ```{r }
-data.frame(sapply(met, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %>%
+met_10 <- met_10 %>% 
+  janitor::clean_names()
+
+data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %>%
   magrittr::set_colnames("Completeness")
 ```
+
+Based on the missing data table, and our decision to focus on objects and years, we once again limited the dataset to those observations with complete object and year data - resulting in a final analytic dataset with `r nrow(met)` observations.
 
 IT WOULD BE NICE TO HAVE SOME INITIAL DESCRIPTORS OF OUR FINAL DATASET HERE, INCLUDING THE ROW AND OBSERVATION COUNT.
 
