@@ -66,11 +66,10 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 6 START ######### -->
-<center> ![Andy in the Art Style of "Your choice" ](images/statues.jpeg){width=35% }
+<center> ![Andy in Snow by Georges Seurat ](images/Andy_Photo.png){width=35% }
 </center>
-**Andy Turner**
-**Contributions:** [Insert Your Contributions here]
-**Andy** [Insert Yor Bio Here]
-**Personal Website / Contact Info** 
+**Andy Turner**   *MPH Epidemiology | Advanced Epidemiology* <br> 
+**Contributions:**<br> * Finding intial dataset <br> * ShinyApp Creation  <br> *  Egyptian Artifacts Analysis <br>
+**Andy** is a second year Masters student in Epidemiology with a Certificate in Advanced Epidemiology (all Epi all the time!). Andy currently works as a Research Assistant focusing on Sexual and Gender Minorities in the United States and Kenya. They are from Las Vegas, Nevada, so fine art runs directly counter to their upbringing. Andy has been to the Met exactly one time, and they were overwhelmed. That said, there were a few cool looking chairs. 
 <!-- ####### BLOCK 6 END ############ -->
 
