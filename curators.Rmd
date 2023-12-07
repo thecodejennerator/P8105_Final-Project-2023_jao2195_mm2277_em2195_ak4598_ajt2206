@@ -32,10 +32,8 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 3 START ######### -->
-<div style="text-align:center;">
-  <img src="images/emily.jpeg" style="width:35%;">
-  <p style="font-size: smaller;">Emily</p>
-</div>
+<center> ![Emily in the Impressionist Era, Anon ](images/emily.png){ width=35% }
+</center>
 
 **Emily Murphy**   *MPH Epidemiology | Infectious Disease Epidemiology* <br> 
 **Contributions:** <br> * Project Motivation Page <br> * Screencast (pending)  <br> *  Project Admin: cleaning up the directory, communicating about to-dos, note-taking during meetings <br>
@@ -45,7 +43,7 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 4 START ######### -->
-<center> ![Diana](images/Diana.jpg){ width=35% }
+<center> ![Diana](images/Diana.png){ width=35% }
 </center>
 **Diana Hernandez** *MPH Sociomedical Sciences | Biostatistics* <br>
 **Contributions:** <br> * Exploring the Met's Departments page <br> * The Data page <br>
