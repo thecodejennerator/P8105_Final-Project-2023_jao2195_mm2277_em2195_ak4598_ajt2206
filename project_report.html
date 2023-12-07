@@ -37,6 +37,19 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/v4-shims.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151578452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-151578452-1');
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -63,6 +76,7 @@ if (window.hljs) {
 
 
 
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 
 
@@ -326,26 +340,35 @@ div.tocify {
         <li>
   <a href="about.html">Project 'Met'ivation</a>
 </li>
-<li>
-  <a href="the_data.html">Exhibition A: The Data</a>
-</li>
-<li>
-  <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
-</li>
-<li>
-  <a href="growing_collection_dashboard.html">Exhibition C: The Met's Growing Collection</a>
-</li>
-<li>
-  <a href="around_the_world.html">Exhibition D: Art Around the World</a>
-</li>
-<li>
-  <a href="special_exhibitions.html">Special Exhibitions</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Exhibitions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="the_data.html">Exhibition A: The Data</a>
+    </li>
+    <li>
+      <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
+    </li>
+    <li>
+      <a href="growing_collection_dashboard.html">Exhibition C: The Met's Growing Collection</a>
+    </li>
+    <li>
+      <a href="around_the_world.html">Exhibition D: Art Around the World</a>
+    </li>
+    <li>
+      <a href="special_exhibitions.html">Special Exhibitions</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="project_report.html">Project Report</a>
 </li>
 <li>
-  <a href="curators.html">Curators</a>
+  <a href="curators.html">Meet the Curators</a>
 </li>
 <li>
   <a href="https://www.metmuseum.org/">
@@ -447,10 +470,79 @@ fit for our academic backgrounds.</p>
 <p>What questions are you trying to answer? How did these questions
 evolve over the course of the project? What new questions did you
 consider in the course of your analysis?</p>
+<p>Our initial questions were “What does the Met contain?”, “Where does
+art come from?”, and “How can we explore the Met more easily?”</p>
 </div>
 <div id="data-collection-and-cleaning" class="section level1">
 <h1>Data Collection and Cleaning</h1>
-<p>Source, scraping method, cleaning, etc.</p>
+<div id="data-source" class="section level3">
+<h3>Data Source</h3>
+<p>The Met offers open access to data of its collection. It can be found
+<a href="https://github.com/metmuseum/openaccess">here</a>.</p>
+</div>
+<div id="data-cleaning" class="section level3">
+<h3>Data Cleaning</h3>
+<ul>
+<li><p>The Met dataset consists of over 400,000 observations. A dataset
+of this size was far too big to handle.</p></li>
+<li><p>We took a look at missing data to decide how to subset the
+dataset into a smaller, more manageable size. The variables
+<code>object_name</code> and <code>accession_year</code> were complete.
+From that information, we took a random sample of 10% of the data,
+creating our final dataset of over 40,000 observations.</p></li>
+</ul>
+<pre><code>##           object_number            is_highlight        is_timeline_work 
+##                       0                       0                       0 
+##        is_public_domain               object_id          gallery_number 
+##                       0                       0                   42991 
+##              department          accession_year             object_name 
+##                       0                       0                       0 
+##                   title                 culture                  period 
+##                    2826                   27397                   38868 
+##                 dynasty                   reign               portfolio 
+##                   45669                   46910                   45294 
+##          constituent_id             artist_role           artist_prefix 
+##                   20197                   20197                   20197 
+##     artist_display_name      artist_display_bio           artist_suffix 
+##                   20197                   20408                   20200 
+##       artist_alpha_sort      artist_nationality       artist_begin_date 
+##                   20197                   20197                   20197 
+##         artist_end_date           artist_gender         artist_ulan_url 
+##                   20197                   37418                   25643 
+##     artist_wikidata_url             object_date       object_begin_date 
+##                   25948                    1348                       0 
+##         object_end_date                  medium              dimensions 
+##                       0                     645                    7517 
+##             credit_line          geography_type                    city 
+##                      24                   42000                   44789 
+##                   state                  county                 country 
+##                   47722                   47180                   40516 
+##                  region               subregion                  locale 
+##                   44829                   45748                   46402 
+##                   locus              excavation                   river 
+##                   47206                   46317                   47760 
+##          classification rights_and_reproduction           link_resource 
+##                    7805                   45643                       0 
+##     object_wikidata_url           metadata_date              repository 
+##                   41109                   47984                       0 
+##                    tags            tags_aat_url       tags_wikidata_url 
+##                   28866                   28866                   28866</code></pre>
+<p>Based on the missing data, we chose the following variables to work
+with:</p>
+<ul>
+<li><code>is_highlight</code>: When “true” indicates a popular and
+important artwork in the collection</li>
+<li><code>department</code>: Indicates The Met’s curatorial department
+responsible for the artwork</li>
+<li><code>accession_year</code>: Year the artwork was acquired</li>
+<li><code>culture</code>: Information about the culture, or people from
+which an object was created</li>
+<li><code>object_name</code>: Describes the physical type of the
+object</li>
+<li><code>country</code>: Country where the artwork was created or
+found</li>
+</ul>
+</div>
 </div>
 <div id="exploratory-analyses-and-alternative-strategies"
 class="section level1">
@@ -458,6 +550,14 @@ class="section level1">
 <p>Visualizations, summaries, and exploratory statistical analyses.</p>
 <p>Justify the steps you took, and show any major changes to your
 ideas.</p>
+<p>As the Met’s collection contains many unknown or NA values, we
+decided to use the variables with the most complete data. We also
+decided that the best way to depict the Met would be with visuals worthy
+of being in the Met itself. Because the Met’s database mainly contained
+categorical variables, we mainly focused on the quantity of objects,
+cultures, and object types. We made sure to use the one continuous
+variable we had (<code>accession_year</code>) to depict the Met over
+time.</p>
 </div>
 <div id="discussion" class="section level1">
 <h1>Discussion</h1>
@@ -478,13 +578,21 @@ document.</p>
 <ul>
 <li>Aleya</li>
 <li>Andy</li>
-<li>Diana</li>
+<li>Diana Hernandez (dmh2228)</li>
 <li>Emily Murphy (erm2195)</li>
 <li>Jennifer</li>
 <li>Melike</li>
 </ul>
 </div>
 
+<br><br>
+<footer>
+  <img src="images/columbia_univ.jpeg" alt="stickers" style="width:30%">
+  <br>
+    <p class="copyright text-muted" align="center">Copyright &copy; Disclosure: "The Art of Data Science: The Met (Trademark)" website was created using R Studio by a team of Columbia University in the City of New York Data Science Students (known herein as the "The Curators"), for course BIST P8105: Data Science. Data used to create this site was from The Met Museum publicly available Github (Open Sourse Data). The Curators,  do not make any claimswith the date presented.  are in no way affiliated, associated with, or sponsored by, The Met Museum, or any other entity. 
+""  </p>
+  <p class="copyright text-muted" align="center">Copyright &copy; 2023 The Curators: Jennifer A. Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Diana Hernandez, Andy Turner  </p>
+</footer>
 
 
 </div>

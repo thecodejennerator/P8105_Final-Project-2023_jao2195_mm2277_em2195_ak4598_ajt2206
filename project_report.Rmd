@@ -34,19 +34,46 @@ Motivated by the intimidating vastness of the Met (and likely, our pride in it a
 
 Our discovery of how fun and satisfying it is to make and use interactive plots in R (such as with [plotly](https://plotly.com/r/)) drew us to a topic that would have lots of opportunities for visualization. Additionally, a few members of our group have specific experience with spatial epidemiology, so working with data like this that allows for map creation was a good fit for our academic backgrounds.
 
-
-
-
 # Initial Questions
 What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?
 
+Our initial questions were "What does the Met contain?", "Where does art come from?", and "How can we explore the Met more easily?"
+
 # Data Collection and Cleaning
-Source, scraping method, cleaning, etc.
+
+### Data Source
+
+The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess).
+
+### Data Cleaning
+
+* The Met dataset consists of over 400,000 observations. A dataset of this size was far too big to handle.
+
+* We took a look at missing data to decide how to subset the dataset into a smaller, more manageable size. The variables `object_name` and `accession_year` were complete. From that information, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations.
+
+```{r include = FALSE}
+load("data/met.RData")
+```
+
+```{r echo = FALSE}
+sapply(met, function(x) sum(is.na(x)))
+```
+
+Based on the missing data, we chose the following variables to work with: 
+
+* `is_highlight`: When "true" indicates a popular and important artwork in the collection
+* `department`: Indicates The Met's curatorial department responsible for the artwork
+* `accession_year`: Year the artwork was acquired
+* `culture`: Information about the culture, or people from which an object was created
+* `object_name`: Describes the physical type of the object
+* `country`: Country where the artwork was created or found
 
 # Exploratory Analyses and Alternative Strategies
 Visualizations, summaries, and exploratory statistical analyses. 
 
 Justify the steps you took, and show any major changes to your ideas.
+
+As the Met's collection contains many unknown or NA values, we decided to use the variables with the most complete data. We also decided that the best way to depict the Met would be with visuals worthy of being in the Met itself. Because the Met's database mainly contained categorical variables, we mainly focused on the quantity of objects, cultures, and object types. We made sure to use the one continuous variable we had (`accession_year`) to depict the Met over time. 
 
 # Discussion
 What were your findings? Are they what you expect? What insights into the data can you make?
@@ -58,7 +85,7 @@ The following students collaborated on this site and report:
 
 * Aleya 
 * Andy
-* Diana
+* Diana Hernandez (dmh2228)
 * Emily Murphy (erm2195)
 * Jennifer
 * Melike
