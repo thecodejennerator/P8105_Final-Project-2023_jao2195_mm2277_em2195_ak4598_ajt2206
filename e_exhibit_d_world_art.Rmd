@@ -1,8 +1,0 @@
----
-title: "e_exhibit_d_world_art.html"
-output: 
-  html_document:
-    toc: true
-    toc_float: true
-    theme: cosmo
----

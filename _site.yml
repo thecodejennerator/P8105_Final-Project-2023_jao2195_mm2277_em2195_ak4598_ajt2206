@@ -1,24 +1,24 @@
-name: "Welcome to The Art of Data Science: The Met Museum"
+name: "The Art of Data Science: The Met Museum"
 output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "About: Project Motivation and About The Met"
-      href: a_about.html
-    - text: "Exhibit A: The Data"
-      href: b_exhibit_a_the_data.html
-    - text: "Exhibit B: The Art"
-      href: c_exhibit_b_the_art.html
-    - text: "Exhibit C: The Art of Data Science: The Analysis"
-      href: d_exhibit_c_taods_the_analysis.html
-    - text: "Exhibit D: Art Around the World"
-      href: e_exhibit_d_world_art.html
-    - text: "Exhibit E: Select Exhibits"
-      href: f_exhibit_e_select_exhibits.html
-    - text: "The Final Exposition"
-      href: g_the_final_exposition.html
-    - text: "The Artists"
-      href: h_the_artists.html
+    - text: "Project 'Met'ivation"
+      href: about.html
+    - text: "Exhibition A: The Data"
+      href: the_data.html
+    - text: "Exhibition B: Exploring the Met's Departments"
+      href: exploring_departments.html
+    - text: "Exhibition C: The Met's Growing Collection"
+      href: growing_collection_dashboard.html
+    - text: "Exhibition D: Art Around the World"
+      href: around_the_world.html
+    - text: "Special Exhibitions"
+      href: special_exhibitions.html
+    - text: "Project Report"
+      href: project_report.html
+    - text: "Curators"
+      href: curators.html
     - icon: fa-link
       href: https://www.metmuseum.org/
     - icon: fa-envelope fa-lg

@@ -1,0 +1,338 @@
+---
+title: "Exhibition E: Egypt"
+output: 
+  flexdashboard::flex_dashboard:
+    vertical_layout: scroll
+runtime: shiny
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(shiny)
+library(sf)
+library(patchwork)
+library(here)
+library(ggmap)
+library(leaflet)
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+mypal<-c("#78B7C5",  "#EBCC2A", "#FF0000",
+         "#3B9AB2", "#B40F20", "#0B775E", "#F2300F", 
+         "#5BBCD6", "#F98400", "#ab0213", "#E2D200", 
+         "#ff7700", "#46ACC8", "#00A08A", "#78B7C5",
+         "#a7ba42", "#f94f8a", "#DD8D29", "#EABE94")
+
+load("data/met.RData")
+
+met_egypt = met |> 
+  filter(department == "Egyptian Art") |> 
+  select(object_id, is_highlight, accession_year, object_name, title, period, dynasty, reign, object_date, object_begin_date, object_end_date, medium, credit_line, region, subregion, locale, excavation, tags)
+
+met_egypt = met_egypt |> 
+ mutate(
+    dynasty = case_when(
+      dynasty == "11" ~ "Dynasty 11",
+      dynasty == "Dynasty 1, 3–4" | dynasty == "Dynasty 1 3-4" ~ "Dynasty Range",
+      dynasty == "Dynasty 11, late" ~ "Dynasty 11",
+      dynasty == "Dynasty 11?" ~ "Dynasty 11",
+      dynasty == "Dynasty 11–13" | dynasty == "Dynasty 11-13" ~ "Dynasty Range",
+      dynasty == "Dynasty 11–17" | dynasty == "Dynasty 11-17" ~ "Dynasty Range",
+      dynasty == "Dynasty 11-17" ~ "Dynasty Range",
+      dynasty == "Dynasty 11–18" ~ "Dynasty Range",
+      dynasty == "Dynasty 11–mid 12" | dynasty == "Dynasty 11-mid 12" ~ "Dynasty Range",
+      dynasty == "Dynasty 11–12" | dynasty == "Dynasty 11-12" ~ "Dynasty Range",
+      dynasty == "Dynasty 12, early" ~ "Dynasty 12",
+      dynasty == "Dynasty 12, early – mid" | dynasty == "Dynasty 12, early - mid" ~ "Dynasty 12",
+      dynasty == "Dynasty 12, early–mid" | dynasty == "Dynasty 12, early-mid" ~ "Dynasty 12",
+      dynasty == "Dynasty 12, late" ~ "Dynasty 12",
+      dynasty == "Dynasty 12, late – 13 up to 1700" | dynasty == "Dynasty 12, late - 13 up to 1700" ~ "Dynasty Range",
+      dynasty == "Dynasty 12, late-13 up to 1700 B. C." ~ "Dynasty Range",
+      dynasty == "Dynasty 12, late–17" ~ "Dynasty Range",
+      dynasty == "Dynasty 12, late-17" ~ "Dynasty Range",
+      dynasty == "Dynasty 12, mid" ~ "Dynasty 12",
+      dynasty == "Dynasty 12–13" ~ "Dynasty 12-13",
+      dynasty == "Dynasty 12, late–early 13" ~ "Dynasty 12-13",
+      dynasty == "Dynasty 12–17" ~ "Dynasty Range",
+      dynasty == "Dynasty 12–18" ~ "Dynasty Range",
+      dynasty == "Dynasty 13 to 1700 B.C." ~ "Dynasty Range",
+      dynasty == "Dynasty 13, mid" ~ "Dynasty 13",
+      dynasty == "Dynasty 13–17" ~ "Dynasty Range",
+      dynasty == "Dynasty 13–18, early" ~ "Dynasty Range",
+      dynasty == "Dynasty 13–SIP" ~ "Dynasty Range",
+      dynasty == "Dynasty 14–15" ~ "Dynasty Range",
+      dynasty == "Dynasty 15–17" ~ "Dynasty Range",
+      dynasty == "Dynasty 17–early Dynasty 18" ~ "Dynasty 17-18",
+      dynasty == "Dynasty 17–Early Dynasty 18" ~ "Dynasty 17-18",
+      dynasty == "Dynasty 17–18" ~ "Dynasty 17-18",
+      dynasty == "Dynasty 18 (?)" ~ "Dynasty 18",
+      dynasty == "Dynasty 18 or later (?)" ~ "Dynasty 18",
+      dynasty == "Dynasty 18, early" ~ "Dynasty 18",
+      dynasty == "Dynasty 18, late" ~ "Dynasty 18",
+      dynasty == "Dynasty 18, possibly later" ~ "Dynasty 18",
+      dynasty == "Dynasty 18, second half" ~ "Dynasty 18",
+      dynasty == "Dynasty 18–19" | dynasty == "Dynasty 18-19" ~ "Dynasty Range",
+      dynasty == "Dynasty 18–20" ~ "Dynasty Range",
+       dynasty == "Dynasty 19–20" ~ "Dynasty 19-20",
+      dynasty == "Dynasty 19–20 (Ramesside)" ~ "Dynasty 19-20",
+      dynasty == "Dynasty 19–20 or later (?)" ~ "Dynasty 19-20",
+      dynasty == "Dynasty 19–21" ~ "Dynasty Range",
+      dynasty == "Dynasty 19–25" ~ "Dynasty Range",
+      dynasty == "Dynasty 19–30" ~ "Dynasty Range",
+      dynasty == "Dynasty 1–2" ~ "Dynasty Range", 
+      dynasty == "Dynasty 1-2" ~ "Dynasty Range",
+      dynasty == "Dynasty 2, second half" ~ "Dynasty 2",
+      dynasty == "Dynasty 20 (Ramesside)" ~ "Dynasty 2",
+      dynasty == "Dynasty 20 or later" ~ "Dynasty 20",
+      dynasty == "Dynasty 20–21" | dynasty == "Dynasty 20-21" ~ "Dynasty Range",
+      dynasty == "Dynasty 20–22" ~ "Dynasty Range",
+      dynasty == "Dynasty 20–26" ~ "Dynasty Range",
+      dynasty == "Dynasty 21 (?)" ~ "Dynasty 21",
+      dynasty == "Dynasty 21 or 22" ~ "Dynasty Range",
+      dynasty == "Dynasty 21–22" ~ "Dynasty Range",
+      dynasty == "Dynasty 21-22" ~ "Dynasty Range",
+      dynasty == "Dynasty 21–24" ~ "Dynasty Range",
+      dynasty == "Dynasty 21–25" ~ "Dynasty Range",
+      dynasty == "Dynasty 21–26" ~ "Dynasty Range",
+      dynasty == "Dynasty 21–30" ~ "Dynasty Range",
+      dynasty == "Dynasty 21–early Dynasty 22" ~ "Dynasty 21-22",
+      dynasty == "Dynasty 22, early" ~ "Dynasty 22",
+      dynasty == "Dynasty 22–24" ~ "Dynasty Range",
+      dynasty == "Dynasty 22–26" ~ "Dynasty Range",
+      dynasty == "Dynasty 25-26" ~ "Dynasty Range",
+      dynasty == "Dynasty 25–26" ~ "Dynasty Range",
+      dynasty == "Dynasty 25 (Kushite)" ~ "Dynasty 25",
+      dynasty == "Dynasty 25–30" ~ "Dynasty Range",
+      dynasty == "Dynasty 26 (Saite)" ~ "Dynasty 26",
+      dynasty == "Dynasty 26 and later" ~ "Dynasty Range",
+      dynasty == "Dynasty 26 or later" ~ "Dynasty Range",
+      dynasty == "Dynasty 26–29" ~ "Dynasty Range",
+      dynasty == "Dynasty 26–4th century" ~ "Dynasty Range",
+      dynasty == "Dynasty 26–30" ~ "Dynasty Range",
+      dynasty == "Dynasty 3–4" | dynasty == "Dynasty 3-4"  ~ "Dynasty Range",
+      dynasty == "Dynasty 27–30" ~ "Dynasty Range",
+      dynasty == "Dynasty 27–30?" ~ "Dynasty Range",
+      dynasty == "Dynasty 30 or later" ~ "Dynasty 30",
+      dynasty == "Dynasty 5 (?)" ~ "Dynasty 5",
+      dynasty == "Dynasty 5, second half" ~ "Dynasty 5",
+      dynasty == "Dynasty 5-6" ~ "Dynasty Range",
+      dynasty == "Dynasty 5–6" ~ "Dynasty Range",
+      dynasty == "Dynasty 6–8" ~ "Dynasty Range",
+      dynasty == "Dynasty 6-8" ~ "Dynasty Range",
+      dynasty == "Dynasty 6–11" ~ "Dynasty Range",
+      dynasty == "Dynasty 6–12" ~ "Dynasty 2",
+      dynasty == "Dynasty 7–10 (?)" ~ "Dynasty Range",
+      dynasty == "Dynasty 8–11" ~ "Dynasty Range",
+      dynasty == "Dynasty 8–12" ~ "Dynasty Range",
+      dynasty == "Dynasty 8–18" ~ "Dynasty Range",
+      dynasty == "Dynasty 9?" ~ "Dynasty 9",
+      dynasty == "Dynasty 9–12" ~ "Dynasty Range",
+      dynasty == "Dynasty 18, early" ~ "Dynasty 18",
+      dynasty == "original Dynasty 19" ~ "Dynasty 19",
+      dynasty == "mid-Dynasty 18" ~ "Dynasty 18",
+      dynasty == "late Dynasty 22" ~ "Dynasty 22",
+      dynasty == "late Dynasty 21" ~ "Dynasty 21",
+      dynasty == "late Dynasty 13-17" ~ "Dynasty Range",
+      dynasty == "late Dynasty 13–17" ~ "Dynasty Range",
+      dynasty == "late Dynasty 12–early Dynasty 13" ~ "Dynasty 12-13",
+      dynasty == "late Dynasty 12–early  Dynasty 13" ~ "Dynasty 12-13",
+      dynasty == "late Dynasty 12–Dynasty 13" ~ "Dynasty 12-13",
+      dynasty == "late Dynasty 12–13" ~ "Dynasty 12-13",
+      dynasty == "Probably Dynasty 1" ~ "Dynasty 1",
+      dynasty == "Probably Dynasty 26" ~ "Dynasty 26",
+      dynasty == "mid Dynasty 13" ~ "Dynasty 13",
+      dynasty == "early Dynasty 18" ~ "Dynasty 18",
+      dynasty == "dynasty 11" ~ "Dynasty 11",
+      dynasty == "Late dynasty 11" ~ "Dynasty 11",
+      dynasty == "Late Dynasty 21–early Dynasty 22" ~ "Dynasty 21-22",
+      dynasty == "Late Dynasty 12–13" ~ "Dynasty 12-13",
+      dynasty == "Dynasty 9–early Dnyasty 11" ~ "Dynasty Range",
+      dynasty == "mid to late Dynasty 13" ~ "Dynasty 13",
+      dynasty == "Dynasty 9–12" ~ "Dynasty Range",
+      dynasty == "Second Intermediate Period" ~ "Dynasty Range",
+      reign == "reign of Ramesses IV" ~ "Dynasty 20",
+      reign == "reign of Sethnakht" ~ "Dynasty 20",
+      object_date == "ca. 2649–1640 B.C." | object_name == "ca. 2649-1640 B.C." ~ "Dynasty Range",
+      TRUE ~ dynasty,
+      TRUE ~ reign,
+      TRUE ~ object_date
+    ),
+    dynasty = ifelse(is.na(dynasty), "No Dynasty Specified", dynasty),
+  dynasty = factor(dynasty, levels = c("Dynasty 1", "Dynasty 2", "Dynasty 3", "Dynasty 4", "Dynasty 5", "Dynasty 6", "Dynasty 8", "Dynasty 9", "Dynasty 11", "Dynasty 12", "Dynasty 12-13", "Dynasty 13", "Dynasty 14", "Dynasty 15", "Dynasty 17", "Dynasty 17-18", "Dynasty 18", "Dynasty 19", "Dynasty 19-20", "Dynasty 20", "Dynasty 21", "Dynasty 22", "Dynasty 23", "Dynasty 24", "Dynasty 25", "Dynasty 26", "Dynasty 27", "Dynasty 30", "Dynasty Range", "NA")),
+  dyn_number = ifelse(is.na(dynasty), 30, as.numeric(dynasty)))
+
+dynasties = met_egypt |> arrange(dynasty) |> distinct(dynasty) |> pull()
+dynasty_number = met_egypt |> arrange(dyn_number) |> distinct(dyn_number) |> pull()
+
+met_subregions = met_egypt |>  
+  filter(!(is.na(subregion))) |> 
+  group_by(subregion) |> 
+  summarize(artifact_number=n()) |> 
+  filter(artifact_number>10)
+
+met_subregions = met_subregions |> 
+  mutate(
+    latitude = c(26.1834, 27.6262, 25.733, 25.7373, 25.7369, 25.550, 25.42, 29.571, 29.570, 25.4255, 25.4311, 28.531, 30.8036, 29.8685, 25.7317, 25.7166, 30.5704, 25.7402, 25.7000),
+    longitude= c(31.9226, 30.9852, 32.617, 32.6077, 32.6241, 32.4646, 32.28, 31.2318, 31.2318, 32.3528, 32.3603, 30.647, 31.8381, 31.2168, 32.6092, 32.6500, 31.5149, 32.6014, 32.5600)) |> 
+     rowwise() |> 
+  mutate(
+    geometry = st_sfc(st_point(c(longitude, latitude)))
+  )
+    
+met_egypt = 
+  left_join(met_egypt, met_subregions, by= "subregion")
+
+load("data/shapeFile.RData")
+
+egypt_map <- met_subregions |> 
+  drop_na(latitude, longitude) |> 
+  st_as_sf(coords = c("longitude", "latitude"), crs = st_crs(shapefile))
+
+color_factor <- colorFactor(palette = mypal, domain = egypt_map$subregion)
+
+brown_shades <- c("#8B4513", "#A0522D", "#CD853F", "#D2691E")
+
+random_brown_shades <- replicate(nrow(shapefile), sample(brown_shades, 1))
+
+```
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+```{r}
+checkboxGroupInput("check_group", "Dynasties:", 
+                   choices = dynasties,
+                   selected = dynasties)
+
+textOutput("result")
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Artifacts Accessioned by Dynasty Over Time
+
+```{r}
+output$result <- renderText({
+  paste("Selected options:", paste(input$check_group, collapse = ", "))
+})
+
+renderPlotly({
+ met_egypt |> 
+  group_by(dynasty, accession_year) |> 
+  summarize(n = n()) |> 
+  filter(!dynasty %in% c("Dynasty Range", "No Dynasty Specified"), dynasty %in% input$check_group) |> 
+  arrange(accession_year) |> 
+  plot_ly(x = ~accession_year, y = ~n, 
+          color = ~dynasty,  
+          type = 'scatter', 
+          mode = 'lines+markers', 
+          colors = mypal) %>% 
+  layout(
+    xaxis = list(title = "Accession Year"),
+    yaxis = list(title = "Number of Artifacts"),
+    legend = list(title = "Dynasty"),
+    showlegend = TRUE  # Set to TRUE if you want to display the legend
+  )
+})
+
+```
+
+
+### Artifacts Approximate Creation Date Over Time
+
+```{r}
+output$result <- renderText({
+  paste("Selected options:", paste(input$check_group, collapse = ", "))
+})
+
+renderPlotly({
+met_egypt |> 
+  mutate(
+    year_created= (object_begin_date + object_end_date)/2
+  ) |> 
+  group_by(dynasty, year_created) |> 
+  summarize(n_obs=n()) |> 
+  filter(dynasty %in% input$check_group) |>
+  plot_ly(x = ~year_created, y = ~n_obs, 
+          color = ~dynasty,  
+          type = 'scatter', 
+          mode = 'lines+markers', 
+          colors = mypal) %>% 
+  layout(
+    xaxis = list(title = "Approximate Creation Date"),
+    yaxis = list(title = "Number of Artifacts"),
+    legend = list(title = "Dynasty"),
+    showlegend = TRUE
+  )
+})
+```
+
+### Number of Artifacts per Dynasty
+
+```{r, echo=FALSE, message=FALSE}
+output$result <- renderText({
+  paste("Selected options:", paste(input$check_group, collapse = ", "))
+})
+
+renderPlotly({
+met_egypt |> 
+  filter(dynasty %in% input$check_group) |> 
+  plot_ly(x = ~dynasty, type = "histogram", color= ~dynasty, legendgroup = ~dynasty, showlegend= TRUE) %>%
+  layout(
+    xaxis = list(title = "Values"), 
+    yaxis = list(title = "Frequency"))
+})
+```
+
+### Map of Egyptian Artifact Locations 
+    
+```{r}
+output$result <- renderText({
+  paste("Selected options:", paste(input$check_group, collapse = ", "))
+})
+
+filtered_data <- reactive({
+  selected_dynasties <- input$check_group
+  met_egypt %>%
+    filter(dynasty %in% selected_dynasties, subregion %in% c("Abydos", "Amarna (Akhetaten)", "Asasif", "Deir el-Bahri", "Dra Abu el-Naga", "Hierakonpolis (Nekhen)", "Khokha", "Lisht North", "Lisht South", "Malqata", "Medinet Habu", "Oxyrhynchus (Bahnasa)", "Qantir (Piramesse)", "Saqqara", "Sheikh Abd el-Qurna", "Southern Asasif", "Tell Basta (Bubastis)",  "Valley of the Kings", "Wadi Gabbanat el-Qurud, Wadi D")) %>%
+    group_by(subregion, latitude, longitude) %>%
+    summarize(
+      n = n())
+})
+
+renderLeaflet({
+  leaflet() |>
+  
+  # Add polygons from egypt_shape
+  addPolygons(
+    data = shapefile, 
+    fillOpacity = 0.3, 
+    fillColor = random_brown_shades,
+    weight = 1, 
+    color = "black",
+    popup = ~NAME_1
+  ) |>
+  
+  # Add point markers from filtered_data
+  addCircleMarkers(
+    data = filtered_data(),  # Note the use of () to call the reactive expression
+    fillColor = ~color_factor(filtered_data()$subregion), 
+    radius = ~sqrt(filtered_data()$n), 
+    popup = ~paste("Subregion: ", filtered_data()$subregion, "<br>Number: ", filtered_data()$n),
+    fillOpacity = 1.0,
+    stroke = FALSE
+  ) |>
+  
+  # Add a legend for the point markers
+  addLegend("bottomright", 
+            colors = mypal[1:length(unique(filtered_data()$subregion))], 
+            labels = unique(filtered_data()$subregion), 
+            opacity = 0.5) |>
+  
+  # Set the tile layer (you can choose a different one)
+  addProviderTiles("Stamen.TonerLite")
+})
+```

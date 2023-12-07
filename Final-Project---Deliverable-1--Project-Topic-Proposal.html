@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Final-Project---Deliverable-1--Project-Topic-Proposal</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">Project 'Met'ivation</a>
+</li>
+<li>
+  <a href="the_data.html">Exhibition A: The Data</a>
+</li>
+<li>
+  <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
+</li>
+<li>
+  <a href="growing_collection.html">Exhibition C: The Met's Growing Collection</a>
+</li>
+<li>
+  <a href="around_the_world.html">Exhibition D: Art Around the World</a>
+</li>
+<li>
+  <a href="f_exhibit_e_select_exhibits.html">Special Exhibitions</a>
+</li>
+<li>
+  <a href="g_the_final_exposition.html">Project Report</a>
+</li>
+<li>
+  <a href="h_the_artists.html">Curators</a>
+</li>
+<li>
+  <a href="https://www.metmuseum.org/">
+    <span class="fa fa-link"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="jao2195@cumc.columbia.edu">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/thecodejennerator/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<p>Final Project <br> Deliverable 1: Team Registration and Project Topic
+Proposal ================ <strong>Team:</strong> Jennifer Osei, Melike
+Aksoy, Emily Murphy, Aleya Khalifa, Andy Turner, Diana Hernandez <br>
+<strong>Date:</strong> Monday, December 04, 2023 11:09 AM</p>
+<div id="deliverable-1-team-registration-and-project-topic-proposal"
+class="section level1">
+<h1>Deliverable 1: Team Registration and Project Topic Proposal</h1>
+<p>First, you will define your teams and propose a project. <br> This
+proposal should be a half-page to a page in length and include:</p>
+<div id="the-group-members-names-and-unis" class="section level2">
+<h2>1.The group members (names and UNIs)</h2>
+<table>
+<caption>
+<em>Table 1: Team Members and UNIs</em>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Group_Member_Names
+</th>
+<th style="text-align:left;">
+UNIs
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Jennifer Osei
+</td>
+<td style="text-align:left;">
+jao2195
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Melike Aksoy
+</td>
+<td style="text-align:left;">
+mma2277
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Emily Murphy
+</td>
+<td style="text-align:left;">
+erm2195
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Aleya Khalifa
+</td>
+<td style="text-align:left;">
+ak4598
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Andy Turner
+</td>
+<td style="text-align:left;">
+ajt2206
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Diana Hernandez
+</td>
+<td style="text-align:left;">
+dmh2228
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="the-tentative-project-title" class="section level2">
+<h2>2. The tentative project title</h2>
+<p><strong>The Art of Data Science: Exploring the Origins of The Met’s
+Collections</strong></p>
+</div>
+<div id="the-motivation-for-this-project" class="section level2">
+<h2>3. The motivation for this project</h2>
+<p>The Met is the largest museum in the Americas as such it would take
+days of visits to see all the pieces of art on display. To help fight
+the sensory overload (and exposure to dry air) that comes with repeated
+visits, we will be analyzing the Met’s collections. Breaking down
+artifacts by country and culture of origin, creating a timeline of Met
+artifacts, and creating visualizations worthy of the Met itself will all
+be part of the project. These data explorations and visualizations will
+provide Met visitors with a deeper understanding of its collections -
+both before and after their visits to the museum.</p>
+<p><em>Where does art come from in terms of culture, period, gender, and
+beyond?</em></p>
+</div>
+<div id="the-intended-final-products" class="section level2">
+<h2>4. The intended final products</h2>
+<p>We will create a website with dashboard that hosts multiple data
+visualizations and a description of our analyses.</p>
+</div>
+<div id="the-anticipated-data-sources" class="section level2">
+<h2>5. The anticipated data sources</h2>
+<p><span class="math display">\[The Met Museum\]</span> (<a
+href="https://metmuseum.github.io/"
+class="uri">https://metmuseum.github.io/</a>)</p>
+</div>
+<div id="the-planned-analyses-visualizations-coding-challenges"
+class="section level2">
+<h2>6. The planned analyses / visualizations / coding challenges</h2>
+<div id="planned-analyses" class="section level3">
+<h3>Planned analyses</h3>
+<ul>
+<li>number of artefacts by dynasty and reign</li>
+<li>number of artefacts by culture over time</li>
+<li>trends in the counts of different types of art (e.g., painting,
+sculpture, etc.) acquired by the MET</li>
+<li>medium of the art by gender of the artist, and whether that differs
+by highlighted and non-highlighted objects</li>
+<li>relationship between an artwork being in the public domain and being
+highlighted</li>
+<li>rivers depicted most frequently/rarely</li>
+</ul>
+</div>
+<div id="visualizations" class="section level3">
+<h3>Visualizations</h3>
+<ul>
+<li>world map: maybe a little GIS action</li>
+<li>sankey plot to visualize flows from where artefact originated and
+where the excavator was from</li>
+<li>bar chart</li>
+<li>timeline using line chart</li>
+</ul>
+</div>
+<div id="coding-challenges" class="section level3">
+<h3>Coding challenges</h3>
+<ul>
+<li>working with mostly string variables, some of which needed to be
+recoded</li>
+<li>handling missing data when aggregating data by category</li>
+<li>not all categories will pertain to all artefacts, like
+<code>reign</code>, since artefacts may be from more recent periods</li>
+<li>working with such a large dataset, we’ll have to decide how to
+filter especially when using dashboard</li>
+</ul>
+</div>
+</div>
+<div id="the-planned-timeline" class="section level2">
+<h2>7. The planned timeline</h2>
+<table>
+<caption>
+<em>Table 2: Team Project Timeline</em>
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Task_Number
+</th>
+<th style="text-align:left;">
+Day
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:center;">
+Description
+</th>
+<th style="text-align:left;">
+Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:left;">
+Thursday
+</td>
+<td style="text-align:left;">
+November 9, 2023
+</td>
+<td style="text-align:center;">
+First team meeting for discussing the ideas, choosing the topic,and
+completing the proposal
+</td>
+<td style="text-align:left;">
+Zoom Meeting
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:left;">
+Saturday
+</td>
+<td style="text-align:left;">
+November 18, 2023
+</td>
+<td style="text-align:center;">
+Team meeting after the Project Review for Coding and Visualizations
+draft
+</td>
+<td style="text-align:left;">
+Zoom Meeting
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:left;">
+Sunday-Wednesday
+</td>
+<td style="text-align:left;">
+November 19, 2023-November 22, 2023
+</td>
+<td style="text-align:center;">
+Working on coding and visualizations
+</td>
+<td style="text-align:left;">
+Github Document
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:left;">
+Monday
+</td>
+<td style="text-align:left;">
+November 27, 2023
+</td>
+<td style="text-align:center;">
+Team meeting for Vizualizations Finalized
+</td>
+<td style="text-align:left;">
+Zoom Meeting
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:left;">
+Monday-Friday
+</td>
+<td style="text-align:left;">
+November 27, 2023-December 1, 2023
+</td>
+<td style="text-align:center;">
+Finalizing the cleaning the code and visualizations
+</td>
+<td style="text-align:left;">
+Github Document
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:left;">
+Monday
+</td>
+<td style="text-align:left;">
+December 4, 2023
+</td>
+<td style="text-align:center;">
+Team meeting for Report, Webpage &amp; Screencast
+</td>
+<td style="text-align:left;">
+Zoom Meeting
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:left;">
+Monday-Friday
+</td>
+<td style="text-align:left;">
+December 4, 2023-December 8, 2023
+</td>
+<td style="text-align:center;">
+Completing the Written Report Giving Detailed Project Description,
+Webpage Overview of Project with Short Explanatory Video, Brief
+Assessment of Teammates Contributions
+</td>
+<td style="text-align:left;">
+Github Document and Website
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:left;">
+Saturday-Thursday
+</td>
+<td style="text-align:left;">
+December 9, 2023- December 14,
+</td>
+<td style="text-align:center;">
+Preparing for In Class Discussion of Final Project
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

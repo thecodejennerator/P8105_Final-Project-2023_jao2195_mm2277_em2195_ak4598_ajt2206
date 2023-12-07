@@ -1,8 +1,0 @@
----
-title: "c_exhibit_b_the_art.html"
-output: 
-  html_document:
-    toc: true
-    toc_float: true
-    theme: cosmo
----

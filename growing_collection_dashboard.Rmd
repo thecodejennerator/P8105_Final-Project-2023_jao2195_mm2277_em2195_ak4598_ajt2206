@@ -1,0 +1,129 @@
+---
+title: "The Met's Growing Collection"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    theme: cosmo
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(flexdashboard)
+library(plotly)
+
+load("data/met.RData")
+
+mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94", 
+         "#3B9AB2", "#B40F20", "#0B775E", "#F2300F", 
+         "#5BBCD6", "#F98400", "#ab0213", "#E2D200", 
+         "#ff7700", "#46ACC8", "#00A08A", "#78B7C5",
+         "#a7ba42", "#f94f8a", "#DD8D29")
+```
+
+ 
+Row {data-height=50}
+-------------------------------------
+
+This line chart shows the number of objects accessed by each department of the Met over time. Double click on a department in the right-hand legend to isolate its trend on the chart. You can also drag your mouse over regions of the timeline that you would like to zoom in on.
+ 
+Row {data-height=600}
+-------------------------------------
+
+### Number of objects by department over time
+
+```{r}
+met %>%
+  group_by(accession_year, department) %>% 
+  summarize(n = n()) %>%
+  ungroup() %>%
+  arrange(department) %>%
+  plot_ly(
+    x = ~accession_year, y = ~n, type = 'scatter', mode = 'lines',
+    alpha = .9, color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of objects",
+                       tickformat=","))
+```
+
+Row {data-height=50}
+-------------------------------------
+
+These three plots show "big" years in which departments at the Met had their highest number of objects, represented the highest number of unique cultures, or represented the highest number of (known) woman artists.
+    
+Row {data-height=500}
+-------------------------------------
+
+### Departments at their largest
+
+```{r}
+met %>%
+  group_by(department, accession_year) %>%
+  summarize(n = n()) %>%
+  select(department, accession_year, n) %>%
+  group_by(department) %>%
+  slice(which.max(n)) %>%
+  arrange(department) %>%
+  plot_ly(
+    y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n*1.5), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of objects",
+                       tickformat=",")) %>%
+  hide_legend()
+```
+
+### Departments at their most culturally diverse
+
+```{r}
+met %>%
+  filter(!is.na(culture)) %>%
+  mutate(culture = str_remove(culture, "possibly "),
+         culture = str_remove(culture, "probably ")) %>%
+  group_by(department, accession_year, .drop=FALSE) %>%
+  summarize(n = n_distinct(culture)) %>%
+  select(department, accession_year, n) %>%
+  group_by(department) %>%
+  slice(which.max(n)) %>%
+  arrange(department) %>%
+  plot_ly(
+    y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n*1.5), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of cultures: ", n)) %>% 
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of cultures",
+                       tickformat=",")) %>%
+  hide_legend()
+```
+
+### Departments at their most representative of women artists
+
+```{r}
+met %>%
+  filter(!is.na(artist_gender)) %>%
+  mutate(woman = ifelse(grepl("Female", artist_gender), 1, 0)) %>%
+  group_by(department, accession_year) %>%
+  summarize(n_woman = sum(woman)) %>%
+    select(department, accession_year, n_woman) %>%
+  group_by(department) %>%
+  slice(which.max(n_woman)) %>%
+  arrange(department) %>%
+  plot_ly(
+    y = ~n_woman, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n_woman*2), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n_woman)) %>%
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of objects by women",
+                       tickformat=",")) %>%
+  hide_legend()
+
+```
+

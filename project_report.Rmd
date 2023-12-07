@@ -1,0 +1,41 @@
+---
+title: "Project Report"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+
+As this will be your only chance to describe your project in detail, make sure that your report is a standalone document that fully describes your process and results. We also expect you to write high-quality code that is understandable to an outside reader.
+
+# Emily: Project Motivation & Related Work
+Provide an overview of the project goals and motivation.
+
+Anything that inspired you, such as a paper, a web site, or something we discussed in class.
+
+# Initial Questions
+What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?
+
+# Data Collection and Cleaning
+Source, scraping method, cleaning, etc.
+
+# Exploratory Analyses and Alternative Strategies
+Visualizations, summaries, and exploratory statistical analyses. 
+
+Justify the steps you took, and show any major changes to your ideas.
+
+# Discussion
+What were your findings? Are they what you expect? What insights into the data can you make?
+
+The written report produced by your team is central to this project. This will detail how you completed your project, and should cover data collection and cleaning, exploratory analyses, alternative strategies, descriptions of approaches, and a discussion of results. We anticipate that your project will change somewhat over time; these changes and the reasons for them should be documented! You will write one report document per group, and be sure to include all group member names in the document.
+
+# Group Members
+The following students collaborated on this site and report:
+
+* Aleya 
+* Andy
+* Diana
+* Emily Murphy (erm2195)
+* Jennifer
+* Melike
