@@ -1,8 +1,0 @@
----
-title: "Exhibition C: The Met's Growing Collection"
-output: 
-  html_document:
-    toc: true
-    toc_float: true
-    theme: cosmo
----
