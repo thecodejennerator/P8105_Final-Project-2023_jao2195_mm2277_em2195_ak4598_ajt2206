@@ -35,8 +35,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 <script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/v4-shims.js"></script>
@@ -360,7 +360,7 @@ div.tocify {
       <a href="around_the_world.html">Exhibition D: Art Around the World</a>
     </li>
     <li>
-      <a href="special_exhibitions.html">Special Exhibitions</a>
+      <a href="https://lakerss12.shinyapps.io/shiny_app/">Special Exhibitions</a>
     </li>
   </ul>
 </li>
@@ -482,15 +482,17 @@ art come from?”, and “How can we explore the Met more easily?”</p>
 </div>
 <div id="data-cleaning" class="section level3">
 <h3>Data Cleaning</h3>
-<ul>
-<li><p>The Met dataset consists of over 400,000 observations. A dataset
-of this size was far too big to handle.</p></li>
-<li><p>We took a look at missing data to decide how to subset the
-dataset into a smaller, more manageable size. The variables
+<p>The Met dataset consists of over 400,000 artistic pieces. If you
+think the Met is overwhelming to get through now - just imagine if all
+of the artworks in storage were also on display. Sadly a dataset of this
+size is too much even for us art aficionados, so we decided to divide
+and conquer (which fittingly is how many of the artifacts from around
+the world ended up in an American Art Museum).</p>
+<p>We took a look at missing data to decide how to subset the dataset
+into a smaller, more manageable size. The variables
 <code>object_name</code> and <code>accession_year</code> were complete.
 From that information, we took a random sample of 10% of the data,
-creating our final dataset of over 40,000 observations.</p></li>
-</ul>
+creating our final dataset of over 40,000 observations.</p>
 <pre><code>##           object_number            is_highlight        is_timeline_work 
 ##                       0                       0                       0 
 ##        is_public_domain               object_id          gallery_number 
@@ -528,7 +530,7 @@ creating our final dataset of over 40,000 observations.</p></li>
 ##                    tags            tags_aat_url       tags_wikidata_url 
 ##                   28866                   28866                   28866</code></pre>
 <p>Based on the missing data, we chose the following variables to work
-with:</p>
+with throughout:</p>
 <ul>
 <li><code>is_highlight</code>: When “true” indicates a popular and
 important artwork in the collection</li>
@@ -541,12 +543,38 @@ which an object was created</li>
 object</li>
 <li><code>country</code>: Country where the artwork was created or
 found</li>
+<li><code>subregion</code>: Geographic location more specific than
+Region, but less specific than Locale, where the artwork was created or
+found</li>
+<li><code>object_begin_date</code>: Date indicating the year the artwork
+was started to be created</li>
+<li><code>object_end_date</code>: Date indicating the year the artwork
+was completed</li>
+<li><code>dynasty</code>: Dynasty (a succession of rulers of the same
+line or family) under which an object was created</li>
 </ul>
+<p>As we transported ourselves to Ancient Egypt and the Met’s many
+excavations in the area, we had to take some additional steps to dust
+off the data without hurting the artifacts. <code>Dynasty</code> was a
+key variable for the Egyptian data, as the Egyptian Art Department is
+the only Department in the Met to have fairly well-identified Dynasties,
+we felt it was important to include it. However, instead of keeping to
+the traditional 30 Dynasties of Egypt, many of the observations were
+coded as “Dynasty 1-5” or “second half 11.” We deep cleaned the table.
+Strategy was that if a Dynasty was easily identifiable from the name
+then we recoded the value to said Dynasty, if the value was of a
+consecutive dynasty ex: “Dynasty 12-13” then we kept the value as said
+Dynasty but only if that specific value was common in the data
+(n&gt;20). This was to prevent having 50+ dynasty ranges and making
+visualization tedious. Moreover, for larger Dynastic Ranges (or low
+artifact count consecutive dynasties) these were just recoded as Dynasty
+Range. Any other values were coded as NA.</p>
+<p>Some other minor cleaning of the Egyptian data also occurred for
+object creation dates.</p>
 </div>
 </div>
-<div id="exploratory-analyses-and-alternative-strategies"
-class="section level1">
-<h1>Exploratory Analyses and Alternative Strategies</h1>
+<div id="exploratory-analysis" class="section level1">
+<h1>Exploratory Analysis</h1>
 <p>Visualizations, summaries, and exploratory statistical analyses.</p>
 <p>Justify the steps you took, and show any major changes to your
 ideas.</p>
@@ -558,30 +586,50 @@ categorical variables, we mainly focused on the quantity of objects,
 cultures, and object types. We made sure to use the one continuous
 variable we had (<code>accession_year</code>) to depict the Met over
 time.</p>
+<p>Entering into the data analysis of the Egyptian Art Department,
+<code>dynasty</code> was identified as the most important variable to
+focus on. The Egyptian Arts Department is unique among Met Collections
+in that for art of its age, it is far more complete information wise
+than other contemporary regions. Nevertheless, many of these artifacts
+were 3000 to 4000 years old, so the data was not perfect. As such, a
+focus on <code>dynasty</code> required a high amount of data cleaning as
+described above. Many artifacts that could be roughly placed timeline
+wise needed to be placed into the overfill category due to lack of
+specificity.</p>
+<p>Because Dynasty was considered so central to our understanding of
+Ancient Egyptian Art - Dynasty represent the political periods of Egypt,
+so we theorized they would have a large impact of the art of the time -
+we created a Shiny Dashboard whose reactive elements responded to Check
+Box <code>dynasty</code> selections.</p>
+<p><a href="https://geodata.lib.utexas.edu/catalog/stanford-bb409wq6265"
+class="uri">https://geodata.lib.utexas.edu/catalog/stanford-bb409wq6265</a></p>
+<p>library(sf)</p>
+<p>shape_file &lt;- st_read(“data/EGY_adm1.shp”)</p>
 </div>
 <div id="discussion" class="section level1">
 <h1>Discussion</h1>
 <p>What were your findings? Are they what you expect? What insights into
 the data can you make?</p>
-<p>The written report produced by your team is central to this project.
-This will detail how you completed your project, and should cover data
-collection and cleaning, exploratory analyses, alternative strategies,
-descriptions of approaches, and a discussion of results. We anticipate
-that your project will change somewhat over time; these changes and the
-reasons for them should be documented! You will write one report
-document per group, and be sure to include all group member names in the
-document.</p>
+<div id="findings-and-conclusions" class="section level2">
+<h2>Findings and Conclusions</h2>
+</div>
+<div id="challenges" class="section level2">
+<h2>Challenges</h2>
+</div>
+<div id="limitations-and-future-challenges" class="section level2">
+<h2>Limitations and Future Challenges</h2>
+</div>
 </div>
 <div id="group-members" class="section level1">
 <h1>Group Members</h1>
 <p>The following students collaborated on this site and report:</p>
 <ul>
-<li>Aleya</li>
-<li>Andy</li>
+<li>Aleya Khalifa (ak4598)</li>
+<li>Andy Turner (ajt2206)</li>
 <li>Diana Hernandez (dmh2228)</li>
 <li>Emily Murphy (erm2195)</li>
-<li>Jennifer</li>
-<li>Melike</li>
+<li>Jennifer Osei (jao2195)</li>
+<li>Melike Aksoy (mma2277)</li>
 </ul>
 </div>
 

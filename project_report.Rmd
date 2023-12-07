@@ -46,13 +46,13 @@ Our initial questions were "What does the Met contain?", "Where does art come fr
 
 ### Data Source
 
-The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess).
+The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess). 
 
 ### Data Cleaning
 
-* The Met dataset consists of over 400,000 observations. A dataset of this size was far too big to handle.
+The Met dataset consists of over 400,000 artistic pieces. If you think the Met is overwhelming to get through now - just imagine if all of the artworks in storage were also on display. Sadly a dataset of this size is too much even for us art aficionados, so we decided to divide and conquer (which fittingly is how many of the artifacts from around the world ended up in an American Art Museum). 
 
-* We took a look at missing data to decide how to subset the dataset into a smaller, more manageable size. The variables `object_name` and `accession_year` were complete. From that information, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations.
+We took a look at missing data to decide how to subset the dataset into a smaller, more manageable size. The variables `object_name` and `accession_year` were complete. From that information, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations.
 
 ```{r include = FALSE}
 load("data/met.RData")
@@ -62,7 +62,7 @@ load("data/met.RData")
 sapply(met, function(x) sum(is.na(x)))
 ```
 
-Based on the missing data, we chose the following variables to work with: 
+Based on the missing data, we chose the following variables to work with throughout: 
 
 * `is_highlight`: When "true" indicates a popular and important artwork in the collection
 * `department`: Indicates The Met's curatorial department responsible for the artwork
@@ -70,6 +70,14 @@ Based on the missing data, we chose the following variables to work with:
 * `culture`: Information about the culture, or people from which an object was created
 * `object_name`: Describes the physical type of the object
 * `country`: Country where the artwork was created or found
+* `subregion`: Geographic location more specific than Region, but less specific than Locale, where the artwork was created or found
+* `object_begin_date`: Date indicating the year the artwork was started to be created
+* `object_end_date`: Date indicating the year the artwork was completed
+* `dynasty`: Dynasty (a succession of rulers of the same line or family) under which an object was created
+
+As we transported ourselves to Ancient Egypt and the Met's many excavations in the area, we had to take some additional steps to dust off the data without hurting the artifacts. `Dynasty` was a key variable for the Egyptian data, as the Egyptian Art Department is the only Department in the Met to have fairly well-identified Dynasties, we felt it was important to include it. However, instead of keeping to the traditional 30 Dynasties of Egypt, many of the observations were coded as "Dynasty 1-5" or "second half 11." We deep cleaned the table. Strategy was that if a Dynasty was easily identifiable from the name then we recoded the value to said Dynasty, if the value was of a consecutive dynasty ex: "Dynasty 12-13" then we kept the value as said Dynasty but only if that specific value was common in the data (n>20). This was to prevent having 50+ dynasty ranges and making visualization tedious. Moreover, for larger Dynastic Ranges (or low artifact count consecutive dynasties) these were just recoded as Dynasty Range. Any other values were coded as NA. 
+
+Some other minor cleaning of the Egyptian data also occurred for object creation dates. 
 
 # Exploratory Analysis
 Visualizations, summaries, and exploratory statistical analyses. 
@@ -77,6 +85,16 @@ Visualizations, summaries, and exploratory statistical analyses.
 Justify the steps you took, and show any major changes to your ideas.
 
 As the Met's collection contains many unknown or NA values, we decided to use the variables with the most complete data. We also decided that the best way to depict the Met would be with visuals worthy of being in the Met itself. Because the Met's database mainly contained categorical variables, we mainly focused on the quantity of objects, cultures, and object types. We made sure to use the one continuous variable we had (`accession_year`) to depict the Met over time. 
+
+Entering into the data analysis of the Egyptian Art Department, `dynasty` was identified as the most important variable to focus on. The Egyptian Arts Department is unique among Met Collections in that for art of its age, it is far more complete information wise than other contemporary regions. Nevertheless, many of these artifacts were 3000 to 4000 years old, so the data was not perfect. As such, a focus on `dynasty` required a high amount of data cleaning as described above. Many artifacts that could be roughly placed timeline wise needed to be placed into the overfill category due to lack of specificity.
+
+Because Dynasty was considered so central to our understanding of Ancient Egyptian Art - Dynasty represent the political periods of Egypt, so we theorized they would have a large impact of the art of the time - we created a Shiny Dashboard whose reactive elements responded to Check Box `dynasty` selections. 
+
+https://geodata.lib.utexas.edu/catalog/stanford-bb409wq6265
+
+library(sf)
+
+shape_file <- st_read("data/EGY_adm1.shp")
 
 # Discussion
 
