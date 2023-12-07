@@ -14,7 +14,7 @@ output:
 </style>
 
 
-We are a group of 2nd year MS,MPH,& PhD students at Columbia University who worked diligently to curate art data for this website!
+We are a group of Masters & PhD students at Columbia University who worked diligently to curate Met art data for this website!
 
 
 <!-- ####### BLOCK 1 START ######### -->
