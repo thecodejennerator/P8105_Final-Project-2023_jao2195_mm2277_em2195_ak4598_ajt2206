@@ -74,14 +74,14 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 <!-- ####### BLOCK 5 START ######### -->
 # Aleya Khalifa
 <div style="text-align:center;">
-  <img src="images/statues.jpeg" style="width:35%;">
-  <p style="font-size: smaller;">Aleya</p>
+  <img src="images/aleya.jpeg" style="width:35%;">
+  <p style="font-size: smaller;">Aleya on a hike by [...]</p>
 </div>
 
-**PhD Epidemiology | CERTIFICATE** <br>
-**Contributions:**
+**PhD Epidemiology** <br>
+**Contributions:** <br> * Exhibit C: The Met's Growing Collection  <br> * Data cleaning & write-up <br>
 
-**Aleya** bio bio bio <br>
+**Aleya** is a PhD Candidate in the Department of Epidemiology studying the impact of mobility on the HIV epidemic. She loves a museum day when it's raining or snowing on a New York Saturday. She loves data science even more.  <br>
 <!-- ####### BLOCK 5 END ############ -->
 
 
