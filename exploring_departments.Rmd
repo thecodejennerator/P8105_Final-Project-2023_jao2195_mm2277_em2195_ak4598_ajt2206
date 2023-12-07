@@ -11,6 +11,8 @@ output:
 ```{r include = FALSE}
 library(tidyverse)
 library(plotly)
+library(wesanderson)
+
 
 load("data/met.RData")
 
@@ -19,9 +21,11 @@ mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94",
          "#5BBCD6", "#F98400", "#ab0213", "#E2D200", 
          "#ff7700", "#46ACC8", "#00A08A", "#78B7C5",
          "#a7ba42", "#f94f8a", "#DD8D29")
+
+theme_set(theme_minimal())
 ```
 
-# **Departments**
+# Departments
 
 The Met holds many collections from Modern and Contemporary Art to Arms and Armor. 
 Explore the vast departments of the Met and the many objects they contain. Explore the different kinds of objects that each department holds. Click [here](https://www.metmuseum.org/about-the-met/collection-areas) to learn more about each department, or collection area.
@@ -45,7 +49,7 @@ met |>
   layout(title = 'Explore each department and their number of objects',
          xaxis = list(title = 'Department'), 
          yaxis = list(title = 'Number of Objects'),
-         legend = list(title = list(text ='Department')))
+         showlegend = FALSE)
 ```
 
 The most objects can be found in the following departments: 1) Drawings and Prints; 2) European Sculpture and Decorative Arts; and 3) Asian Art.
@@ -70,7 +74,7 @@ met |>
   plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
   layout(xaxis = list(title = 'Department'), 
          yaxis = list(title = 'Number of Highlighted Objects'),
-         legend = list(title = list(text ='Department')))
+         showlegend = FALSE)
 ```
 
 The most highlighted objects can be found in the following departments: 1) The American Wing; 2) Asian Art; and 3) Costume Institute.
@@ -82,7 +86,7 @@ met |>
   filter(department == "Drawings and Prints") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -90,19 +94,18 @@ met |>
 
 met |> 
   filter(department == "Drawings and Prints") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 740))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 760) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Drawings and Prints, the most common objects are: 1) Print; 2) Drawing; and 3) Book.
@@ -114,7 +117,7 @@ met |>
   filter(department == "European Sculpture and Decorative Arts") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -122,19 +125,18 @@ met |>
 
 met |> 
   filter(department == "European Sculpture and Decorative Arts") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 89))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 89) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In European Sculpture and Decorative Arts, the most common objects are: 1) Piece; 2) Fragment; and 3) Vase.
@@ -146,7 +148,7 @@ met |>
   filter(department == "Photographs") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -154,19 +156,18 @@ met |>
 
 met |> 
   filter(department == "Photographs") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 80))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 80) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Photographs, the most common objects are: 1) Photograph; 2) Negative; and 3) Carte-de-visite.
@@ -178,7 +179,7 @@ met |>
   filter(department == "Asian Art") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -186,19 +187,18 @@ met |>
 
 met |> 
   filter(department == "Asian Art") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 130))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 142) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Asian Art, the most common objects are: 1) Piece; 2) Print; and 3) Vase.
@@ -210,7 +210,7 @@ met |>
   filter(department == "Greek and Roman Art") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -218,19 +218,18 @@ met |>
 
 met |> 
   filter(department == "Greek and Roman Art") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 100))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 90) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Greek and Roman Art, the most common objects are: 1) Kylix fragment; 2) Statue; and 3) Vase.
@@ -242,7 +241,7 @@ met |>
   filter(department == "Costume Institute") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -250,19 +249,18 @@ met |>
 
 met |> 
   filter(department == "Costume Institute") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 90))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 90) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Costume Institute, the most common objects are 1) Dress; 2) Ensemble; and 3) Evening dress.
@@ -274,7 +272,7 @@ met |>
   filter(department == "Egyptian Art") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -282,22 +280,21 @@ met |>
 
 met |> 
   filter(department == "Egyptian Art") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 62))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 54) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
-In Egyptian Art, the most common objects are: 1) Relief; 2) Scarab; and 3) Jar Label.
+In Egyptian Art, the most common objects are: 1) Relief; 2) Scarab; and 3) Jar Label. Learn more about the Egyptian Art department [here](https://lakerss12.shinyapps.io/shiny_app/).
 
 ## The American Wing
 
@@ -306,7 +303,7 @@ met |>
   filter(department == "The American Wing") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -314,19 +311,18 @@ met |>
 
 met |> 
   filter(department == "The American Wing") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 59))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 62) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar(aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In The American Wing, the most common objects are: 1) Drawing; 2) Painting; and 3) Watercolor.
@@ -338,7 +334,7 @@ met |>
   filter(department == "Islamic Art") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -346,19 +342,18 @@ met |>
 
 met |> 
   filter(department == "Islamic Art") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 42))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 54) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Islamic Art, the most common objects are: 1) Fragment; 2) Textile; and 3) Coin.
@@ -370,7 +365,7 @@ met |>
   filter(department == "Modern and Contemporary Art") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -378,19 +373,18 @@ met |>
 
 met |> 
   filter(department == "Modern and Contemporary Art") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal, 
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 80))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 77) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Modern and Contemporary Art, the most common objects are: 1) Drawing; 2) Painting; and 3) Textile.
@@ -402,7 +396,7 @@ met |>
   filter(department == "Arms and Armor") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -410,19 +404,18 @@ met |>
 
 met |> 
   filter(department == "Arms and Armor") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 25))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 28) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Arms and Armor, the most common objects are: 1) Sword guard (Tsuba); 2) Knife handle (Kozuka); and 3) Arrowhead (Yanone).
@@ -434,7 +427,7 @@ met |>
   filter(department == "Arts of Africa, Oceania, and the Americas") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -442,19 +435,18 @@ met |>
 
 met |> 
   filter(department == "Arts of Africa, Oceania, and the Americas") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 35))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 35) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Arts of Africa, Oceania, and the Americas, the most common objects are: 1) Vase; 2) Figure; and 3) Mask.
@@ -466,7 +458,7 @@ met |>
   filter(department == "Medieval Art") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -474,19 +466,18 @@ met |>
 
 met |> 
   filter(department == "Medieval Art") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 24))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 24) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Medieval Art, the most common objects are: 1) Fragment; 2) Ostrakon; and 3) Brooch.
@@ -498,7 +489,7 @@ met |>
   filter(department == "Ancient Near Eastern Art") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -506,19 +497,18 @@ met |>
 
 met |> 
   filter(department == "Ancient Near Eastern Art") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 30))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 25) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Ancient Near Eastern Art, the most common objects are: 1) Stamp seal; 2) Cuneiform tablet; and 3) Cylinder seal.
@@ -530,7 +520,7 @@ met |>
   filter(department == "Musical Instruments") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -538,19 +528,18 @@ met |>
 
 met |> 
   filter(department == "Musical Instruments") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 8))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 9) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In Musical Instruments, the most common objects are: 1) Bell; 2) Pottery Whistle; and 3) Rattle.
@@ -562,7 +551,7 @@ met |>
   filter(department == "European Paintings") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -570,13 +559,17 @@ met |>
 
 met |> 
   filter(department == "European Paintings") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In European Paintings, the most common objects are: 1) Painting; and 2) Drawing.
@@ -588,7 +581,7 @@ met |>
   filter(department == "Robert Lehman Collection") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -596,19 +589,18 @@ met |>
 
 met |> 
   filter(department == "Robert Lehman Collection") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 6))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 10) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In the Robert Lehman Collection, the most common objects are: 1) Drawing; 2) Frame; and 3) Painting.
@@ -620,7 +612,7 @@ met |>
   filter(department == "The Cloisters") |>
   count(object_name) |> 
   mutate(rank = min_rank(desc(n))) |> 
-  filter(rank < 4) |> 
+  filter(rank < 6) |> 
   arrange(desc(n)) |>
   rename("Object Name" = object_name, "Number of Objects" = n) |>
   select("Object Name", "Number of Objects") |> 
@@ -628,19 +620,18 @@ met |>
 
 met |> 
   filter(department == "The Cloisters") |>
-  count(object_name) |> 
-  mutate(object_name = fct_reorder(object_name, n)) |> 
-  plot_ly(x = ~object_name, y = ~n, color = ~object_name, type = "bar", colors = mypal,
-          transforms = list(
-          list(
-          type = 'filter',
-          target = 'y',
-          operation = '>',
-          value = 10))) |>
-  layout(title = 'Explore the Objects',
-         xaxis = list(title = 'Object Name'), 
-         yaxis = list(title = 'Number of Objects'),
-         showlegend = FALSE)
+  count(object_name) |>
+  filter(n > 9) |>
+  ggplot(aes(x = reorder(object_name, n, fill = object_name), y = n)) + 
+  geom_bar( aes(fill = object_name), stat = "identity", show.legend = FALSE) + 
+  labs(
+    title = "Explore the most common objects",
+    x = "Object Name",
+    y = "Number of Objects",
+    fill = "Object Name"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
 In The Cloisters, the most common objects are: 1) Panel, 2) Pilgrim's badge; and 3) Capital.
