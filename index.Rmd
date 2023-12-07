@@ -43,13 +43,13 @@ output:
 </style>
 
 
+
+
 ## <font size="12"><b> Welcome to The Art of Data Science: The Met Museum </font> 
 
 Overview
 
 ##  <font size="12"><b> Exhibits </font> 
-
-
 
 
 

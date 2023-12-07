@@ -1,5 +1,5 @@
 ---
-title: "Project Curators"
+title: "**Meet the Curators**"
 output: 
   html_document:
     toc: true
@@ -7,11 +7,90 @@ output:
     theme: cosmo
 ---
 
-The following students collaborated on this site:
+<style type="text/css">
+  body{
+  font-size: 16pt;
+}
+</style>
 
-* Aleya 
-* Andy
-* Diana
-* Emily Murphy (erm2195)
-* Jennifer
-* Melike
+
+We are a group of 2nd year MS,MPH,& PhD students at Columbia University who worked diligently to curate art data for this website!
+
+
+<!-- ####### BLOCK 1 START ######### -->
+<center> ![ Jennifer Osei in the Art Style of Vincent Van Gogh ](images/artify_Jennifer_Osei.jpg){ width=25% }
+</center>
+**Jennifer A. Osei**   *MS Biostatistics | Theory and Methods* <br> 
+**Contributions:** <br> * Website Development and Coding (.html,.css) <br> * Project Concept Creativity  <br> *  Statistical Analysis (pending)  <br> * Screencast (pending)
+
+**Jennifer** is an MS Biostatistics student at Columbia University. From Buffalo, NY , she loves cold weather (stil thinking about it), playing tennis, and singing. Jennifer's goal using data to assess and tailor health programs with the goal of improving health though data. She loves music and would love to try and play the violin one day! In her free time she enjoys random NYC adventures and would love to ACTUALLY visit The Met .....one day.... hopefully using the maps in this project to explore after finals hehe :).
+<!-- ####### BLOCK 1 END ############ -->
+
+
+
+
+
+<!-- ####### BLOCK 2 START ######### -->
+<center> ![ Melike in the Art Style of "Your choice" ](images/statues.jpeg){ width=45% }
+</center>
+**Melike Aksoy**
+**Contributions:** [Insert Your Contributions here]
+**Melike** [Insert Yor Bio Here]
+**Personal Website / Contact Info** 
+<!-- ####### BLOCK 2 END ############ -->
+
+
+
+
+
+
+<!-- ####### BLOCK 3 START ######### -->
+<center> ![Emily in the Art Style of "Your choice"](images/statues.jpeg){ width=45% }
+</center>
+**Emily Murphy**
+**Contributions:** [Insert Your Contributions here]
+**Emily ** [Insert Your Bio Here]
+**Personal Website / Contact Info** 
+<!-- ####### BLOCK 3 END ############ -->
+
+
+
+
+
+<!-- ####### BLOCK 4 START ######### -->
+<center> ![ Melike in the Art Style of "Your choice"](images/statues.jpeg){ width=45% }
+</center>
+**Diana Hernandez**
+**Contributions:** [Insert Your Contributions here]
+**Diana ** [Insert Yor Bio Here]
+**Personal Website / Contact Info** 
+<!-- ####### BLOCK 4 END ############ -->
+
+
+
+
+
+
+<!-- ####### BLOCK 5 START ######### -->
+<center> ![ Aleya in the Art Style of "Your choice" ](images/statues.jpeg){width=45% }
+</center>
+**Aleya Khalifa**
+**Contributions:** [Insert Your Contributions here]
+**Aleya** [Insert Yor Bio Here]
+**Personal Website / Contact Info** 
+<!-- ####### BLOCK 5 END ############ -->
+
+
+
+
+
+
+<!-- ####### BLOCK 6 START ######### -->
+<center> ![Andy in the Art Style of "Your choice" ](images/statues.jpeg){width=45% }
+</center>
+**Andy Turner**
+**Contributions:** [Insert Your Contributions here]
+**Andy** [Insert Yor Bio Here]
+**Personal Website / Contact Info** 
+<!-- ####### BLOCK 6 END ############ -->
+
