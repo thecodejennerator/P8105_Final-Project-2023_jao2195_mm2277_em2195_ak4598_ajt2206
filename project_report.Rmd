@@ -39,6 +39,9 @@ What questions are you trying to answer? How did these questions evolve over the
 
 Our initial questions were "What does the Met contain?", "Where does art come from?", and "How can we explore the Met more easily?"
 
+
+
+
 # Data Collection and Cleaning
 
 ### Data Source
@@ -68,7 +71,7 @@ Based on the missing data, we chose the following variables to work with:
 * `object_name`: Describes the physical type of the object
 * `country`: Country where the artwork was created or found
 
-# Exploratory Analyses and Alternative Strategies
+# Exploratory Analysis
 Visualizations, summaries, and exploratory statistical analyses. 
 
 Justify the steps you took, and show any major changes to your ideas.
@@ -76,16 +79,27 @@ Justify the steps you took, and show any major changes to your ideas.
 As the Met's collection contains many unknown or NA values, we decided to use the variables with the most complete data. We also decided that the best way to depict the Met would be with visuals worthy of being in the Met itself. Because the Met's database mainly contained categorical variables, we mainly focused on the quantity of objects, cultures, and object types. We made sure to use the one continuous variable we had (`accession_year`) to depict the Met over time. 
 
 # Discussion
+
 What were your findings? Are they what you expect? What insights into the data can you make?
 
-The written report produced by your team is central to this project. This will detail how you completed your project, and should cover data collection and cleaning, exploratory analyses, alternative strategies, descriptions of approaches, and a discussion of results. We anticipate that your project will change somewhat over time; these changes and the reasons for them should be documented! You will write one report document per group, and be sure to include all group member names in the document.
+## Findings and Conclusions
+
+
+## Challenges 
+
+
+## Limitations and Future Challenges
+
+
+
+
 
 # Group Members
 The following students collaborated on this site and report:
 
-* Aleya 
-* Andy
+* Aleya Khalifa (ak4598)
+* Andy Turner (ajt2206)
 * Diana Hernandez (dmh2228)
 * Emily Murphy (erm2195)
-* Jennifer
-* Melike
+* Jennifer Osei (jao2195)
+* Melike Aksoy (mma2277)

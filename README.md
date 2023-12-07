@@ -1,7 +1,7 @@
 # P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206
 Final Project for P8105 Data Science 
 
-11/21 Meeting with TA
+# 11/21 Meeting with TA
 
 * Have we been able to download the format in a way that we could actually work with? Yes, Diana found where we can download a .csv fil with all objects and import it into a single dataframe
 * Are we planning to include formal statistical analyses? Probably a few. TA says that if it's not a good fit or we can't get the formal analyses working properly, we don't have to include them
@@ -56,3 +56,27 @@ Thursday afternoon: meet for a Zoom call
 By EOD Thursday: review site and fix any last minute things
 Friday: Emily works on screencast, send to everyone for review 
 Saturday: submit!
+
+# 12/7 Meeting with TA
+
+Examples for describing data: 
+
+* https://st3431.github.io/abortionlaws.github.io/data.html
+* https://shunxie.github.io/life_expectancy.github.io/Imputation.html
+* https://sopochkon1.github.io/sheroes_finalproject.github.io/Data.html
+
+Examples of the final report:
+
+* https://shunxie.github.io/life_expectancy.github.io/Project-report.html
+
+Example phrasing for analysis: 
+
+* First, we want to examine the distribution of movies according to Bechdel Test dimension. The code chunk below summarizes the proportion of movies in movies_df according to their Bechdel Test Score, as well as the proportion of movies that pass or fail the Bechdel test.
+
+* "In our dataset, we have a lot of vaccinations for different diseases. Therefore, it is natural to check whether the vaccinations data are correlated to each other. It seems like they are all very correlated to each other, with correlation value higher than 0.6. In consequence, we decide to only choose vaccinations for measles as our chosen vector as it was one of the most common disease and now almost fully controled by vaccination. There is still some cases remain for the people that did not get vaccinated according to CDC website."
+
+* "Life expectancy as our dependent variable has similar trends for both developed and developing countries. Two life expectancy indices have a persistent increase over time. However, the expectancy for developed countries is 10 years higher than the developing countries over 16 years. The similar trends also holds for different income groups but countries classified in low income group has a higher growth rate for life expectancy than other groups."
+
+
+
+
