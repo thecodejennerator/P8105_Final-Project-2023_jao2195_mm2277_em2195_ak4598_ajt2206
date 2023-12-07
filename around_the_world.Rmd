@@ -3,7 +3,7 @@ title: "Exhibition D: Art Around the World"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
-    source_code: fill
+    vertical_layout: fill
 runtime: shiny
 ---
 
@@ -14,6 +14,7 @@ library(plotly)
 library(shiny)
 library(sf)
 library(rnaturalearth)
+library(rsconnect)
 ```
 
 
@@ -21,40 +22,80 @@ library(rnaturalearth)
 load("data/met.RData")
 ```
 
+```{r, echo=FALSE}
+met_country <- met |> 
+mutate(country = case_when(
+    country == "Central Turkey" ~ "Turkey",
+    country == "USA" ~ "United States", 
+    country == "Iran(Persia)" ~ "Iran", 
+    country == "Ivory Coast" ~ "Cote d'Ivoire", 
+    country == "iran" ~ "Iran", 
+    country == "Eastern India" ~ "India",
+    country == "Byzantine Egypt" ~ "Egypt",
+    country == "Western Australia" ~ "Australia",
+    country == "England" ~ "United Kingdom",
+    country == "England|England" ~ "United Kingdom",
+    country == "Crotia(former Yugoslavia)" ~"Crotia",
+    country == "Western France" ~ "France", 
+    country == "Southern Netherlands" ~ "Netherlands",
+    country == "Southern Netherland" ~ "Netherlands", 
+    country == "Scotland" ~ "United Kingdom",
+    country == "Republic of Congo" ~ "Congo", 
+    country == "Republic of Cameroon" ~ "Cameroon",
+    country == "Republic of Costa Rica" ~ "Costa Rica",
+    country == "Republic of Guinea-Bissau" ~ "Guinea-Bissau",
+    country == "Republic of the Marshall Islands" ~ "Marshall Isl",
+    country == "Republic of Guinea-Bissau" ~ "Guinea-Bissau",
+    country == "Republic of Benin" ~ "Benin",
+    country == "Northern Iran"  ~"Iran",
+    country == "Northwestern Iran"  ~"Iran",
+    country == "Northwest Iran"  ~"Iran",
+    country == "Northwestern Iran" ~"Iran",
+    country == "Northern India" ~ "India",
+    country == "Nothern France" ~ "France", 
+    TRUE ~ as.character(country)
+  ), 
+  country = str_replace(country, "present-day ", ""))
+
+```
+
 ```{r, echo=FALSE, message=FALSE}
-object_counts <- met |> 
+object_counts <- met_country |> 
   group_by(country, object_name) |> 
   summarise(n_objects = n()) |> 
   group_by(country) |> 
-  summarise(total_objects = sum(n_objects, na.rm = TRUE))
-
+  summarise(total_objects = sum(n_objects, na.rm = TRUE)) 
 
 world <- ne_countries(scale = "medium", returnclass = "sf")
 
 world <- left_join(world, object_counts, by = c("name" = "country"))
+world2 <- left_join(object_counts, world, by = c("country" = "name"))
+
+world2 <- world2 |> 
+  filter(is.na(scalerank))
 ```
 
+Column {.sidebar}
+-----------------------------------------------------------------------
 
 ```{r, echo=FALSE}
-# Shiny UI
-ui <- fluidPage(
-  sidebarLayout(
-    sidebarPanel(
-      selectInput(
-        inputId = "Country",
-        label = h3("Select Country"),
-        choices = world$name
-      )
-    ),
-    mainPanel(
-      plotlyOutput("plot")
-    )
-  )
-)
+country_vec = world |>  pull(name) |> unique()
 
+selectInput(
+  inputId = "Country", 
+  label = h3("Select Country"),
+  choices = country_vec)
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r, echo=FALSE}
 # Shiny Server
-server <- function(input, output) {
-  output$plot <- renderPlotly({
+renderPlotly({
     # light grey boundaries
     l <- list(color = toRGB("grey"), width = 0.5)
 
@@ -65,20 +106,20 @@ server <- function(input, output) {
     )
 
     selected_country <- input$Country
-    filtered_world <- world %>%
+    filtered_world <- world  |> 
       filter(name == selected_country)
 
-    world %>%
-      plot_geo() %>%
+    world |> 
+      plot_geo() |> 
       add_trace(
         z = ~total_objects, color = ~total_objects, colors = 'Blues',
         text = ~name, locations = ~su_a3, marker = list(line = l)
       ) %>%
-      colorbar(title = 'Number of Objects by Country', len = 0.3) %>%
+      colorbar(title = 'Number of Objects by Country', len = 0.3) |> 
       layout(
         title = "Number of Objects by Country",
         geo = g,
-        height = "80vh"
+        height = "150vh"
       ) %>%
       add_trace(
         data = filtered_world,
@@ -89,114 +130,98 @@ server <- function(input, output) {
         hoverinfo = 'text'
       )
   })
+
+
+```
+
+### Description
+
+T
+
+\ \par
+T
+
+\ \par
+  * 
+  
+\ \par
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r, echo=FALSE}
+
+ui <- fluidPage(
+  titlePanel("Number of Objects by Country"),
+  mainPanel(
+    plotlyOutput("objectPlot")
+  )
+)
+
+server <- function(input, output) {
+  output$objectPlot <- renderPlotly({
+    world2 |> 
+      group_by(country, total_objects.x) |> 
+      summarise(n = n()) |> 
+      arrange(desc(total_objects.x)) |> 
+      plot_ly(
+        x = ~country,
+        y = ~total_objects.x,
+        type = 'bar',
+        text = ~country,
+        marker = list(color = 'skyblue')
+      ) |> 
+      layout(
+        title = "Number of Objects Without A Certain Country",
+        xaxis = list(title = "Country"),
+        yaxis = list(title = "Total Objects"),
+        hovermode = 'closest'
+      )
+  })
 }
 
 # Run the Shiny app
 shinyApp(ui, server)
 
-```
-
------------------------------------------------------------------------
-### First Floor 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(leaflet)
-
-met_departments <- data.frame(
-  department_name = c("The American Wing", "European Sculpture and Decorative Arts", "Modern and Contemporary Art", "Egyptian Art", "Greek and Roman Art", "Medieval Art", "Arms and Armor"),
-  lat = c(40.780611, 40.779861, 40.778778, 40.780167, 40.778444, 40.779583, 40.780083),
-  lng = c(-73.963361, -73.963250, -73.964667, -73.962167, -73.963306, -73.963694, -73.963000),
-  department_info = c("Information A", "Information B", "Information C", "Information D", "Information E", "Information F", "Information G")
-)
-
-my_map <- leaflet() %>%
-  addTiles() %>%
-  setView(lng = -73.963402, lat = 40.779434, zoom = 15)
-
-for (i in seq_len(nrow(met_departments))) {
-  my_map <- my_map %>%
-    addMarkers(
-      lat = met_departments$lat[i],
-      lng = met_departments$lng[i],
-      popup = paste("Department: ", met_departments$department_name[i], "<br>",
-                    "Information: ", met_departments$department_info[i]),
-      options = popupOptions(
-        maxWidth = 300,
-        closeOnClick = TRUE
-      )
-    )
-}
-
-my_map
-
 
 ```
 
 
-### Second Floor 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(leaflet)
+### Chart C
 
+```{r, echo=FALSE}
 
-met_departments <- data.frame(
-  department_name = c("Islamic Art", "Ancient Near Eastern Art", "Drawings and Prints", "Photographs", "Musical Instruments", "Asian Art", "European Paintings", "American Wing"),
-  lat = c(40.778222, 40.778611, 40.778778, 40.778833, 40.780056, 40.779694, 40.779861, 40.780250),
-  lng = c(-73.963500, -73.963083, -73.963639,-73.963833,-73.963056, -73.962472,  -73.963556, -73.963361),
-  department_info = c("Information A", "Information B", "Information C", "Information D", "Information E", "Information F", "Information G", "Information H" )
+# UI ----
+ui <- fluidPage(
+  titlePanel("Top 20 Countries by Number of Objects"),
+
+  # Main layout with output definition ----
+  mainPanel(
+    plotlyOutput("top_countries_chart")
+  )
 )
 
+# Server ----
+server <- function(input, output) {
+  
+  output$top_countries_chart <- renderPlotly({
+    top_countries <- object_counts %>%
+      arrange(desc(total_objects)) %>%
+      head(20)
 
-my_map <- leaflet() %>%
-  addTiles() %>%
-  setView(lng = -73.963402, lat = 40.779434, zoom = 15)
-
-
-for (i in seq_len(nrow(met_departments))) {
-  my_map <- my_map %>%
-    addMarkers(
-      lat = met_departments$lat[i],
-      lng = met_departments$lng[i],
-      popup = paste("Department: ", met_departments$department_name[i], "<br>",
-                    "Information: ", met_departments$department_info[i]),
-      options = popupOptions(
-        maxWidth = 300,
-        closeOnClick = TRUE
+    plot_ly(data = top_countries, x = ~country, y = ~total_objects, type = "bar") %>%
+      layout(
+        title = "Top 20 Countries by Number of Objects",
+        xaxis = list(title = "Country", categoryorder = "total ascending"),
+        yaxis = list(title = "Number of Objects")
       )
-    )
+  })
 }
 
-my_map
-```
+# Run the application 
+shinyApp(ui, server)
 
-
-## The Cloisters
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-
-met_cloisters <- data.frame(
-  department_name = c("The Cloisters"),
-  lat = c(40.8649),
-  lng = c(-73.9317),
-  department_info = c("Information A")
-)
-
-
-my_map <- leaflet() %>%
-  addTiles() %>%
-  setView(lng = -73.9317, lat = 40.8649, zoom = 15)
-
-
-for (i in seq_len(nrow(met_departments))) {
-  my_map <- my_map %>%
-    addMarkers(
-      lat = met_cloisters$lat[i],
-      lng = met_cloisters$lng[i],
-      popup = paste("Department: ", met_cloisters$department_name[i], "<br>",
-                    "Information: ", met_cloisters$department_info[i]),
-      options = popupOptions(
-        maxWidth = 300,
-        closeOnClick = TRUE
-      )
-    )
-}
-
-my_map
 ```
