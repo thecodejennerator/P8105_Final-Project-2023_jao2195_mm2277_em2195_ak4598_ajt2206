@@ -12,6 +12,7 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 <!-- ####### BLOCK 1 START ######### -->
 ## <font size="3"> Jennifer A. Osei </font>
+
 <center> ![ Jennifer Osei in the Art Style of Vincent Van Gogh ](images/artify_Jennifer_Osei.jpg){ width=35% }
 </center>
 
@@ -46,7 +47,6 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 =======
 <center> ![Emily in the Impressionist Era, Anon ](images/emily.png){ width=35% }
 </center>
->>>>>>> refs/remotes/origin/main
 
 
 **Emily Murphy**   *MPH Epidemiology | Infectious Disease Epidemiology* <br> 
@@ -62,8 +62,6 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 <center> ![Diana](images/Diana.jpg){ width=35% }
 =======
 <center> ![Diana](images/Diana.png){ width=35% }
->>>>>>> refs/remotes/origin/main
-</center>
 
 
 **Diana Hernandez** *MPH Sociomedical Sciences | Biostatistics* <br>
@@ -104,6 +102,6 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 **Andy Turner**   *MPH Epidemiology | Advanced Epidemiology* <br> 
 **Contributions:**<br> * Finding intial dataset <br> * ShinyApp Creation  <br> *  Egyptian Artifacts Analysis <br>
 **Andy** is a second year Masters student in Epidemiology with a Certificate in Advanced Epidemiology (all Epi all the time!). Andy currently works as a Research Assistant focusing on Sexual and Gender Minorities in the United States and Kenya. They are from Las Vegas, Nevada, so fine art runs directly counter to their upbringing. Andy has been to the Met exactly one time, and they were overwhelmed. That said, there were a few cool looking chairs. 
->>>>>>> refs/remotes/origin/main
+
 <!-- ####### BLOCK 6 END ############ -->
 
