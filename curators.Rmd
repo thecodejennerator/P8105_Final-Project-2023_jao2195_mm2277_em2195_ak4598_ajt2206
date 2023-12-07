@@ -45,12 +45,11 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 4 START ######### -->
-<center> ![ Melike in the Art Style of "Your choice"](images/statues.jpeg){ width=35% }
+<center> ![Diana](images/Diana.jpg){ width=35% }
 </center>
-**Diana Hernandez**
-**Contributions:** [Insert Your Contributions here]
-**Diana ** [Insert Yor Bio Here]
-**Personal Website / Contact Info** 
+**Diana Hernandez** *MPH Sociomedical Sciences | Biostatistics* <br>
+**Contributions:** <br> * Exploring the Met's Departments page <br> * The Data page <br>
+**Diana ** is a second-year MPH student in the Sociomedical Sciences department. She's from Miami Beach, FL and loves sunshine. She has been to the Met many times but still gets lost any time she visits. Her favorite department in the Met is [Arms and Armor](https://www.metmuseum.org/about-the-met/collection-areas/arms-and-armor). She says it's a cool department with a cool department name.
 <!-- ####### BLOCK 4 END ############ -->
 
 
