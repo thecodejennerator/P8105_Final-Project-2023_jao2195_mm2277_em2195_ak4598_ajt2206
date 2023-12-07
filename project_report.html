@@ -478,19 +478,23 @@ art come from?”, and “How can we explore the Met more easily?”</p>
 <div id="data-source" class="section level3">
 <h3>Data Source</h3>
 <p>The Met offers open access to data of its collection. It can be found
-<a href="https://github.com/metmuseum/openaccess">here</a>.</p>
+<a href="https://github.com/metmuseum/openaccess">here</a>, for anyone
+interested in running their own analyses or reproducing ours.</p>
 </div>
-<div id="data-cleaning" class="section level3">
-<h3>Data Cleaning</h3>
-<ul>
-<li><p>The Met dataset consists of over 400,000 observations. A dataset
-of this size was far too big to handle.</p></li>
-<li><p>We took a look at missing data to decide how to subset the
-dataset into a smaller, more manageable size. The variables
-<code>object_name</code> and <code>accession_year</code> were complete.
-From that information, we took a random sample of 10% of the data,
-creating our final dataset of over 40,000 observations.</p></li>
-</ul>
+<div id="generating-our-sample" class="section level3">
+<h3>Generating our Sample</h3>
+<p>The Met dataset consists of over 400,000 observations. A dataset of
+this size is far too big to handle, as any analysis would take an
+excessively long time to process. Given this scale, we decided that it
+would be wise to just work with a smaller, more manageable subset of the
+data.</p>
+<p>To start, we looked into which variables were the most complete, and
+found that nearly every observation in the dataset had a value for the
+<code>object_name</code> and <code>accession_year</code> variables.
+Knowing that these would be important variables for our analyses, we
+restricted the dataset to only include observations with non-missing
+values for both variables. Then, we pulled a random 10% sample, creating
+our final dataset.</p>
 <pre><code>##           object_number            is_highlight        is_timeline_work 
 ##                       0                       0                       0 
 ##        is_public_domain               object_id          gallery_number 
@@ -527,6 +531,9 @@ creating our final dataset of over 40,000 observations.</p></li>
 ##                   41109                   47984                       0 
 ##                    tags            tags_aat_url       tags_wikidata_url 
 ##                   28866                   28866                   28866</code></pre>
+<p>^ NOT SURE WHAT THIS IS DOING?</p>
+<p>IT WOULD BE NICE TO HAVE SOME INITIAL DESCRIPTORS OF OUR FINAL
+DATASET HERE, INCLUDING THE ROW AND OBSERVATION COUNT.</p>
 <p>Based on the missing data, we chose the following variables to work
 with:</p>
 <ul>
@@ -587,10 +594,10 @@ the data can you make?</p>
 
 <br><br>
 <footer>
-  <img src="images/columbia_univ.jpeg" alt="stickers" style="width:30%">
+  <img src="images/columbia_univ.jpeg" alt="stickers" style="width:10%">
   <br>
-    <p class="copyright text-muted" align="center">Copyright &copy; Disclosure: "The Art of Data Science: The Met (Trademark)" website was created using R Studio by a team of Columbia University in the City of New York Data Science Students (known herein as the "The Curators"), for course BIST P8105: Data Science. Data used to create this site was from The Met Museum publicly available Github (Open Sourse Data). The Curators,  do not make any claimswith the date presented.  are in no way affiliated, associated with, or sponsored by, The Met Museum, or any other entity. 
-""  </p>
+    <p class="copyright text-muted" align="center">Copyright &copy; Disclosure: "The Art of Data Science: The Met &Trade" website was created using R Studio by a team of Columbia University in the City of New York Data Science Students (known herein as the "The Curators"), for course BIST P8105: Data Science. Data used to create this site was from The Met Museum publicly available Github (Open Sourse Data). The Curators,  do not make any claimswith the date presented.  are in no way affiliated, associated with, or sponsored by, The Met Museum, or any other entity. 
+"  </p>
   <p class="copyright text-muted" align="center">Copyright &copy; 2023 The Curators: Jennifer A. Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Diana Hernandez, Andy Turner  </p>
 </footer>
 

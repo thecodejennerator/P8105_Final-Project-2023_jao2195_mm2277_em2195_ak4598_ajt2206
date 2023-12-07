@@ -46,13 +46,13 @@ Our initial questions were "What does the Met contain?", "Where does art come fr
 
 ### Data Source
 
-The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess).
+The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess), for anyone interested in running their own analyses or reproducing ours. 
 
-### Data Cleaning
+### Generating our Sample
 
-* The Met dataset consists of over 400,000 observations. A dataset of this size was far too big to handle.
+The Met dataset consists of over 400,000 observations. A dataset of this size is far too big to handle, as any analysis would take an excessively long time to process. Given this scale, we decided that it would be wise to just work with a smaller, more manageable subset of the data.
 
-* We took a look at missing data to decide how to subset the dataset into a smaller, more manageable size. The variables `object_name` and `accession_year` were complete. From that information, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations.
+To start, we looked into which variables were the most complete, and found that nearly every observation in the dataset had a value for the `object_name` and `accession_year` variables. Knowing that these would be important variables for our analyses, we restricted the dataset to only include observations with non-missing values for both variables. Then, we pulled a random 10% sample, creating our final dataset.
 
 ```{r include = FALSE}
 load("data/met.RData")
@@ -61,6 +61,10 @@ load("data/met.RData")
 ```{r echo = FALSE}
 sapply(met, function(x) sum(is.na(x)))
 ```
+
+^ NOT SURE WHAT THIS IS DOING?
+
+IT WOULD BE NICE TO HAVE SOME INITIAL DESCRIPTORS OF OUR FINAL DATASET HERE, INCLUDING THE ROW AND OBSERVATION COUNT.
 
 Based on the missing data, we chose the following variables to work with: 
 
