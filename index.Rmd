@@ -20,13 +20,11 @@ output:
   }
 </style>
 
-
 </head>
 
 <body>
     <h1>Background image</h1>
 </body>
-
 
 
 </html>
