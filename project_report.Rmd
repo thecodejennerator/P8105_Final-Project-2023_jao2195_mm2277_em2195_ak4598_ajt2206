@@ -7,6 +7,11 @@ output:
     theme: cosmo
 ---
 
+```{r, include = FALSE}
+library(tidyverse)
+```
+
+
 As this will be your only chance to describe your project in detail, make sure that your report is a standalone document that fully describes your process and results. We also expect you to write high-quality code that is understandable to an outside reader.
 
 # Project Motivation & Related Work
@@ -56,21 +61,29 @@ The Met offers open access to data of its collection. It can be found [here](htt
 
 The Met dataset consists of over 400,000 artistic pieces. If you think the Met is overwhelming to get through now - just imagine if all of the artworks in storage were also on display. Sadly a dataset of this size is too much even for us art aficionados, so we decided to divide and conquer (which fittingly is how many of the artifacts from around the world ended up in an American Art Museum). 
 
-We took a look at missing data to decide how to subset the dataset into a smaller, more manageable size. The variables `object_name` and `accession_year` were complete. From that information, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations.
+A dataset of this size is far too big to handle, as any analysis would take an excessively long time to process. Given this scale, we decided that it would be wise to just work with a smaller, more manageable subset of the data.
 
-The Met dataset consists of over 400,000 observations. A dataset of this size is far too big to handle, as any analysis would take an excessively long time to process. Given this scale, we decided that it would be wise to just work with a smaller, more manageable subset of the data.
+Using the code below, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations. You can use this code to create the same subset we did from The Met's raw data file `MetOBjects.txt`:
 
-To start, we looked into which variables were the most complete, and found that nearly every observation in the dataset had a value for the `object_name` and `accession_year` variables. Knowing that these would be important variables for our analyses, we restricted the dataset to only include observations with non-missing values for both variables. Then, we pulled a random 10% sample, creating our final dataset.
+    -   `set.seed(1)`
+
+    -   `met_10 <- sample_n(MetOBjects, nrow(MetOBjects)*.10)`
+
+    -   `save(met_10, file = "data/met_10.RData")`
+    
+Once we had our 10% sample, we embarked on some data cleaning.
+
+#### First, we looked into which variables were the most complete. The following table shows the % completeness for all variables. Across the `r nrow(met_10)` observations, `object_name`, `accession_year`, and `department` were most complete. This informed which analytic questions we could answer.
 
 ```{r include = FALSE}
+load("data/met_10.RData")
 load("data/met.RData")
 ```
 
-```{r echo = FALSE}
-sapply(met, function(x) sum(is.na(x)))
+```{r }
+data.frame(sapply(met, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %>%
+  magrittr::set_colnames("Completeness")
 ```
-
-^ NOT SURE WHAT THIS IS DOING?
 
 IT WOULD BE NICE TO HAVE SOME INITIAL DESCRIPTORS OF OUR FINAL DATASET HERE, INCLUDING THE ROW AND OBSERVATION COUNT.
 
