@@ -11,7 +11,7 @@
 
 <meta name="author" content="Aleya Khalifa" />
 
-<meta name="date" content="2023-12-04" />
+<meta name="date" content="2023-12-07" />
 
 <title>Subsetting and Saving Data</title>
 
@@ -36,6 +36,19 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/v4-shims.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151578452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-151578452-1');
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -62,6 +75,7 @@ if (window.hljs) {
 
 
 
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 
 
@@ -252,26 +266,35 @@ $(document).ready(function () {
         <li>
   <a href="about.html">Project 'Met'ivation</a>
 </li>
-<li>
-  <a href="the_data.html">Exhibition A: The Data</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Exhibitions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="the_data.html">Exhibition A: The Data</a>
+    </li>
+    <li>
+      <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
+    </li>
+    <li>
+      <a href="growing_collection_dashboard.html">Exhibition C: The Met's Growing Collection</a>
+    </li>
+    <li>
+      <a href="around_the_world.html">Exhibition D: Art Around the World</a>
+    </li>
+    <li>
+      <a href="https://lakerss12.shinyapps.io/shiny_app/">Special Exhibitions</a>
+    </li>
+  </ul>
 </li>
 <li>
-  <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
+  <a href="project_report.html">Project Report</a>
 </li>
 <li>
-  <a href="growing_collection.html">Exhibition C: The Met's Growing Collection</a>
-</li>
-<li>
-  <a href="around_the_world.html">Exhibition D: Art Around the World</a>
-</li>
-<li>
-  <a href="f_exhibit_e_select_exhibits.html">Special Exhibitions</a>
-</li>
-<li>
-  <a href="g_the_final_exposition.html">Project Report</a>
-</li>
-<li>
-  <a href="h_the_artists.html">Curators</a>
+  <a href="curators.html">Meet the Curators</a>
 </li>
 <li>
   <a href="https://www.metmuseum.org/">
@@ -302,28 +325,21 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Subsetting and Saving Data</h1>
 <h4 class="author">Aleya Khalifa</h4>
-<h4 class="date">2023-12-04</h4>
+<h4 class="date">2023-12-07</h4>
 
 </div>
 
 
 <div id="import-data" class="section level2">
 <h2>Import data</h2>
-<pre class="r"><code>met &lt;- read_delim(&quot;data/MetObjectsTxt.txt&quot;) %&gt;%  
+<p>Note: <code>met_10</code> is a random sample of 10% of The Met’s
+original dataset <em>MetObjects</em>, which comes in a text file. Here,
+we clean up the dataset a bit before using it in analysis. The cleaned
+dataset is named <code>met</code>.</p>
+<pre class="r"><code>load(&quot;data/met_10.RData&quot;)
+
+met &lt;- met_10 %&gt;%  
   janitor::clean_names()</code></pre>
-<pre><code>## Warning: One or more parsing issues, call `problems()` on your
-## data frame for details, e.g.:
-##   dat &lt;- vroom(...)
-##   problems(dat)</code></pre>
-<pre><code>## Rows: 484956 Columns: 54
-## ── Column specification ──────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (45): Object Number, Gallery Number, Department, Object Name, Title, Cul...
-## dbl  (5): Object ID, AccessionYear, Constituent ID, Object Begin Date, Objec...
-## lgl  (4): Is Highlight, Is Timeline Work, Is Public Domain, Metadata Date
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <div id="check-missingness" class="section level3">
 <h3>Check missingness</h3>
 <p>The variable <code>accession_year</code> has high completeness. And
@@ -333,39 +349,39 @@ rows with missing values by selected column:</p>
 <pre><code>##           object_number            is_highlight        is_timeline_work 
 ##             0.000000000             0.000000000             0.000000000 
 ##        is_public_domain               object_id          gallery_number 
-##             0.000000000             0.000000000             0.897844341 
+##             0.000000000             0.000000000             0.895989277 
 ##              department          accession_year             object_name 
-##             0.000000000             0.008046091             0.004672589 
+##             0.000000000             0.007237860             0.004454067 
 ##                   title                 culture                  period 
-##             0.059106393             0.570703322             0.812059238 
+##             0.058830807             0.572615734             0.810310341 
 ##                 dynasty                   reign               portfolio 
-##             0.952158546             0.976830888             0.945326999 
+##             0.951623879             0.977585318             0.944447881 
 ##          constituent_id             artist_role           artist_prefix 
-##             0.417446119             0.417446119             0.417446119 
+##             0.420146407             0.420146407             0.420146407 
 ##     artist_display_name      artist_display_bio           artist_suffix 
-##             0.417446119             0.421755788             0.417545097 
+##             0.420146407             0.424497371             0.420208269 
 ##       artist_alpha_sort      artist_nationality       artist_begin_date 
-##             0.417446119             0.417446119             0.417446119 
+##             0.420146407             0.420146407             0.420146407 
 ##         artist_end_date           artist_gender         artist_ulan_url 
-##             0.417446119             0.780429565             0.531006937 
+##             0.420146407             0.778801938             0.533457057 
 ##     artist_wikidata_url             object_date       object_begin_date 
-##             0.537685893             0.027695296             0.000000000 
+##             0.539828848             0.028147232             0.000000000 
 ##         object_end_date                  medium              dimensions 
-##             0.000000000             0.014875576             0.154770742 
+##             0.000000000             0.014599443             0.155954222 
 ##             credit_line          geography_type                    city 
-##             0.001342390             0.876361979             0.932459852 
+##             0.001216620             0.874997422             0.932859058 
 ##                   state                  county                 country 
-##             0.994595386             0.982350976             0.843270317 
+##             0.994514898             0.982802351             0.843674606 
 ##                  region               subregion                  locale 
-##             0.935045654             0.954340188             0.967545509 
+##             0.934343747             0.953520982             0.967151253 
 ##                   locus              excavation                   river 
-##             0.984497563             0.965829890             0.995686207 
+##             0.983874626             0.965522219             0.995257243 
 ##          classification rights_and_reproduction           link_resource 
-##             0.162317819             0.949420154             0.000000000 
+##             0.163439530             0.951335189             0.000000000 
 ##     object_wikidata_url           metadata_date              repository 
-##             0.857401496             1.000000000             0.000000000 
+##             0.856995567             1.000000000             0.000000000 
 ##                    tags            tags_aat_url       tags_wikidata_url 
-##             0.603149564             0.603149564             0.603149564</code></pre>
+##             0.602247654             0.602247654             0.602247654</code></pre>
 </div>
 <div id="clean-up-object-types-to-create-more-general-classes"
 class="section level3">
@@ -389,68 +405,26 @@ objects.</p>
            object_name))))))))))))</code></pre>
 </div>
 </div>
-<div id="examine-different-subsets" class="section level2">
-<h2>Examine different subsets</h2>
-<table>
-<caption>Subsetting scenarios</caption>
-<colgroup>
-<col width="52%" />
-<col width="22%" />
-<col width="24%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Subset scenario</th>
-<th>Number of rows</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Random 10% sample</td>
-<td>48495</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Observations with complete data for <code>object_name</code> and
-<code>accession_year</code></td>
-<td>479480</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Random 10% of sample with complete data for <code>object_name</code>
-and <code>accession_year</code></td>
-<td>48495</td>
-<td>Might be best</td>
-</tr>
-<tr class="even">
-<td>Observations with complete data for <code>object_name</code> ,
-<code>accession_year</code> , <code>culture</code></td>
-<td>206830</td>
-<td>Different picture of objects over time</td>
-</tr>
-<tr class="odd">
-<td>Observations with complete data for <code>object_name</code> ,
-<code>accession_year</code> , <code>culture</code> ,
-<code>country</code></td>
-<td>31547</td>
-<td>Different picture of objects over time</td>
-</tr>
-</tbody>
-</table>
-</div>
 <div id="save-r-data-file" class="section level2">
 <h2>Save R data file</h2>
-<p>Chosen subset: Random 10% of sample with complete data for
-<code>object_name</code> and <code>accession_year</code></p>
+<p>Chosen subset: Objects with complete data for
+<code>object_name</code> and <code>accession_year</code> - two crucial
+variables for our analysis.</p>
 <pre class="r"><code>met &lt;- met %&gt;%
-  filter(!is.na(object_name) &amp; !is.na(accession_year)) %&gt;%
-  sample_n(nrow(met)*.10)
+  filter(!is.na(object_name) &amp; !is.na(accession_year)) 
   
 save(met, 
      file = &quot;data/met.RData&quot;)</code></pre>
 </div>
 
+<br><br>
+<footer>
+  <img src="images/columbia_univ.jpeg" alt="stickers" style="width:30%">
+  <br>
+    <p class="copyright text-muted" align="center">Copyright &copy; Disclosure: "The Art of Data Science: The Met (Trademark)" website was created using R Studio by a team of Columbia University in the City of New York Data Science Students (known herein as the "The Curators"), for course BIST P8105: Data Science. Data used to create this site was from The Met Museum publicly available Github (Open Sourse Data). The Curators,  do not make any claimswith the date presented.  are in no way affiliated, associated with, or sponsored by, The Met Museum, or any other entity. 
+""  </p>
+  <p class="copyright text-muted" align="center">Copyright &copy; 2023 The Curators: Jennifer A. Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Diana Hernandez, Andy Turner  </p>
+</footer>
 
 
 
