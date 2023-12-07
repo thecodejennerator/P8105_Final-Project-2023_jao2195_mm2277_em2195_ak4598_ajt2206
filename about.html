@@ -37,6 +37,19 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/v4-shims.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151578452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-151578452-1');
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -63,6 +76,7 @@ if (window.hljs) {
 
 
 
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 
 
@@ -326,26 +340,35 @@ div.tocify {
         <li>
   <a href="about.html">Project 'Met'ivation</a>
 </li>
-<li>
-  <a href="the_data.html">Exhibition A: The Data</a>
-</li>
-<li>
-  <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
-</li>
-<li>
-  <a href="growing_collection_dashboard.html">Exhibition C: The Met's Growing Collection</a>
-</li>
-<li>
-  <a href="around_the_world.html">Exhibition D: Art Around the World</a>
-</li>
-<li>
-  <a href="special_exhibitions.html">Special Exhibitions</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Exhibitions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="the_data.html">Exhibition A: The Data</a>
+    </li>
+    <li>
+      <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
+    </li>
+    <li>
+      <a href="growing_collection_dashboard.html">Exhibition C: The Met's Growing Collection</a>
+    </li>
+    <li>
+      <a href="around_the_world.html">Exhibition D: Art Around the World</a>
+    </li>
+    <li>
+      <a href="https://lakerss12.shinyapps.io/shiny_app/">Special Exhibitions</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="project_report.html">Project Report</a>
 </li>
 <li>
-  <a href="curators.html">Curators</a>
+  <a href="curators.html">Meet the Curators</a>
 </li>
 <li>
   <a href="https://www.metmuseum.org/">
@@ -461,6 +484,14 @@ so working with data like this that allows for map creation was a good
 fit for our academic backgrounds.</p>
 </div>
 
+<br><br>
+<footer>
+  <img src="images/columbia_univ.jpeg" alt="stickers" style="width:30%">
+  <br>
+    <p class="copyright text-muted" align="center">Copyright &copy; Disclosure: "The Art of Data Science: The Met (Trademark)" website was created using R Studio by a team of Columbia University in the City of New York Data Science Students (known herein as the "The Curators"), for course BIST P8105: Data Science. Data used to create this site was from The Met Museum publicly available Github (Open Sourse Data). The Curators,  do not make any claimswith the date presented.  are in no way affiliated, associated with, or sponsored by, The Met Museum, or any other entity. 
+""  </p>
+  <p class="copyright text-muted" align="center">Copyright &copy; 2023 The Curators: Jennifer A. Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Diana Hernandez, Andy Turner  </p>
+</footer>
 
 
 </div>
