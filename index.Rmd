@@ -2,8 +2,8 @@
 title: "Welcome to The Art of Data Science: The Met Museum"
 output: 
   html_document:
-    toc: true
-    toc_float: true
+    toc: false
+    toc_float: false
     theme: cosmo
 ---
 
