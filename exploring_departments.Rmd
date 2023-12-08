@@ -30,11 +30,13 @@ theme_set(theme_minimal())
 The Met holds many collections from Modern and Contemporary Art to Arms and Armor. 
 Explore the vast departments of the Met and the many objects they contain. Explore the different kinds of objects that each department holds. Click [here](https://www.metmuseum.org/about-the-met/collection-areas) to learn more about each department, or collection area.
 
-The department with the most number of objects is [Drawings and Prints](https://www.metmuseum.org/about-the-met/collection-areas/drawings-and-prints) with 4 times as many objects as the next department! Yet that changes when looking at the most number of highlighted, or popular pieces of artwork, as the department with the most highlighted number of objects is [The American Wing](https://www.metmuseum.org/about-the-met/collection-areas/the-american-wing).
+The department with the most objects is [Drawings and Prints](https://www.metmuseum.org/about-the-met/collection-areas/drawings-and-prints) with 4 times as many objects as the next department! (Interestingly enough, works on paper can only be in exhibition ~3 months at a time due to their fragility.) Yet that changes when looking at the most highlighted objects, or popular pieces of artwork, as the department with the most highlighted number of objects is [The American Wing](https://www.metmuseum.org/about-the-met/collection-areas/the-american-wing). Close behind The American Wing, Asian Art comes in second with the most highlighted objects.
 
-As we explore each department and the objects they hold, we find that Drawings and Prints mostly contains drawings and prints (no surprise there). Photographs also mainly contains photographs. The most common object was a piece in both Asian Art and European Sculpture and Decorative Arts. 
+As we explore each department and the objects they hold, we find that Drawings and Prints mostly contains drawings and prints (no surprise there). In Drawings and Prints, prints has more than triple the number of objects than the other objects. [Photographs](https://www.metmuseum.org/about-the-met/collection-areas/photographs) also mainly contains photographs (again, not shocking and 3 times the number of objects compared to the other objects). The most common object was a piece in both [Asian Art](https://www.metmuseum.org/about-the-met/collection-areas/asian-art) and [European Sculpture and Decorative Arts](https://www.metmuseum.org/about-the-met/collection-areas/european-sculpture-and-decorative-arts). 
 
-Finally, lets discuss a collection close to our home away from home: The Cloisters. This collection mostly contains panel, Pilgrim's badge, and capital. 
+Unlike any other department, [Greek and Roman Art](https://www.metmuseum.org/about-the-met/collection-areas/greek-and-roman-art) mostly contains Kylix fragments (nearly 8 times any other object!). Kylix fragments, or vessels, are specific to Greek and Roman culture. Again, unlike any other department, the [Egyptian Art](https://www.metmuseum.org/about-the-met/collection-areas/egyptian-art) department has objects like reliefs, or painted scenes, and scarabs, or beetle shaped amulets. We explored the Egyptian Art department further [here](https://lakerss12.shinyapps.io/shiny_app/). 
+
+Finally, let's discuss a collection close to us at CUMC: [The Cloisters](https://www.metmuseum.org/about-the-met/collection-areas/medieval-art-and-the-cloisters). This collection mostly contains panel, Pilgrim's badge, and capital. Most of the art displayed at The Cloisters is in fact part of The Medieval Art department.
 
 ```{r}
 met |>
@@ -47,12 +49,12 @@ met |>
   knitr::kable(caption = "Top 3 Departments by Number of Objects")
 ```
 
-```{r}
+```{r out.width='100%'}
 met |> 
   count(department) |> 
   mutate(department = fct_reorder(department, n)) |> 
   plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
-  layout(title = 'Explore each department and their number of objects',
+  layout(title = 'Each department and their number of objects',
          xaxis = list(title = 'Department'), 
          yaxis = list(title = 'Number of Objects'),
          showlegend = FALSE)
@@ -72,13 +74,14 @@ met |>
   knitr::kable(caption = "Top 3 Departments by Number of Highlighted Objects")
 ```
 
-```{r}
+```{r out.width='100%'}
 met |> 
   filter(is_highlight == TRUE) |>
   count(department) |> 
   mutate(department = fct_reorder(department, n)) |> 
   plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
-  layout(xaxis = list(title = 'Department'), 
+  layout(title = 'Each department and their number of highlighted objects',
+         xaxis = list(title = 'Department'), 
          yaxis = list(title = 'Number of Highlighted Objects'),
          showlegend = FALSE)
 ```
@@ -300,7 +303,7 @@ met |>
   scale_fill_manual(values = wes_palette("AsteroidCity1"))
 ```
 
-In Egyptian Art, the most common objects are: 1) Relief; 2) Scarab; and 3) Jar Label. Learn more about the Egyptian Art department [here](https://lakerss12.shinyapps.io/shiny_app/).
+In Egyptian Art, the most common objects are: 1) Relief; 2) Scarab; and 3) Jar Label. 
 
 ## The American Wing
 
