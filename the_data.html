@@ -33,10 +33,24 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.0/js/v4-shims.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151578452-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-151578452-1');
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -63,6 +77,7 @@ if (window.hljs) {
 
 
 
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 
 
@@ -221,6 +236,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -326,26 +344,35 @@ div.tocify {
         <li>
   <a href="about.html">Project 'Met'ivation</a>
 </li>
-<li>
-  <a href="the_data.html">Exhibition A: The Data</a>
-</li>
-<li>
-  <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
-</li>
-<li>
-  <a href="growing_collection.html">Exhibition C: The Met's Growing Collection</a>
-</li>
-<li>
-  <a href="around_the_world.html">Exhibition D: Art Around the World</a>
-</li>
-<li>
-  <a href="special_exhibitions.html">Special Exhibitions</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Exhibitions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="the_data.html">Exhibition A: The Data</a>
+    </li>
+    <li>
+      <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
+    </li>
+    <li>
+      <a href="growing_collection_dashboard.html">Exhibition C: The Met's Growing Collection</a>
+    </li>
+    <li>
+      <a href="around_the_world.html">Exhibition D: Art Around the World</a>
+    </li>
+    <li>
+      <a href="https://lakerss12.shinyapps.io/shiny_app/">Special Exhibitions</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="project_report.html">Project Report</a>
 </li>
 <li>
-  <a href="curators.html">Curators</a>
+  <a href="curators.html">Meet the Curators</a>
 </li>
 <li>
   <a href="https://www.metmuseum.org/">
@@ -372,6 +399,14 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Exhibition A: The Data</h1>
@@ -379,58 +414,109 @@ div.tocify {
 </div>
 
 
-<div id="data-source" class="section level1">
-<h1><strong>Data Source</strong></h1>
+<div id="data-collection-and-cleaning" class="section level1">
+<h1>Data Collection and Cleaning</h1>
+<div id="data-source" class="section level3">
+<h3>Data Source</h3>
 <p>The Met offers open access to data of its collection. It can be found
-<a href="https://github.com/metmuseum/openaccess">here</a>.</p>
+<a href="https://github.com/metmuseum/openaccess">here</a>, for anyone
+interested in running their own analyses or reproducing ours.</p>
 </div>
-<div id="data-cleaning" class="section level1">
-<h1><strong>Data Cleaning</strong></h1>
-<ul>
-<li><p>The Met dataset consists of over 400,000 observations. A dataset
-of this size was far too big to handle.</p></li>
-<li><p>We took a look at missing data to decide how to subset the
-dataset into a smaller, more manageable size. The variables
-<code>object_name</code> and <code>accession_year</code> were complete.
-From that information, we took a random sample of 10% of the data,
-creating our final dataset of over 40,000 observations.</p></li>
-</ul>
-<pre><code>##           object_number            is_highlight        is_timeline_work 
-##                       0                       0                       0 
-##        is_public_domain               object_id          gallery_number 
-##                       0                       0                   43515 
-##              department          accession_year             object_name 
-##                       0                       0                       0 
-##                   title                 culture                  period 
-##                    2899                   27573                   39235 
-##                 dynasty                   reign               portfolio 
-##                   46114                   47358                   45838 
-##          constituent_id             artist_role           artist_prefix 
-##                   20487                   20487                   20487 
-##     artist_display_name      artist_display_bio           artist_suffix 
-##                   20487                   20718                   20495 
-##       artist_alpha_sort      artist_nationality       artist_begin_date 
-##                   20487                   20487                   20487 
-##         artist_end_date           artist_gender         artist_ulan_url 
-##                   20487                   37997                   25962 
-##     artist_wikidata_url             object_date       object_begin_date 
-##                   26283                    1346                       0 
-##         object_end_date                  medium              dimensions 
-##                       0                     675                    7617 
-##             credit_line          geography_type                    city 
-##                      31                   42380                   45249 
-##                   state                  county                 country 
-##                   48219                   47693                   40840 
-##                  region               subregion                  locale 
-##                   45294                   46223                   46850 
-##                   locus              excavation                   river 
-##                   47721                   46770                   48306 
-##          classification rights_and_reproduction           link_resource 
-##                    7948                   46032                       0 
-##     object_wikidata_url           metadata_date              repository 
-##                   41500                   48495                       0 
-##                    tags            tags_aat_url       tags_wikidata_url 
-##                   29297                   29297                   29297</code></pre>
+<div id="generating-our-sample" class="section level3">
+<h3>Generating our Sample</h3>
+<p>The Met dataset consists of over 400,000 artistic pieces. If you
+think the Met is overwhelming to get through now - just imagine if all
+of the artworks in storage were also on display. Sadly a dataset of this
+size is too much even for us art aficionados, so we decided to divide
+and conquer (which fittingly is how many of the artifacts from around
+the world ended up in an American Art Museum).</p>
+<p>A dataset of this size is far too big to handle, as any analysis
+would take an excessively long time to process. Given this scale, we
+decided that it would be wise to just work with a smaller, more
+manageable subset of the data.</p>
+<p>Using the code below, we took a random sample of 10% of the data,
+creating our final dataset of over 40,000 observations. You can use this
+code to create the same subset we did from The Met’s raw data file
+<code>MetOBjects.txt</code>:</p>
+<pre><code>-   `set.seed(1)`
+
+-   `met_10 &lt;- sample_n(MetOBjects, nrow(MetOBjects)*.10)`
+
+-   `save(met_10, file = &quot;data/met_10.RData&quot;)`</code></pre>
+<p>Once we had our 10% sample, we embarked on some data cleaning.</p>
+<div
+id="first-we-looked-into-which-variables-were-the-most-complete.-the-following-table-shows-the-completeness-for-all-variables."
+class="section level4">
+<h4>First, we looked into which variables were the most complete. The
+following table shows the % completeness for all variables.</h4>
+<p>Across the 48495 observations, <code>object_name</code> and
+<code>accession_year</code> were most complete. <code>department</code>
+was 100% complete. This informed which analytic questions we could
+answer.</p>
+<pre class="r"><code>met_10 &lt;- met_10 %&gt;% 
+  janitor::clean_names()
+
+data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %&gt;%
+  magrittr::set_colnames(&quot;Completeness&quot;)</code></pre>
+<pre><code>##                         Completeness
+## object_number                 100.00
+## is_highlight                  100.00
+## is_timeline_work              100.00
+## is_public_domain              100.00
+## object_id                     100.00
+## gallery_number                 10.40
+## department                    100.00
+## accession_year                 99.28
+## object_name                    99.55
+## title                          94.12
+## culture                        42.74
+## period                         18.97
+## dynasty                         4.84
+## reign                           2.24
+## portfolio                       5.56
+## constituent_id                 57.99
+## artist_role                    57.99
+## artist_prefix                  57.99
+## artist_display_name            57.99
+## artist_display_bio             57.55
+## artist_suffix                  57.98
+## artist_alpha_sort              57.99
+## artist_nationality             57.99
+## artist_begin_date              57.99
+## artist_end_date                57.99
+## artist_gender                  22.12
+## artist_ulan_url                46.65
+## artist_wikidata_url            46.02
+## object_date                    97.19
+## object_begin_date             100.00
+## object_end_date               100.00
+## medium                         98.54
+## dimensions                     84.40
+## credit_line                    99.88
+## geography_type                 12.50
+## city                            6.71
+## state                           0.55
+## county                          1.72
+## country                        15.63
+## region                          6.57
+## subregion                       4.65
+## locale                          3.28
+## locus                           1.61
+## excavation                      3.45
+## river                           0.47
+## classification                 83.66
+## rights_and_reproduction         4.87
+## link_resource                 100.00
+## object_wikidata_url            14.30
+## metadata_date                   0.00
+## repository                    100.00
+## tags                           39.78
+## tags_aat_url                   39.78
+## tags_wikidata_url              39.78</code></pre>
+<p>Based on the missing data table, and our decision to focus on objects
+and years, we once again limited the dataset to those observations with
+complete object and year data - resulting in a final analytic dataset
+with 47984 observations.</p>
 <p>Based on the missing data, we chose the following variables to work
 with:</p>
 <ul>
@@ -445,9 +531,46 @@ which an object was created</li>
 object</li>
 <li><code>country</code>: Country where the artwork was created or
 found</li>
+<li><code>subregion</code>: Geographic location more specific than
+Region, but less specific than Locale, where the artwork was created or
+found</li>
+<li><code>object_begin_date</code>: Date indicating the year the artwork
+was started to be created</li>
+<li><code>object_end_date</code>: Date indicating the year the artwork
+was completed</li>
+<li><code>dynasty</code>: Dynasty (a succession of rulers of the same
+line or family) under which an object was created</li>
 </ul>
+<p>As we transported ourselves to Ancient Egypt and the Met’s many
+excavations in the area, we had to take some additional steps to dust
+off the data without hurting the artifacts. <code>Dynasty</code> was a
+key variable for the Egyptian data, as the Egyptian Art Department is
+the only Department in the Met to have fairly well-identified Dynasties,
+we felt it was important to include it. However, instead of keeping to
+the traditional 30 Dynasties of Egypt, many of the observations were
+coded as “Dynasty 1-5” or “second half 11.” We deep cleaned the table.
+Strategy was that if a Dynasty was easily identifiable from the name
+then we recoded the value to said Dynasty, if the value was of a
+consecutive dynasty ex: “Dynasty 12-13” then we kept the value as said
+Dynasty but only if that specific value was common in the data
+(n&gt;20). This was to prevent having 50+ dynasty ranges and making
+visualization tedious. Moreover, for larger Dynastic Ranges (or low
+artifact count consecutive dynasties) these were just recoded as Dynasty
+Range. Any other values were coded as NA.</p>
+<p>Some other minor cleaning of the Egyptian data also occurred for
+object creation dates.</p>
+</div>
+</div>
 </div>
 
+<br><br>
+<footer>
+  <img src="images/columbia_univ.jpeg" alt="stickers" style="width:30%">
+  <br>
+    <p class="copyright text-muted" align="center">Copyright &copy; Disclosure: "The Art of Data Science: The Met (Trademark)" website was created using R Studio by a team of Columbia University in the City of New York Data Science Students (known herein as the "The Curators"), for course BIST P8105: Data Science. Data used to create this site was from The Met Museum publicly available Github (Open Sourse Data). The Curators,  do not make any claimswith the date presented.  are in no way affiliated, associated with, or sponsored by, The Met Museum, or any other entity. 
+""  </p>
+  <p class="copyright text-muted" align="center">Copyright &copy; 2023 The Curators: Jennifer A. Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Diana Hernandez, Andy Turner  </p>
+</footer>
 
 
 </div>
@@ -483,6 +606,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

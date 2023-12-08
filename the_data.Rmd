@@ -5,25 +5,55 @@ output:
     toc: true
     toc_float: true
     theme: cosmo
+    code_folding: hide
 ---
 
+```{r, include = FALSE}
+library(tidyverse)
+```
+
+# Data Collection and Cleaning
+
+### Data Source
+
+The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess), for anyone interested in running their own analyses or reproducing ours. 
+
+
+### Generating our Sample
+
+The Met dataset consists of over 400,000 artistic pieces. If you think the Met is overwhelming to get through now - just imagine if all of the artworks in storage were also on display. Sadly a dataset of this size is too much even for us art aficionados, so we decided to divide and conquer (which fittingly is how many of the artifacts from around the world ended up in an American Art Museum). 
+
+A dataset of this size is far too big to handle, as any analysis would take an excessively long time to process. Given this scale, we decided that it would be wise to just work with a smaller, more manageable subset of the data.
+
+Using the code below, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations. You can use this code to create the same subset we did from The Met's raw data file `MetOBjects.txt`:
+
+    -   `set.seed(1)`
+
+    -   `met_10 <- sample_n(MetOBjects, nrow(MetOBjects)*.10)`
+
+    -   `save(met_10, file = "data/met_10.RData")`
+    
+Once we had our 10% sample, we embarked on some data cleaning.
+
+#### First, we looked into which variables were the most complete. The following table shows the % completeness for all variables. 
+
 ```{r include = FALSE}
+load("data/met_10.RData")
+
 load("data/met.RData")
 ```
 
-# **Data Source**
+Across the `r nrow(met_10)` observations, `object_name` and `accession_year` were most complete. `department` was 100% complete. This informed which analytic questions we could answer.
 
-The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess).
+```{r }
+met_10 <- met_10 %>% 
+  janitor::clean_names()
 
-# **Data Cleaning**
-
-* The Met dataset consists of over 400,000 observations. A dataset of this size was far too big to handle.
-
-* We took a look at missing data to decide how to subset the dataset into a smaller, more manageable size. The variables `object_name` and `accession_year` were complete. From that information, we took a random sample of 10% of the data, creating our final dataset of over 40,000 observations.
-
-```{r echo = FALSE}
-sapply(met, function(x) sum(is.na(x)))
+data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %>%
+  magrittr::set_colnames("Completeness")
 ```
+
+Based on the missing data table, and our decision to focus on objects and years, we once again limited the dataset to those observations with complete object and year data - resulting in a final analytic dataset with `r nrow(met)` observations.
 
 Based on the missing data, we chose the following variables to work with: 
 
@@ -33,4 +63,12 @@ Based on the missing data, we chose the following variables to work with:
 * `culture`: Information about the culture, or people from which an object was created
 * `object_name`: Describes the physical type of the object
 * `country`: Country where the artwork was created or found
+* `subregion`: Geographic location more specific than Region, but less specific than Locale, where the artwork was created or found
+* `object_begin_date`: Date indicating the year the artwork was started to be created
+* `object_end_date`: Date indicating the year the artwork was completed
+* `dynasty`: Dynasty (a succession of rulers of the same line or family) under which an object was created
+
+As we transported ourselves to Ancient Egypt and the Met's many excavations in the area, we had to take some additional steps to dust off the data without hurting the artifacts. `Dynasty` was a key variable for the Egyptian data, as the Egyptian Art Department is the only Department in the Met to have fairly well-identified Dynasties, we felt it was important to include it. However, instead of keeping to the traditional 30 Dynasties of Egypt, many of the observations were coded as "Dynasty 1-5" or "second half 11." We deep cleaned the table. Strategy was that if a Dynasty was easily identifiable from the name then we recoded the value to said Dynasty, if the value was of a consecutive dynasty ex: "Dynasty 12-13" then we kept the value as said Dynasty but only if that specific value was common in the data (n>20). This was to prevent having 50+ dynasty ranges and making visualization tedious. Moreover, for larger Dynastic Ranges (or low artifact count consecutive dynasties) these were just recoded as Dynasty Range. Any other values were coded as NA. 
+
+Some other minor cleaning of the Egyptian data also occurred for object creation dates. 
 
