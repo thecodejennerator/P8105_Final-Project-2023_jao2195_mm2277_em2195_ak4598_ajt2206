@@ -12,52 +12,86 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 <!-- ####### BLOCK 1 START ######### -->
 ## <font size="3"> Jennifer A. Osei </font>
-<<<<<<< Updated upstream
-<center> ![ Jennifer Osei in the Art Style of Vincent Van Gogh ](images/artify_Jennifer_Osei.jpg){ width=35% }
+
+<center> ![Jennifer in Vincent Van Gogh ](images/artify_Jennifer_Osei.jpg){width=35% }
 </center>
 
-=======
+<html>
+<head>
+<style>
+  .center-text {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
 
-<center> ![ Jennifer Osei in the Art Style of Vincent Van Gogh ](images/artify_Jennifer_Osei.jpg){ width=35% }
-</center>
+<div class="center-text">
+  <font size="3">**Jennifer Osei**</font>
+</div>
 
->>>>>>> Stashed changes
+</body>
+</html>
+
+
 **Jennifer A. Osei**   *MS Biostatistics | Theory and Methods* <br> 
-**Contributions:** <br> * Website Development and Coding (.html,.css) <br> * Project Concept Creativity  <br> *  Statistical Analysis (pending)  <br> * Screencast (pending)
+**Contributions:** <br> * Website Development and Coding (.html,.css) <br> * Project Concept Creativity  <br> *  Statistical Analysis (pending)  <br> * Final Report (pending)
 
-**Jennifer** is an MS Biostatistics student at Columbia University. From Buffalo, NY, she loves cold weather (still thinking about it), playing tennis, and singing. Jennifer's passionate about using data to assess and tailor programs to improve health. She loves music and would love to try and play the violin one day! In her free time she enjoys random NYC adventures and would love to ACTUALLY visit The Met .....one day.... hopefully using the maps in this project to explore after finals hehe :).
+**Jennifer** is a MS Biostatistics student at Columbia University. From Buffalo, NY, she loves cold weather (she thinks...), playing tennis, and singing. Jennifer's passionate about using data to improve healthcare. She loves music and would love to try and play the violin one day! In her free time she enjoys random NYC adventures and would love to ACTUALLY visit The Met .....one day.... hopefully using the maps in this project to explore after finals hehe :).  
 <!-- ####### BLOCK 1 END ############ -->
 
 
 <!-- ####### BLOCK 2 START ######### -->
 ## <font size="3"> Melike Aksoy </font>
+
 <center> ![ Melike in the Art Style of Impressionist ](images/melike.JPG){ width=35% }
 </center>
 
+<html>
+<head>
+<style>
+  .center-text {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="center-text">
+  <font size="3">**Melike Aksoy**</font>
+</div>
+
+</body>
+</html>
 
 **Melike Aksoy**  *MPH Biostatistics | Advanced Epidemiology* <br> 
 **Contributions:** [Insert Your Contributions here]
 **Melike** is a second-year MPH Biostatistics student. She is from New Jersey. Melike currently works as a research assistant at Department of Neurology in Columbia Medical Center. She loves traveling, taking photos, spending time with her cats, coloring, reading books, and  hiking. Her favorite artist is Monet and her favorite department is 19th and Early 20th Century European Paintings And Sculpture. She likes to collect books, postcards, and prints of Monet's art. 
-**Personal Website / Contact Info** 
 <!-- ####### BLOCK 2 END ############ -->
 
 
 
 <!-- ####### BLOCK 3 START ######### -->
-<<<<<<< HEAD
+
 ## <font size="3"> Emily Murphy </font>
-<div style="text-align:center;">
-  <img src="images/emily.jpeg" style="width:35%;">
-  <p style="font-size: smaller;">Emily</p>
+<html>
+<head>
+<style>
+  .center-text {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="center-text">
+  <font size="3">**Emily Murphy**</font>
 </div>
-=======
+
+</body>
+</html>
 <center> ![Emily in the Impressionist Era, Anon ](images/emily.png){ width=35% }
 </center>
-<<<<<<< Updated upstream
->>>>>>> refs/remotes/origin/main
-=======
->>>>>>> Stashed changes
-
 
 **Emily Murphy**   *MPH Epidemiology | Infectious Disease Epidemiology* <br> 
 **Contributions:** <br> * Project Motivation Page <br> * Screencast (pending)  <br> *  Project Admin: cleaning up the directory, communicating about to-dos, note-taking during meetings <br>
@@ -67,18 +101,29 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 4 START ######### -->
-<<<<<<< HEAD
+
 ## <font size="3"> Diana Hernandez </font>
-<center> ![Diana](images/Diana.jpg){ width=35% }
-=======
-<center> ![Diana](images/Diana.png){ width=35% }
-<<<<<<< Updated upstream
->>>>>>> refs/remotes/origin/main
-</center>
-=======
->>>>>>> Stashed changes
+
+<html>
+<head>
+<style>
+  .center-text {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="center-text">
+  <font size="3">**Diana Hernandez**</font>
+</div>
+
+</body>
+</html>
 
 
+<center> ![Diana in Pencil Sketch ](images/Diana.png){ width=35% }
+</center> 
 **Diana Hernandez** *MPH Sociomedical Sciences | Biostatistics* <br>
 **Contributions:** <br> * Exploring the Met's Departments page <br> * The Data page <br>
 **Diana ** is a second-year MPH student in the Sociomedical Sciences department. She's from Miami Beach, FL and loves sunshine. She has been to the Met many times but still gets lost any time she visits. Her favorite department in the Met is [Arms and Armor](https://www.metmuseum.org/about-the-met/collection-areas/arms-and-armor). She says it's a cool department with a cool department name.
@@ -88,9 +133,26 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 <!-- ####### BLOCK 5 START ######### -->
 ## <font size="3"> Aleya Khalifa </font>
-<center> ![ Aleya in the Art Style of "Your choice" ](images/statues.jpeg){width=35% }
-</center>
 
+<html>
+<head>
+<style>
+  .center-text {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="center-text">
+  <font size="3">**Aleya Khalifa**</font>
+</div>
+
+</body>
+</html>
+
+<center> ![ Aleya in Greek Statue ](images/greek_statue.jpeg){width=35% }
+</center>
 
 **Aleya Khalifa**
 **Contributions:** [Insert Your Contributions here]
@@ -101,30 +163,34 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 6 START ######### -->
-<<<<<<< HEAD
+
+
 ## <font size="3"> Andy Turner </font>
-<center> ![Andy in the Art Style of "Your choice" ](images/statues.jpeg){width=35% }
-</center>
+
+<html>
+<head>
+<style>
+  .center-text {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="center-text">
+  <font size="3">**Andy Turner**</font>
+</div>
+
+</body>
+</html>
 
 
-**Andy Turner**
-**Contributions:** [Insert Your Contributions here]
-**Andy** [Insert Yor Bio Here]
-**Personal Website / Contact Info** 
-=======
-<<<<<<< Updated upstream
-<center> ![Andy in Snow by Georges Seurat ](images/Andy_Photo.png){width=35% }
-=======
 <center> ![Andy in Snow by Georges Seurat](images/Andy_Photo.png){width=35%}
->>>>>>> Stashed changes
 </center>
-**Andy Turner**   *MPH Epidemiology | Advanced Epidemiology* <br> 
-**Contributions:**<br> * Finding intial dataset <br> * ShinyApp Creation  <br> *  Egyptian Artifacts Analysis <br>
-**Andy** is a second year Masters student in Epidemiology with a Certificate in Advanced Epidemiology (all Epi all the time!). Andy currently works as a Research Assistant focusing on Sexual and Gender Minorities in the United States and Kenya. They are from Las Vegas, Nevada, so fine art runs directly counter to their upbringing. Andy has been to the Met exactly one time, and they were overwhelmed. That said, there were a few cool looking chairs. 
-<<<<<<< Updated upstream
->>>>>>> refs/remotes/origin/main
-=======
 
->>>>>>> Stashed changes
+**Andy Turner**   *MPH Epidemiology | Advanced Epidemiology* <br> <br>
+**Contributions:**<br> * Finding intial dataset <br> * ShinyApp Creation  <br> *  Egyptian Artifacts Analysis <br> <br>
+**Andy** is a second year Masters student in Epidemiology with a Certificate in Advanced Epidemiology (all Epi all the time!). Andy currently works as a Research Assistant focusing on Sexual and Gender Minorities in the United States and Kenya. They are from Las Vegas, Nevada, so fine art runs directly counter to their upbringing. Andy has been to the Met exactly one time, and they were overwhelmed. That said, there were a few cool looking chairs. 
+
 <!-- ####### BLOCK 6 END ############ -->
 
