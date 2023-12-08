@@ -5,12 +5,12 @@ output:
     toc: true
     toc_float: true
     theme: cosmo
+    code_folding: hide
 ---
 
 ```{r, include = FALSE}
 library(tidyverse)
 ```
-
 
 As this will be your only chance to describe your project in detail, make sure that your report is a standalone document that fully describes your process and results. We also expect you to write high-quality code that is understandable to an outside reader.
 
@@ -40,19 +40,23 @@ Motivated by the intimidating vastness of the Met (and likely, our pride in it a
 Our discovery of how fun and satisfying it is to make and use interactive plots in R (such as with [plotly](https://plotly.com/r/)) drew us to a topic that would have lots of opportunities for visualization. Additionally, a few members of our group have specific experience with spatial epidemiology, so working with data like this that allows for map creation was a good fit for our academic backgrounds.
 
 # Initial Questions
-What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?
 
-Our initial questions were "What does the Met contain?", "Where does art come from?", and "How can we explore the Met more easily?"
+Once we decided to explore The Met with data. We asked these initial questions:
 
+* *What does the Met contain?*
+* *Where does art come from across culture, dynasties, time, and beyond?*
+* *How can we explore the Met more easily?*
 
+The Met's data as overwhelming as The Met, we had to narrow down our focus. Although the database contains **a lot** of data. It also lacked data in certain variables. We decided to work with the variables with the most complete data and developed the following questions:
+
+* *What kind of objects does each department hold?*
+* *With Egyptian Art being so popular, what do its objects tell us?*
+* *How has the Met changed over time?*
+* *Where does the art in the Met come from?*
 
 # Data Collection and Cleaning
 
 ### Data Source
-
-
-The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess). 
-
 
 The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess), for anyone interested in running their own analyses or reproducing ours. 
 
