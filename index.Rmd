@@ -90,21 +90,36 @@ output:
 
 
  <!-- Project Report-->
-<center> <p>
-<h1 class="highlight"> <font size="10"> <b> Project Report </font> </h1 class="highlight">  
+<center> <h1 class="highlight"> <font size="10"> <b> Project Report </font> </h1 class="highlight"> 
+<center>
+  <p>
     <h2 style="background-color: rgba(244, 223, 190, 0.6); padding: 10px; color: black;">
-        <a href="https://example.com" style="color: black;"> Click here </a> to learn more abour our amazingly creative data team who made this project possible!  </p> </center>
+        <a href="https://example.com" style="color: black;"> Click here </a> to learn more about how the 'art of data science' came to be & and the story of how we processed the data from start to finish!  
+         </font>
+    </h2>
+  </p>
+</center>
+</body>
+</html>
 
  <!-- Meet the Curators-->
-<center> <p> <h1 class="highlight"> <font size="10"> <b> Meet the Curators </font> </h1 class="highlight"> 
-    <h2 style="background-color: rgba(244, 223, 190, 0.6); padding: 10px; color: black;"> <a href="https://example.com" style="color: black;"> Click here </a> to check out our amazingly creative data science team who made this project possible!  </p> 
+<center> <h1 class="highlight"> <font size="10"> <b> Meet the Curators </font> </h1 class="highlight"> 
+<center>
+  <p>
+    <h2 style="background-color: rgba(244, 223, 190, 0.6); padding: 10px; color: black;">
+        <a href="https://example.com" style="color: black;"> Click here </a> to learn more about our amazingly creative data team who made this project possible!  
+         </font>
+    </h2>
+  </p>
 </center>
+</body>
+</html>
     
+  <!-- Page Goodbye-->
+<center><h1 class="highlight"> <font size="10"> <b> We hope you enjoyed your virtual visit to The Art of Data Science: The Met Museum! Come and Visit Us Again!  </font> </h1 class="highlight">  </center>
 
-<center><h1 class="highlight"> <font size="10"> <b> We hope you enjoy your virtual visit to The Art of Data Science: The Met Museum! Come and Visit Us Again!  </font> </h1 class="highlight">  </center>
-
-   <!-- Image -->
-   <img src="images/greek_statue.jpeg" alt="Description of the image" style="width: 300px; height: auto;">
+   <!-- Some Art Images -->
+    <img src="images/greek_statue.jpeg" alt="Description of the image" style="width:     300px; height: auto;">
    
    <!-- About The Met -->
    <p style="background-color: rgba(255, 0, 0, 0.5); padding: 10px;">
@@ -131,7 +146,7 @@ output:
    </p>
    </body>
 
-  
+   <!-- Disclaimer Footer Highlight -->
   
   <p style="background-color: rgba(244, 223, 190, 0.6); padding: 10px;">For more information, visit <a href="https://example.com">The Met Museum website</a>.
    </p>
