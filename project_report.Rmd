@@ -56,6 +56,21 @@ The Met's data as overwhelming as The Met, we had to narrow down our focus. Alth
 
 # Data Collection and Cleaning
 
+```{r setup, include = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(plotly)
+
+load("data/met_10.RData")
+load("data/met.RData")
+
+mypal = c("#78B7C5",  "#EBCC2A", "#FF0000", "#EABE94", 
+         "#3B9AB2", "#B40F20", "#0B775E", "#F2300F", 
+         "#5BBCD6", "#F98400", "#ab0213", "#E2D200", 
+         "#ff7700", "#46ACC8", "#00A08A", "#78B7C5",
+         "#a7ba42", "#f94f8a", "#DD8D29")
+```
+
 ### Data Source
 
 Since its beginning in 1870, The Metropolitan Museum (The Met) has acquired and displayed over 5,000 years worth of art work from around the world. 
@@ -77,11 +92,6 @@ Using the code below, we took a random sample of 10% of the data, creating our f
 
     -   `save(met_10, file = "data/met_10.RData")`
     
-```{r include = FALSE}
-load("data/met_10.RData")
-load("data/met.RData")
-```
-
 Once we had our 10% sample (amounting to `r format(nrow(met_10), big.mark=",")` observations), we embarked on some data cleaning.
 
 #### First, we looked into which variables were the most complete. 
@@ -139,11 +149,175 @@ Yet, as we transported ourselves to Ancient Egypt and the Met's many excavations
 Some other minor cleaning of the Egyptian data also occurred for object creation dates. 
 
 # Exploratory Analysis
-Visualizations, summaries, and exploratory statistical analyses. 
 
-Justify the steps you took, and show any major changes to your ideas.
+## Department digging
+
+
+## Trends analysis
 
 As the Met's collection contains many unknown or NA values, we decided to use the variables with the most complete data. We also decided that the best way to depict the Met would be with visuals worthy of being in the Met itself. Because the Met's database mainly contained categorical variables, we mainly focused on the quantity of objects, cultures, and object types. We made sure to use the one continuous variable we had (`accession_year`) to depict the Met over time. 
+
+When browsing through The Met dataset, we immediately noticed the completeness of the year variable, `accession_year`, which represents the year that a specific object was acquired by the museum. The following plot shows the distribution of acquisition years in our data - quite impressive!
+
+```{r}
+ggplot(met, aes(x = accession_year)) + 
+  geom_histogram(color = "#0B775E", fill = "#a7ba42", binwidth = 10) +
+  scale_x_continuous(breaks = seq(1860, 2030, by = 10)) +
+  labs(title = "Distribution of the year objects were acquired",
+       y = "Number of objects", 
+       x = "Year") + 
+  theme_classic()
+```
+
+### Growth over time
+
+This prompted us to take a deeper dive and look at the growth over time by department. For example, did all of them have a spike in object acquisitions in the 1960s and 2010s? For this, we build an interactive plot which you can also find in Exhibit C: The Met's Growing Collection.
+
+```{r, message=FALSE}
+met %>%
+  group_by(accession_year, department) %>% 
+  summarize(n = n()) %>%
+  ungroup() %>%
+  arrange(department) %>%
+  plot_ly(
+    x = ~accession_year, y = ~n, type = 'scatter', mode = 'lines',
+    alpha = .9, color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
+  layout(title = "Number of objects acquired by department over time",
+         xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of objects",
+                       tickformat=","),
+         showlegend = FALSE)
+```
+
+Now, we can hover over or zoom into parts of the trend line that look interesting. For example, what happened in 2011 with Greek and Roman Art? A google search revealed nothing, so maybe it was just a particularly productive year for that department's curator. More interestingly, however, is the year 1963, in which the department of Drawings and Prints acquired over 4,000 objects.
+
+*What happened in the Drawings and Prints department in 1963?*
+
+Well, first we searched the world wide web. Turns out, [the _Mona Lisa_ was added to The Met in 1963!](https://www.metmuseum.org/perspectives/videos/2021/1/from-the-vaults-leonardo-da-vinci-mona-lisa)
+
+<div style="text-align:center;">
+  <img src="images/Mona-Lisa.jpeg" style="width:100%;">
+  <p style="font-size: smaller;"><em>A crowd forms around the Mona Lisa (1963)</em></p>
+</div>
+
+But that can't be the reason for the uptick in objects acquired. The _Mona Lisa_ is just one painting. 
+
+If we take a look at the top 10 artists in that department in that year, we see that many are not individual people at all - they are almost all related to tobacco companies. 
+
+```{r}
+met %>% filter(accession_year == 1963 & department == "Drawings and Prints") %>% group_by(artist_display_name) %>% summarize(n = n()) %>% arrange(desc(n)) %>% slice_max(n, n=10)
+```
+
+Pretty interesting since the National Institutes for Health released their report on Smoking and Health in 1964! It must have been a hot topic in 1963.
+
+### Big years at The Met
+
+This led us to explore not just trends in object acquisitions, but also "big" years in The Met's history. With a little data wrangling, we were able to identify three types of standout years, by department: 1. When it had the highest number of objects 2. When it represented the highest number of unique cultures 3. When it represented the highest number of (known) woman artists
+
+We created three plots to visualize these "big" years across departments. It turned out each department at the Met has quite the different story.
+
+#### Departments at their largest
+
+_In which year did each department have the most growth?_
+
+```{r, message=FALSE}
+met %>%
+  group_by(department, accession_year) %>%
+  summarize(n = n()) %>%
+  select(department, accession_year, n) %>%
+  group_by(department) %>%
+  slice(which.max(n)) %>%
+  arrange(department) %>%
+  plot_ly(
+    y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n*1.5), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n)) %>% 
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of objects",
+                       tickformat=",")) %>%
+  hide_legend()
+```
+
+This plot is not too surprising since it shows more clearly what we were interpreting from the trend lines. But now we can see that three departments have had more recent growth: _Greek and Roman Art_, _the Costume Institute_, and _Photographs_. Maybe we should hurry over to those departments on our next Met visit.
+
+#### Departments at their most culturally diverse
+
+_In which year was each department most representative of cultures from around the world?_
+
+```{r, message=FALSE}
+met %>%
+  filter(!is.na(culture)) %>%
+  mutate(culture = str_remove(culture, "possibly "),
+         culture = str_remove(culture, "probably ")) %>%
+  group_by(department, accession_year, .drop=FALSE) %>%
+  summarize(n = n_distinct(culture)) %>%
+  select(department, accession_year, n) %>%
+  group_by(department) %>%
+  slice(which.max(n)) %>%
+  arrange(department) %>%
+  plot_ly(
+    y = ~n, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n*1.5), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of cultures: ", n)) %>% 
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of cultures",
+                       tickformat=",")) %>%
+  hide_legend()
+```
+
+Interestingly, departments have not peaked in their representation-factor in recent years. Most were most diverse between the years of 1880 and 1980. But once again, _the Costume Institute_ is looking the most interesting for a present-day visit...
+
+#### Departments at their most representative of women artists
+
+_In which year was each department most representative of women artists?_
+
+Note: our data issue in this chart is that for many objects, gender of the artist is unknown! This table shows the proportion of objects with known (men, women) and unknown genders:
+
+```{r, message=FALSE}
+met %>% select(artist_gender) %>%
+  mutate(Gender = ifelse(is.na(artist_gender), "Unknown", 
+                         ifelse(grepl("Female", artist_gender), "Women", "Men"))) %>%
+  janitor::tabyl(Gender) %>% 
+  janitor::adorn_pct_formatting(rounding = "half up", digits = 0)
+```
+
+Sadly, we don't know the artist's gender for 78% of objects. Nonetheless, we wanted to see, among those objects with gender information, which departments were centering women artists and when. We expect, however, that these data reflect more modern eras in which it would have been easier to discern details about the artist.
+
+```{r, message=FALSE}
+met %>%
+  filter(!is.na(artist_gender)) %>%
+  mutate(woman = ifelse(grepl("Female", artist_gender), 1, 0)) %>%
+  group_by(department, accession_year) %>%
+  summarize(n_woman = sum(woman)) %>%
+    select(department, accession_year, n_woman) %>%
+  group_by(department) %>%
+  slice(which.max(n_woman)) %>%
+  arrange(department) %>%
+  plot_ly(
+    y = ~n_woman, x = ~accession_year, type = "scatter", mode = "markers",
+    size = ~I(n_woman*2), alpha = .9,
+    color = ~department, colors = mypal,
+    hoverinfo = 'text',
+    text = ~paste("</br> Department: ", department, "</br> Year: ", accession_year, "</br> Number of objects: ", n_woman)) %>%
+  layout(xaxis = list(title = "Year"),
+         yaxis = list (title = "Number of objects by women",
+                       tickformat=",")) %>%
+  hide_legend()
+
+```
+
+Once again, _the Costume Institute_ has been the most impressive! We think we know exactly which department we're going to first.
+
+## Mapping
+
+
+## Special deep-dives
 
 Entering into the data analysis of the Egyptian Art Department, `dynasty` was identified as the most important variable to focus on. The Egyptian Arts Department is unique among Met Collections in that for art of its age, it is far more complete information wise than other contemporary regions. Nevertheless, many of these artifacts were 3000 to 4000 years old, so the data was not perfect. As such, a focus on `dynasty` required a high amount of data cleaning as described above. Many artifacts that could be roughly placed timeline wise needed to be placed into the overfill category due to lack of specificity.
 
