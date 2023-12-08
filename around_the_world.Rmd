@@ -1,28 +1,27 @@
 ---
-title: "Exhibition D: Art Around the World"
+title: "Discovering Inside The Met"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
-runtime: shiny
 ---
-
-```{r setup, include=FALSE, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(flexdashboard)
 library(tidyverse)
 library(plotly)
-library(shiny)
 library(sf)
+library(shiny)
 library(rnaturalearth)
 library(rsconnect)
-```
+library(dplyr)
 
+```
 
 ```{r, echo=FALSE, warning=FALSE}
 load("data/met.RData")
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 met_country <- met |> 
 mutate(country = case_when(
     country == "Central Turkey" ~ "Turkey",
@@ -59,12 +58,13 @@ mutate(country = case_when(
 
 ```
 
-```{r, echo=FALSE, message=FALSE}
-object_counts <- met_country |> 
-  group_by(country, object_name) |> 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+object_counts <- met |> 
+  group_by(country, object_name, department) |> 
   summarise(n_objects = n()) |> 
-  group_by(country) |> 
-  summarise(total_objects = sum(n_objects, na.rm = TRUE)) 
+  group_by(country,department) |> 
+  summarise(total_objects = sum(n_objects, na.rm = TRUE))
+
 
 world <- ne_countries(scale = "medium", returnclass = "sf")
 
@@ -75,154 +75,293 @@ world2 <- world2 |>
   filter(is.na(scalerank))
 ```
 
-Column {.sidebar}
+Column {data-width=600}
 -----------------------------------------------------------------------
+Column {.tabset .tabset-fade}
+-------------------------------------
+### First Floor
 
 ```{r, echo=FALSE}
-country_vec = world |>  pull(name) |> unique()
+library(leaflet)
 
-selectInput(
-  inputId = "Country", 
-  label = h3("Select Country"),
-  choices = country_vec)
+met_departments <- data.frame(
+  department_name = c("The American Wing", "European Sculpture and Decorative Arts", "Modern and Contemporary Art", "Egyptian Art", "Greek and Roman Art", "Medieval Art", "Arms and Armor"),
+  lat = c(40.780611, 40.779861, 40.778778, 40.780167, 40.778444, 40.779583, 40.780083),
+  lng = c(-73.963361, -73.963250, -73.964667, -73.962167, -73.963306, -73.963694, -73.963000),
+  department_info = c("1844", "4256", "1478", "2875", "3420", "764", "1351")
+)
 
-```
+firstfl <- leaflet() %>%
+  addTiles() %>%
+  setView(lng = -73.963402, lat = 40.779434, zoom = 15)
 
-Column {data-width=650}
------------------------------------------------------------------------
-
-### Chart A
-
-```{r, echo=FALSE}
-# Shiny Server
-renderPlotly({
-    # light grey boundaries
-    l <- list(color = toRGB("grey"), width = 0.5)
-
-    g <- list(
-      showframe = FALSE,
-      showcoastlines = FALSE,
-      projection = list(type = 'mercator')
+for (i in seq_len(nrow(met_departments))) {
+  firstfl <- firstfl %>%
+    addMarkers(
+      lat = met_departments$lat[i],
+      lng = met_departments$lng[i],
+      popup = paste("Department: ", met_departments$department_name[i], "<br>",
+                    "Number of Objects: ", met_departments$department_info[i]),
+      options = popupOptions(
+        maxWidth = 300,
+        closeOnClick = TRUE
+      )
     )
+}
 
-    selected_country <- input$Country
-    filtered_world <- world  |> 
-      filter(name == selected_country)
+firstfl
+```
 
-    world |> 
-      plot_geo() |> 
-      add_trace(
-        z = ~total_objects, color = ~total_objects, colors = 'Blues',
-        text = ~name, locations = ~su_a3, marker = list(line = l)
-      ) %>%
-      colorbar(title = 'Number of Objects by Country', len = 0.3) |> 
-      layout(
-        title = "Number of Objects by Country",
-        geo = g,
-        height = "150vh"
-      ) %>%
-      add_trace(
-        data = filtered_world,
-        type = 'scattergeo',
-        mode = 'markers',
-        marker = list(color = 'pink', size = 30),
-        text = ~name,
-        hoverinfo = 'text'
-      )
-  })
+### Barplot
 
+```{r, echo=FALSE}
+library(leaflet)
+library(dplyr)
+library(plotly)
+
+met_departments <- data.frame(
+  department_name = c("The American Wing", "European Sculpture and Decorative Arts", "Modern and Contemporary Art", "Egyptian Art", "Greek and Roman Art", "Medieval Art", "Arms and Armor"),
+  lat = c(40.780611, 40.779861, 40.778778, 40.780167, 40.778444, 40.779583, 40.780083),
+  lng = c(-73.963361, -73.963250, -73.964667, -73.962167, -73.963306, -73.963694, -73.963000),
+  department_info = c("1844", "4256", "1478", "2875", "3420", "764", "1351")
+)
+
+met_departments <- met_departments %>%
+  mutate(Floor = case_when(
+    grepl("first floor", tolower(department_name)) ~ "First Floor",
+    grepl("second floor", tolower(department_name)) ~ "Second Floor",
+    grepl("the cloisters", tolower(department_name)) ~ "The Cloisters",
+    TRUE ~ "Other"
+  ))
+
+barplot_data <- object_counts %>%
+  filter(department %in% met_departments$department_name)
+
+
+bar_plot <- plot_ly(barplot_data, x = ~department, y = ~total_objects, type = "bar") %>%
+  layout(
+    title = "First Floor",
+    xaxis = list(title = "Department"),
+    yaxis = list(title = "Number of Objects")
+  )
+
+# Show the plot
+bar_plot
 
 ```
 
-### Description
-
-The country with most of object is Egypt. 
-
-\ \par
-T
-
-\ \par
-  * 
-  
-\ \par
-
-
-Column {data-width=350}
+Column {data-width=300}
 -----------------------------------------------------------------------
-
-### Chart B
+Column {.tabset .tabset-fade}
+-------------------------------------
+### Second Floor
 
 ```{r, echo=FALSE}
+library(leaflet)
 
-ui <- fluidPage(
-  titlePanel("Number of Objects by Country"),
-  mainPanel(
-    plotlyOutput("objectPlot")
-  )
+
+met_departments <- data.frame(
+  department_name = c("Islamic Art", "Ancient Near Eastern Art", "Drawings and Prints", "Photographs", "Musical Instruments", "Asian Art", "European Paintings", "The American Wing"),
+  lat = c(40.778222, 40.778611, 40.778778, 40.778833, 40.780056, 40.779694, 40.779861, 40.780250),
+  lng = c(-73.963500, -73.963083, -73.963639,-73.963833,-73.963056, -73.962472,  -73.963556, -73.963361),
+  department_info = c("1599", "618", "17.146K", "3663", "506", "3773", "286", "1844" )
 )
 
-server <- function(input, output) {
-  output$objectPlot <- renderPlotly({
-    world2 |> 
-      group_by(country, total_objects.x) |> 
-      summarise(n = n()) |> 
-      arrange(desc(total_objects.x)) |> 
-      plot_ly(
-        x = ~country,
-        y = ~total_objects.x,
-        type = 'bar',
-        text = ~country,
-        marker = list(color = 'skyblue')
-      ) |> 
-      layout(
-        title = "Number of Objects Without A Certain Country",
-        xaxis = list(title = "Country"),
-        yaxis = list(title = "Total Objects"),
-        hovermode = 'closest'
+
+secondfl <- leaflet() %>%
+  addTiles() %>%
+  setView(lng = -73.963402, lat = 40.779434, zoom = 15)
+
+
+for (i in seq_len(nrow(met_departments))) {
+  secondfl <- secondfl %>%
+    addMarkers(
+      lat = met_departments$lat[i],
+      lng = met_departments$lng[i],
+      popup = paste("Department: ", met_departments$department_name[i], "<br>",
+                    "Number of Objects: ", met_departments$department_info[i]),
+      options = popupOptions(
+        maxWidth = 300,
+        closeOnClick = TRUE
       )
-  })
+    )
 }
 
-# Run the Shiny app
-shinyApp(ui, server)
+secondfl
+```
+
+### Barplot
+
+```{r, echo=FALSE}
+library(leaflet)
+library(dplyr)
+library(plotly)
+
+
+met_departments <- data.frame(
+  department_name = c("Islamic Art", "Ancient Near Eastern Art", "Drawings and Prints", "Photographs", "Musical Instruments", "Asian Art", "European Paintings", "American Wing"),
+  lat = c(40.778222, 40.778611, 40.778778, 40.778833, 40.780056, 40.779694, 40.779861, 40.780250),
+  lng = c(-73.963500, -73.963083, -73.963639, -73.963833, -73.963056, -73.962472, -73.963556, -73.963361),
+   department_info = c("1599", "618", "17.146K", "3663", "506", "3773", "286", "1844" )
+)
+
+met_departments <- met_departments %>%
+  mutate(Floor = case_when(
+    grepl("first floor", tolower(department_name)) ~ "First Floor",
+    grepl("second floor", tolower(department_name)) ~ "Second Floor",
+    grepl("the cloisters", tolower(department_name)) ~ "The Cloisters",
+    TRUE ~ "Other"
+  ))
+
+barplot_data <- object_counts %>%
+  filter(department %in% met_departments$department_name)
+
+second <- plot_ly(barplot_data, x = ~department, y = ~total_objects, type = "bar") %>%
+  layout(
+    title = "Second Floor",
+    xaxis = list(title = "Department"),
+    yaxis = list(title = "Number of Objects")
+  )
+
+# Show the plot
+second
 
 
 ```
 
+Column {data-width=300}
+-----------------------------------------------------------------------
+Column {.tabset .tabset-fade}
+-------------------------------------
+### Floor G
 
-### Chart C
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(magrittr)
+library(leaflet)
 
-```{r, echo=FALSE}
-
-# UI ----
-ui <- fluidPage(
-  titlePanel("Top 20 Countries by Number of Objects"),
-
-  # Main layout with output definition ----
-  mainPanel(
-    plotlyOutput("top_countries_chart")
-  )
+met_departments <- data.frame(
+  department_name = c("Robert Lehman Collection", "Costume Institute"),
+  lat = c(40.77984, 40.780194),
+  lng = c(-73.96422, -73.961944),
+  department_info = c("241", "3226")
 )
 
-# Server ----
-server <- function(input, output) {
-  
-  output$top_countries_chart <- renderPlotly({
-    top_countries <- object_counts %>%
-      arrange(desc(total_objects)) %>%
-      head(20)
 
-    plot_ly(data = top_countries, x = ~country, y = ~total_objects, type = "bar") %>%
-      layout(
-        title = "Top 20 Countries by Number of Objects",
-        xaxis = list(title = "Country", categoryorder = "total ascending"),
-        yaxis = list(title = "Number of Objects")
+gfl <- leaflet() %>%
+  addTiles() %>%
+  setView(lng = -73.963402, lat = 40.779434, zoom = 15)
+
+# Add markers for each department
+for (i in seq_len(nrow(met_departments))) {
+  gfl <- gfl |> 
+    addMarkers(
+      lat = met_departments$lat[i],
+      lng = met_departments$lng[i],
+      popup = paste("Department: ", met_departments$department_name[i], "<br>",
+                    "Number of Objects: ", met_departments$department_info[i]),
+      options = popupOptions(
+        maxWidth = 300,
+        closeOnClick = TRUE
       )
-  })
+    )
 }
 
-# Run the application 
-shinyApp(ui, server)
+gfl
+```
+
+### Barplot
+
+```{r, echo=FALSE}
+library(leaflet)
+library(dplyr)
+library(plotly)
+
+
+met_departments <- data.frame(
+  department_name = c("Robert Lehman Collection", "Costume Institute"),
+  lat = c(40.77984, 40.780194),
+  lng = c(-73.96422, -73.961944),
+  department_info = c("241", "3226")
+)
+
+
+met_departments <- met_departments %>%
+  mutate(Floor = case_when(
+    grepl("first floor", tolower(department_name)) ~ "First Floor",
+    grepl("second floor", tolower(department_name)) ~ "Second Floor",
+    grepl("floor g", tolower(department_name)) ~ "Floor G or B1",
+    grepl("the cloisters", tolower(department_name)) ~ "The Cloisters",
+    TRUE ~ "Other"
+  ))
+
+barplot_data <- object_counts %>%
+  filter(department %in% met_departments$department_name)
+
+plotg <- plot_ly(barplot_data, x = ~department, y = ~total_objects, type = "bar") %>%
+  layout(
+    title = "Floor G",
+    xaxis = list(title = "Department"),
+    yaxis = list(title = "Number of Objects")
+  )
+
+
+plotg
+
 
 ```
+
+Column {data-width=300}
+-----------------------------------------------------------------------
+Column {.tabset .tabset-fade}
+-------------------------------------
+### The Cloisters
+
+```{r, echo=FALSE}
+met_departments <- data.frame(
+  department_name = c("The Cloisters"),
+  lat = c(40.8649),
+  lng = c(-73.9317),
+  department_info = c("218")
+)
+
+
+cloisters <- leaflet() %>%
+  addTiles() %>%
+  setView(lng = -73.9317, lat = 40.8649, zoom = 15)
+
+
+for (i in seq_len(nrow(met_departments))) {
+  cloisters <- cloisters %>%
+    addMarkers(
+      lat = met_departments$lat[i],
+      lng = met_departments$lng[i],
+      popup = paste("Department: ", met_departments$department_name[i], "<br>",
+                    "Number of Objects: ", met_departments$department_info[i]),
+      options = popupOptions(
+        maxWidth = 300,
+        closeOnClick = TRUE
+      )
+    )
+}
+
+cloisters
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
