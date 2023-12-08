@@ -58,7 +58,9 @@ The Met's data as overwhelming as The Met, we had to narrow down our focus. Alth
 
 ### Data Source
 
-The Met offers open access to data of its collection. It can be found [here](https://github.com/metmuseum/openaccess), for anyone interested in running their own analyses or reproducing ours. 
+Since its beginning in 1870, The Metropolitan Museum (The Met) has acquired and displayed over 5,000 years worth of art work from around the world. 
+
+Thankfully for us data scientists, The Met offers open access to data of its collection. They did this to encourage interaction with the museum's collection, and to help people around the world to use the wealth of data they have stored on an impressive number of artefacts. The dataset can be found [here](https://github.com/metmuseum/openaccess), for anyone interested in running their own analyses or reproducing ours. 
 
 
 ### Generating our Sample
@@ -75,17 +77,18 @@ Using the code below, we took a random sample of 10% of the data, creating our f
 
     -   `save(met_10, file = "data/met_10.RData")`
     
-Once we had our 10% sample, we embarked on some data cleaning.
-
-#### First, we looked into which variables were the most complete. The following table shows the % completeness for all variables. 
-
 ```{r include = FALSE}
 load("data/met_10.RData")
-
 load("data/met.RData")
 ```
 
-Across the `r nrow(met_10)` observations, `object_name` and `accession_year` were most complete. `department` was 100% complete. This informed which analytic questions we could answer.
+Once we had our 10% sample (amounting to `r format(nrow(met_10), big.mark=",")` observations), we embarked on some data cleaning.
+
+#### First, we looked into which variables were the most complete. 
+
+The following table shows the % completeness for all variables. 
+
+Across all observations, `object_name` and `accession_year` were most complete. `department` was 100% complete. This informed which analytic questions we could answer.
 
 ```{r }
 met_10 <- met_10 %>% 
@@ -95,11 +98,9 @@ data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2)))
   magrittr::set_colnames("Completeness")
 ```
 
-Based on the missing data table, and our decision to focus on objects and years, we once again limited the dataset to those observations with complete object and year data - resulting in a final analytic dataset with `r nrow(met)` observations.
+Based on the missing data table, and our decision to focus on objects and years, we once again limited the dataset to those observations with complete object and year data - resulting in a final analytic dataset with `r format(nrow(met), big.mark=",")` observations and `r format(ncol(met), big.mark=",")` variables.
 
-IT WOULD BE NICE TO HAVE SOME INITIAL DESCRIPTORS OF OUR FINAL DATASET HERE, INCLUDING THE ROW AND OBSERVATION COUNT.
-
-Based on the missing data, we chose the following variables to work with: 
+All in all, we chose the following variables to work with: 
 
 * `is_highlight`: When "true" indicates a popular and important artwork in the collection
 * `department`: Indicates The Met's curatorial department responsible for the artwork
@@ -112,7 +113,28 @@ Based on the missing data, we chose the following variables to work with:
 * `object_end_date`: Date indicating the year the artwork was completed
 * `dynasty`: Dynasty (a succession of rulers of the same line or family) under which an object was created
 
-As we transported ourselves to Ancient Egypt and the Met's many excavations in the area, we had to take some additional steps to dust off the data without hurting the artifacts. `Dynasty` was a key variable for the Egyptian data, as the Egyptian Art Department is the only Department in the Met to have fairly well-identified Dynasties, we felt it was important to include it. However, instead of keeping to the traditional 30 Dynasties of Egypt, many of the observations were coded as "Dynasty 1-5" or "second half 11." We deep cleaned the table. Strategy was that if a Dynasty was easily identifiable from the name then we recoded the value to said Dynasty, if the value was of a consecutive dynasty ex: "Dynasty 12-13" then we kept the value as said Dynasty but only if that specific value was common in the data (n>20). This was to prevent having 50+ dynasty ranges and making visualization tedious. Moreover, for larger Dynastic Ranges (or low artifact count consecutive dynasties) these were just recoded as Dynasty Range. Any other values were coded as NA. 
+#### Second, we took a closer look at the variables of interest.
+
+We  noticed that the values in `object_name` were far too detailed for our purpose. For example, who needs to differentiated between a relief fragment from the _Tomb of Maketre_ and a relief fragment form the _Tomb of Nespekashuty_? If you want to, don't run this code. But we consolidated object types, like _reliefs_, to create better summaries.
+
+```{r, eval=FALSE}
+met <- met %>%
+  mutate(object_name = ifelse(
+    grepl("Textile", object_name), "Textile",
+    ifelse(grepl("Painting", object_name), "Painting",
+    ifelse(grepl("Relief", object_name), "Relief",
+    ifelse(grepl("Print", object_name), "Print", 
+           ifelse(grepl("aseball card", object_name), "Baseball card", 
+                  ifelse(grepl("Vase", object_name), "Vase", 
+                         ifelse(grepl("rnament", object_name), "Vase", 
+                                ifelse(grepl("arring", object_name), "Earring", 
+                                       ifelse(grepl("ecklace", object_name), "Necklace", 
+                                              ifelse(grepl("hotograph", object_name), "Photograph", 
+                                                     ifelse(grepl("tatue", object_name), "Statue", 
+           object_name))))))))))))
+```
+
+Yet, as we transported ourselves to Ancient Egypt and the Met's many excavations in the area, we had to take some additional steps to dust off the data without hurting the artifacts. `Dynasty` was a key variable for the Egyptian data, as the Egyptian Art Department is the only Department in the Met to have fairly well-identified Dynasties, we felt it was important to include it. However, instead of keeping to the traditional 30 Dynasties of Egypt, many of the observations were coded as "Dynasty 1-5" or "second half 11." We deep cleaned the table. Strategy was that if a Dynasty was easily identifiable from the name then we recoded the value to said Dynasty, if the value was of a consecutive dynasty ex: "Dynasty 12-13" then we kept the value as said Dynasty but only if that specific value was common in the data (n>20). This was to prevent having 50+ dynasty ranges and making visualization tedious. Moreover, for larger Dynastic Ranges (or low artifact count consecutive dynasties) these were just recoded as Dynasty Range. Any other values were coded as NA. 
 
 Some other minor cleaning of the Egyptian data also occurred for object creation dates. 
 
