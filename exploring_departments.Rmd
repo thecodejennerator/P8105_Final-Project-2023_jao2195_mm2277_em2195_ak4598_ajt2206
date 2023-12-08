@@ -30,6 +30,12 @@ theme_set(theme_minimal())
 The Met holds many collections from Modern and Contemporary Art to Arms and Armor. 
 Explore the vast departments of the Met and the many objects they contain. Explore the different kinds of objects that each department holds. Click [here](https://www.metmuseum.org/about-the-met/collection-areas) to learn more about each department, or collection area.
 
+The department with the most number of objects is [Drawings and Prints](https://www.metmuseum.org/about-the-met/collection-areas/drawings-and-prints) with 4 times as many objects as the next department! Yet that changes when looking at the most number of highlighted, or popular pieces of artwork, as the department with the most highlighted number of objects is [The American Wing](https://www.metmuseum.org/about-the-met/collection-areas/the-american-wing).
+
+As we explore each department and the objects they hold, we find that Drawings and Prints mostly contains drawings and prints (no surprise there). Photographs also mainly contains photographs. The most common object was a piece in both Asian Art and European Sculpture and Decorative Arts. 
+
+Finally, lets discuss a collection close to our home away from home: The Cloisters. This collection mostly contains panel, Pilgrim's badge, and capital. 
+
 ```{r}
 met |>
   count(department) |> 
