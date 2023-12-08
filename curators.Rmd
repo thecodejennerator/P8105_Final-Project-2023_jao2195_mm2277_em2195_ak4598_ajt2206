@@ -7,155 +7,85 @@ output:
     theme: cosmo
 ---
 
-We are a group of Masters & PhD students at Columbia University who worked diligently to curate The Met Art Data for this website!
+We are a group of Masters & PhD students at Columbia University who worked diligently to curate The Met Art Data for this website.
 
 
 <!-- ####### BLOCK 1 START ######### -->
-## <font size="3"> Jennifer A. Osei </font>
-
-<center> ![Jennifer in Vincent Van Gogh ](images/artify_Jennifer_Osei.jpg){width=35% }
-</center>
-
-<html>
-<head>
-<style>
-  .center-text {
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<div class="center-text">
-  <font size="3">**Jennifer Osei**</font>
+<div style="text-align:center;">
+  <img src="images/artify_Jennifer_Osei.jpg" style="width:35%;">
+  <p style="font-size: smaller;">Jennifer in Vincent Van Gogh style</p>
 </div>
 
-</body>
-</html>
+# Jennifer Osei
 
+*MS Biostatistics | Theory and Methods* <br> 
 
-**Jennifer A. Osei**   *MS Biostatistics | Theory and Methods* <br> 
-**Contributions:** <br> * Website Development and Coding (.r,.html,.css) <br> * Project Concept Creativity  <br> * Home & Curator Pages  <br> * Final Report Contributions (pending)
+**Contributions:** <br> * Website Development and Coding (.r,.html,.css) <br> * Project Concept Creativity  <br> * Home & Curator Pages  <br> * Project Report <br>
 
 **Jennifer** is a MS Biostatistics student at Columbia University. From Buffalo, NY, she loves cold weather (she thinks...), playing tennis, and singing. Jennifer's passionate about using data to improve healthcare. She loves music and would love to try and play the violin one day! In her free time she enjoys random NYC adventures and would love to ACTUALLY visit The Met .....one day.... hopefully using the maps in this project to explore after finals hehe :).  
 <!-- ####### BLOCK 1 END ############ -->
 
 
 <!-- ####### BLOCK 2 START ######### -->
-## <font size="3"> Melike Aksoy </font>
-
-<center> ![ Melike in the Art Style of Impressionist ](images/melike.JPG){ width=35% }
-</center>
-
-<html>
-<head>
-<style>
-  .center-text {
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<div class="center-text">
-  <font size="3">**Melike Aksoy**</font>
+<div style="text-align:center;">
+  <img src="images/melike.JPG" style="width:35%;">
+  <p style="font-size: smaller;">Melike in Impressionist Style</p>
 </div>
 
-</body>
-</html>
+# Melike Aksoy
 
-**Melike Aksoy**  *MPH Biostatistics | Advanced Epidemiology* <br> 
-**Contributions:** [Insert Your Contributions here]
+*MPH Biostatistics | Advanced Epidemiology* <br> 
+
+**Contributions:** <br> * Art Around the World dashboard <br> * Project Report<br>
+
 **Melike** is a second-year MPH Biostatistics student. She is from New Jersey. Melike currently works as a research assistant at Department of Neurology in Columbia Medical Center. She loves traveling, taking photos, spending time with her cats, coloring, reading books, and  hiking. Her favorite artist is Monet and her favorite department is 19th and Early 20th Century European Paintings And Sculpture. She likes to collect books, postcards, and prints of Monet's art. 
 <!-- ####### BLOCK 2 END ############ -->
 
 
 
 <!-- ####### BLOCK 3 START ######### -->
-
-## <font size="3"> Emily Murphy </font>
-<html>
-<head>
-<style>
-  .center-text {
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<div class="center-text">
-  <font size="3">**Emily Murphy**</font>
+# Emily Murphy
+<div style="text-align:center;">
+  <img src="images/emily.png" style="width:35%;">
+  <p style="font-size: smaller;">Emily in the Impressionist Era</p>
 </div>
 
-</body>
-</html>
-<center> ![Emily in the Impressionist Era, Anon ](images/emily.png){ width=35% }
-</center>
+*MPH Epidemiology | Infectious Disease Epidemiology* <br> 
 
-**Emily Murphy**   *MPH Epidemiology | Infectious Disease Epidemiology* <br> 
-**Contributions:** <br> * Project Motivation Page <br> * Screencast (pending)  <br> *  Project Admin: cleaning up the directory, communicating about to-dos, note-taking during meetings <br>
-**Emily** is a second-year MPH student in the Epidemiology department. She's from Alexandria, VA, and is particularly interested in zoonoses and emerging infectious diseases. Her favorite artist at the Met is JMW Turner, though she doesn't particularly like [<em>Whalers</em>](https://www.metmuseum.org/art/collection/search/437854).<br>
+**Contributions:** <br> * Project Motivation Page <br> * Curators Page <br> * Screencast <br>
+
+**Emily** is a second-year MPH student in the Epidemiology department. She's from Alexandria, VA, and is particularly interested in zoonoses and emerging infectious diseases. Her favorite artist at the Met is JMW Turner, but she thinks  [<em>Whalers</em>](https://www.metmuseum.org/art/collection/search/437854) is overrated.<br>
 <!-- ####### BLOCK 3 END ############ -->
 
 
 
 <!-- ####### BLOCK 4 START ######### -->
-
-## <font size="3"> Diana Hernandez </font>
-
-<html>
-<head>
-<style>
-  .center-text {
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<div class="center-text">
-  <font size="3">**Diana Hernandez**</font>
+# Diana Hernandez
+<div style="text-align:center;">
+  <img src="images/Diana.png" style="width:35%;">
+  <p style="font-size: smaller;">Diana as a pencil sketch</p>
 </div>
 
-</body>
-</html>
+*MPH Sociomedical Sciences | Biostatistics* <br>
 
-
-<center> ![Diana in Pencil Sketch ](images/Diana.png){ width=35% }
-</center> 
-**Diana Hernandez** *MPH Sociomedical Sciences | Biostatistics* <br>
 **Contributions:** <br> * Exploring the Met's Departments page <br> * The Data page <br>
-**Diana ** is a second-year MPH student in the Sociomedical Sciences department. She's from Miami Beach, FL and loves sunshine. She has been to the Met many times but still gets lost any time she visits. Her favorite department in the Met is [Arms and Armor](https://www.metmuseum.org/about-the-met/collection-areas/arms-and-armor). She says it's a cool department with a cool department name.
+
+**Diana** is a second-year MPH student in the Sociomedical Sciences department. She's from Miami Beach, FL and loves sunshine. She has been to the Met many times but still gets lost any time she visits. Her favorite department in the Met is [Arms and Armor](https://www.metmuseum.org/about-the-met/collection-areas/arms-and-armor). She says it's a cool department with a cool department name.
 <!-- ####### BLOCK 4 END ############ -->
 
 
 
 <!-- ####### BLOCK 5 START ######### -->
-## <font size="3"> Aleya Khalifa </font>
-
-<html>
-<head>
-<style>
-  .center-text {
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<div class="center-text">
-  <font size="3">**Aleya Khalifa**</font>
+# Aleya Khalifa
+<div style="text-align:center;">
+  <img src="images/aleya_artify.png" style="width:35%;">
+  <p style="font-size: smaller;">Aleya on a hike in watercolor</p>
 </div>
 
-</body>
-</html>
+*PhD Epidemiology* <br> 
 
-<center> ![ Aleya on a hike in watercolor ](images/aleya_artify.png){width=35% }
-</center>
-
-**Aleya Khalifa**   *PhD Epidemiology* <br> 
 **Contributions:** <br> * The Met's Growing Collection dashboard & report <br> * Data cleaning <br>
+
 **Aleya** is a PhD Candidate in the Department of Epidemiology studying the impact of mobility on the HIV epidemic. She loves visiting museums on a rainy New York day. She loves data science even more.
 
 <!-- ####### BLOCK 5 END ############ -->
@@ -163,33 +93,16 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 6 START ######### -->
-
-
-## <font size="3"> Andy Turner </font>
-
-<html>
-<head>
-<style>
-  .center-text {
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<div class="center-text">
-  <font size="3">**Andy Turner**</font>
+# Andy Turner
+<div style="text-align:center;">
+  <img src="images/Andy_Photo.png" style="width:35%;">
+  <p style="font-size: smaller;">Andy in Snow by Georges Seurat</p>
 </div>
 
-</body>
-</html>
+*MPH Epidemiology | Advanced Epidemiology* <br>
 
+**Contributions:**<br> * Finding the intial dataset <br> * ShinyApp Creation  <br> *  Egyptian Artifacts Analysis <br>
 
-<center> ![Andy in Snow by Georges Seurat](images/Andy_Photo.png){width=35%}
-</center>
-
-**Andy Turner**   *MPH Epidemiology | Advanced Epidemiology* <br> <br>
-**Contributions:**<br> * Finding intial dataset <br> * ShinyApp Creation  <br> *  Egyptian Artifacts Analysis <br> <br>
 **Andy** is a second year Masters student in Epidemiology with a Certificate in Advanced Epidemiology (all Epi all the time!). Andy currently works as a Research Assistant focusing on Sexual and Gender Minorities in the United States and Kenya. They are from Las Vegas, Nevada, so fine art runs directly counter to their upbringing. Andy has been to the Met exactly one time, and they were overwhelmed. That said, there were a few cool looking chairs. 
 
 <!-- ####### BLOCK 6 END ############ -->
