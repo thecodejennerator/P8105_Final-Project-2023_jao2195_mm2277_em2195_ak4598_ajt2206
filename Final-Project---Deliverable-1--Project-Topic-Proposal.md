@@ -3,7 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner, Diana Hernandez <br>
-**Date:** Friday, December 08, 2023 07:59 AM
+**Date:** Friday, December 08, 2023 11:45 AM
 
 # Deliverable 1: Team Registration and Project Topic Proposal
 
