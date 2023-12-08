@@ -24,13 +24,13 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 <!-- ####### BLOCK 2 START ######### -->
 ## <font size="3"> Melike Aksoy </font>
-<center> ![ Melike in the Art Style of Monet ](images/Melike.JPG){ width=35% }
+<center> ![ Melike in the Art Style of Impressionist ](images/melike.JPG){ width=35% }
 </center>
 
 
-**Melike Aksoy**
+**Melike Aksoy**  *MPH Biostatistics | Advanced Epidemiology* <br> 
 **Contributions:** [Insert Your Contributions here]
-**Melike** [Insert Yor Bio Here]
+**Melike** is a second-year MPH Biostatistics student. She is from New Jersey. Melike currently works as a research assistant at Department of Neurology in Columbia Medical Center. She loves traveling, taking photos, spending time with her cats, coloring, reading books, and  hiking. Her favorite artist is Monet and her favorite department is 19th and Early 20th Century European Paintings And Sculpture. She likes to collect books, postcards, and prints of Monet's art. 
 **Personal Website / Contact Info** 
 <!-- ####### BLOCK 2 END ############ -->
 
