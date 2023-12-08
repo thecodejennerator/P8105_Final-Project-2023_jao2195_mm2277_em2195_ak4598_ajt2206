@@ -24,7 +24,7 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 <!-- ####### BLOCK 2 START ######### -->
 ## <font size="3"> Melike Aksoy </font>
-<center> ![ Melike in the Art Style of "Your choice" ](images/statues.jpeg){ width=35% }
+<center> ![ Melike in the Art Style of Monet ](images/Melike.JPG){ width=35% }
 </center>
 
 
