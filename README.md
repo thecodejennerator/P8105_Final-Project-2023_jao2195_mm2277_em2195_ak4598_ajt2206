@@ -78,5 +78,15 @@ Example phrasing for analysis:
 * "Life expectancy as our dependent variable has similar trends for both developed and developing countries. Two life expectancy indices have a persistent increase over time. However, the expectancy for developed countries is 10 years higher than the developing countries over 16 years. The similar trends also holds for different income groups but countries classified in low income group has a higher growth rate for life expectancy than other groups."
 
 
+TO DO 
+* Diana to convert most of her plots to ggplot to reduce loading time
+* Update the header (right under theme) using `code_folding: hide` to add a show/hide code toggle to each code chunk on the html pages. Need to remove eval = FALSE, etc. to get it to work
+* Jennifer to clean up the landing page a bit. Update the background image to be a little bit darker and mysterious. Could swap the footer logo for a clear background or drop it entirely
+* Diana to make the Data page headers not bolded
+* Diana to add a narrative about the plots and only include the ones that seem interesting
+* See if there's a way to make plots take up the full width of the screen
+* Aleya to add a link back to the homepage to her timeline page, add a narrative to the report about what her plots are displaying, and see if there's a way to get the header to match the Cosmo theme
+* Andy continue investigating how to use the bottom third of the page. Rename the dynasties using Roman Numerals. Add a link back to the home page
+* Figure out the curators page and why earlier fixed got overwritten
 
 
