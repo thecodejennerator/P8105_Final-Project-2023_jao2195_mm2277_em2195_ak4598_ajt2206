@@ -4,6 +4,8 @@ output:
   flexdashboard::flex_dashboard:
     orientation: rows
     theme: cosmo
+    navbar:
+      - { icon: "fa-home", href: "./index.html", align: right }
 ---
 
 ```{r setup, include = FALSE}
