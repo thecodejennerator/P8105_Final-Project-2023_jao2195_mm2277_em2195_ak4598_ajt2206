@@ -119,13 +119,13 @@ output:
     
   <!-- Page Goodbye-->
 <center><h1 class="highlight"> <font size="10"> <b> We hope you enjoyed your virtual visit to The Art of Data Science: The Met Museum! Come and Visit Us Again!  </font> </h1 class="highlight">  </center>
- <body>
+
    <!-- Some Art Images -->
     <img src="images/greek_statue.jpeg" alt="Description of the image" style="width:     300px; height: auto;">
  
   
    <!-- About The Met -->
-   <p style="background-color: (244, 223, 190, 0.6); padding: 10px;">
+   <p style="background-color: rgba(244, 223, 190, 0.6); padding: 10px;">
       For more information about The Met &trade; Art Museum in New York City, visit        The Met &trade; Museum Website 
       <a href="https://www.metmuseum.org/">here.</a>.
    </p>
@@ -148,8 +148,8 @@ output:
 
    <!-- Disclaimer Footer Highlight -->
   
-  <p style="background-color: rgba(244, 223, 190, 0.6); padding: 10px;">For more information, visit <a href="https://example.com">The Met Museum website</a>.
-   </p>
-  </body>
-
+   
+</body>
 </html>
+
+ 
