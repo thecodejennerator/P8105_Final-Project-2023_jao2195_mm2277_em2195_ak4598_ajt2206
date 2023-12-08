@@ -110,7 +110,7 @@ output:
   <p>
     <h2 style="background-color: rgba(244, 223, 190, 0.6); padding: 10px; color: black;">
         <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/curators.html" style="color: black;"> Click here </a> to learn more about our amazingly creative data team who made this project possible!  
-         </font>
+      </font>
     </h2>
   </p>
 </center>
@@ -119,10 +119,11 @@ output:
     
   <!-- Page Goodbye-->
 <center><h1 class="highlight"> <font size="10"> <b> We hope you enjoyed your virtual visit to The Art of Data Science: The Met Museum! Come and Visit Us Again!  </font> </h1 class="highlight">  </center>
-
+ <body>
    <!-- Some Art Images -->
     <img src="images/greek_statue.jpeg" alt="Description of the image" style="width:     300px; height: auto;">
-   
+ 
+  
    <!-- About The Met -->
    <p style="background-color: (244, 223, 190, 0.6); padding: 10px;">
       For more information about The Met &trade; Art Museum in New York City, visit        The Met &trade; Museum Website 
@@ -131,13 +132,15 @@ output:
    </body>
 
    <!-- About The Met Data -->
-   <p style="background-color: rgba(244, 223, 190, 0.6); padding: 10px;">For more              information about the Open Source Met Data on Github, visit The Met &trade;          Github Repository 
+   <p style="background-color: rgba(244, 223, 190, 0.6); padding: 10px;">
+      For more information about the Open Source Met Data on Github, visit The Met            &trade; Github Repository 
       <a href="https://github.com/metmuseum/openaccess">here.</a>.
    </p>
    </body>
   
    <!-- About The Class P8105-->
-   <p style="background-color: rgba(244, 223, 190, 0.6); padding: 10px;">For more              information about the Columbia University Course BIST P8105: Data Science,           visit 
+   <p style="background-color: rgba(244, 223, 190, 0.6); padding: 10px;"> 
+      For more information about the Columbia University Course BIST P8105: Data           Science, visit 
       <a href="https://p8105.com/">here.</a>.
    </p>
    </body>
@@ -146,4 +149,7 @@ output:
    <!-- Disclaimer Footer Highlight -->
   
   <p style="background-color: rgba(244, 223, 190, 0.6); padding: 10px;">For more information, visit <a href="https://example.com">The Met Museum website</a>.
+   </p>
+  </body>
 
+</html>

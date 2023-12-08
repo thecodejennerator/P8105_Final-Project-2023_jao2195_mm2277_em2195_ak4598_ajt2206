@@ -35,7 +35,7 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 **Jennifer A. Osei**   *MS Biostatistics | Theory and Methods* <br> 
-**Contributions:** <br> * Website Development and Coding (.html,.css) <br> * Project Concept Creativity  <br> *  Statistical Analysis (pending)  <br> * Final Report (pending)
+**Contributions:** <br> * Website Development and Coding (.r,.html,.css) <br> * Project Concept Creativity  <br> * Home & Curator Pages  <br> * Final Report Contributions (pending)
 
 **Jennifer** is a MS Biostatistics student at Columbia University. From Buffalo, NY, she loves cold weather (she thinks...), playing tennis, and singing. Jennifer's passionate about using data to improve healthcare. She loves music and would love to try and play the violin one day! In her free time she enjoys random NYC adventures and would love to ACTUALLY visit The Met .....one day.... hopefully using the maps in this project to explore after finals hehe :).  
 <!-- ####### BLOCK 1 END ############ -->
