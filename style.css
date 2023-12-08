@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
-    <title>Background Image</title>
+    <title></title>
 </head>
 
 <body>
@@ -26,3 +26,23 @@ body{
     height: 100%;
     width: 100%;
 }
+
+<style type="text/css">
+  body {
+    font-family: 'sans_serif', sans-serif; /* Specify the desired font family */
+  }
+  
+<style type="text/css">
+  
+  body {
+    font-size: 10pt;
+    color: white;  
+    font-weight: bold;  
+  }
+  
+  highlight {
+            background-color: rgba(0, 0, 0, 0.6);  
+            padding: 5px; /* Adjust the padding as needed */
+  }
+  
+</style>
