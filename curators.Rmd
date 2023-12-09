@@ -14,7 +14,7 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 # Jennifer Osei
 <div style="text-align:center;">
   <img src="images/artify_Jennifer_Osei.jpg" style="width:35%;">
-  <p style="font-size: smaller;">Jennifer in Vincent Van Gogh style</p>
+  <p style="font-size: smaller;">Jennifer in 'Falling for Fall' by Vincent Van Gogh </p>
 </div>
 
 
