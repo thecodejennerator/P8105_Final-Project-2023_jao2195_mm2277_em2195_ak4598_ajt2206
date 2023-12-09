@@ -79,7 +79,7 @@ output:
     <h2 style="background-color: rgba(244, 223, 190, 0.6); padding: 10px; color: black;text-align: center;font-size: 24px;">
         <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/the_data.html" style="color: black;"> <b> Click here </a> to learn more about Exhibition A: The Data! </b> <br>
          <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/exploring_departments.html" style="color: black;"> <b> Click here </a> to learn more about Exhibition B: Exploring the Met's Departments! </b><br>
-          <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/growing_collection_dashboard.html" style="color: black;"> <b> Click here </a> to learn more about Exhibition C: Them Met's Growing Collection!</b> <br>
+          <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/growing_collection_dashboard.html" style="color: black;"> <b> Click here </a> to learn more about Exhibition C: The Met's Growing Collection!</b> <br>
            <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/inside_the_met.html" style="color: black;"> 
       <b> Click here </a> to learn more about Exhibition D: Discovering Inside the Met! </b><br>
        <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/around_the_world.html" style="color: black;"> 
@@ -99,7 +99,7 @@ output:
 <center>
   <p>
     <h2 style="background-color: rgba(244, 223, 190, 0.6); padding: 10px; color: black;">
-        <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/project_report.html" style="color: black;"> <b>Click here </a> to learn more about how the 'art of data science' came to be & and the story of how we processed the data from start to finish!  </b>
+        <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/project_report.html" style="color: black;"> <b>Click here </a> to learn more about how the 'art of data science' came to be and the story of how we processed the data from start to finish!  </b>
          </font>
     </h2>
   </p>
