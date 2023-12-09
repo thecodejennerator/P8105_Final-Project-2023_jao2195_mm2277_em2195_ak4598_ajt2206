@@ -120,7 +120,11 @@ All in all, we chose the following variables to work with:
 
 ## Cleaning Up Categorization
 
-With the scope of our analytic dataset decided, we now turned our attention to the actual contents of the included variables. First, we noticed that the values in `object_name` were far too detailed for our purposes. For example, who needs to differentiate between a relief fragment from the _Tomb of Maketre_ and a relief fragment form the _Tomb of Nespekashuty_? If you want to, don't run the code below. But we consolidated object types, like _reliefs_, to create simpler and clearer summaries.
+With the scope of our analytic dataset decided, we now turned our attention to the actual contents of the included variables. 
+
+### Object Name
+
+First, we noticed that the values in `object_name` were far too detailed for our purposes. For example, who needs to differentiate between a relief fragment from the _Tomb of Maketre_ and a relief fragment form the _Tomb of Nespekashuty_? If you want to, don't run the code below. But we consolidated object types, like _reliefs_, to create simpler and clearer summaries.
 
 ```{r}
 met <- met %>%
@@ -138,6 +142,8 @@ met <- met %>%
                                                      ifelse(grepl("tatue", object_name), "Statue", 
            object_name))))))))))))
 ```
+
+### Dynasty
 
 As we transported ourselves to Ancient Egypt and the Met's many excavations in the area, we had to take some additional steps to dust off the data without hurting the artifacts. `Dynasty` was a key variable for the Egyptian data; because the Egyptian Art Department is the only Department in the Met to have fairly well-identified dynasties, we felt it was important to include it. However, instead of keeping to the traditional 30 Dynasties of Egypt, many of the observations were coded as "Dynasty 1-5" or "second half 11." 
 
@@ -290,6 +296,26 @@ met_egypt = met |>
   dynasty = factor(dynasty, levels = c("Dynasty 1", "Dynasty 2", "Dynasty 3", "Dynasty 4", "Dynasty 5", "Dynasty 6", "Dynasty 8", "Dynasty 9", "Dynasty 11", "Dynasty 12", "Dynasty 12-13", "Dynasty 13", "Dynasty 14", "Dynasty 15", "Dynasty 17", "Dynasty 17-18", "Dynasty 18", "Dynasty 19", "Dynasty 19-20", "Dynasty 20", "Dynasty 21", "Dynasty 22", "Dynasty 23", "Dynasty 24", "Dynasty 25", "Dynasty 26", "Dynasty 27", "Dynasty 30", "Dynasty Range", "NA")),
   dyn_number = ifelse(is.na(dynasty), 30, as.numeric(dynasty)))
 ```
+
+### Country
+
+Geolocating the source of artworks and depicting them on a world map required some additional data management. This began with merged our already-prepped Met data with world data from `rnaturalearth` package. This world data contains information about countries and locations such as longitudes and latitudes. 
+
+However, after merging, it became clear that the `country` variable in our data need some additional cleaning, as some countries were coded in a different format than the world data dataset. This difference created more missing data on countries and total number of objects. In order to resolve the issue, we updated the name of the countries in our Met data to match the names of countries in the world data. We also pulled out the subset of the remaining objects with attributed countries that didn't match country names in the world data, so that we could investigate these non-matches in their own plot.
+
+### Egyptian Subregion
+
+Continuing with our art theme, the Met took some LARGE creative liberties when it described the `subregion` in which artifacts in Egypt were found. Unfortunately, the regions and subregions that the Met identified were not what the Egyptian government themselves self-identified as regions and subregions within their country. 
+
+As such, some (archeological) digging was required to map Egypt. First, we snagged a shapefile of First-Level Administrative Districts from a [UTexas library] (https://geodata.lib.utexas.edu/catalog/stanford-bb409wq6265). To better streamline our repositories, we decided to upload and then save the `EGY_adm1.shp` as an RData file and keep only the modified file for quicker loading.
+
+Using the code below, we decided to upload and then save the `EGY_adm1.shp` as an RData file and keep only the modified file to streamline our reposiories and speed up loading time:
+
+    -   `library(sf)`
+
+    -   `shape_file <- st_read("data/EGY_adm1.shp")`
+
+Thankfully the file was in Polygon form, so we had a map - now to get to the real artifacts. Due to the general ugliness of the regions/subregions data, we decided to use the subregions data and simply find the latitude and longitudes for the areas. To make sure we finished this task before being mummified, we restricted the data to only subregions with more than 10 artifact numbers. Sadly, the resulting data for artifacts is point data rather than polygons, but it would still be useful for our later mapping of artefacts by Egyptian region.
 
 # Exploratory Analysis
 
@@ -527,11 +553,6 @@ Once again, _the Costume Institute_ has been the most impressive! We think we kn
 
 ## Global Origins of Met Artwork
 Of course, the Met doesn't just contain work originating the United States. Given its global focus, with entire departments devoted to art from particular countries, we aimed to find identify which regions of the world were most responsible for the museum's collection. To take a look for yourself, head over to the interactive map in [Exhibition E: Art Around the World](around_the_world.html). 
-
-### Data Cleaning Process
-Geolocating the source of artworks and depicting them on a world map required some additional data management. This began with merged our already-prepped Met data with world data from `rnaturalearth` package. This world data contains information about countries and locations such as longitudes and latitudes. 
-
-However, after merging, it became clear that the `country` variable in our data need some additional cleaning, as some countries were coded in a different format than the world data dataset. This difference created more missing data on countries and total number of objects. In order to resolve the issue, we updated the name of the countries in our Met data to match the names of countries in the world data. We also pulled out the subset of the remaining objects with attributed countries that didn't match country names in the world data, so that we could investigate these non-matches in their own plot.
 
 ## Mapping Met Departments
 
