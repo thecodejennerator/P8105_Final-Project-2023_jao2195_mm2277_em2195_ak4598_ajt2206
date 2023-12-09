@@ -149,8 +149,8 @@ output:
    </body>
    
 
-   <!-- Disclaimer Footer Highlight -->
-  
+   <!-- QR CODE To Website -->
+    <img src="images/website_QR_Code.png" alt="Description of the image" style="width:     300px; height: auto;">
    
 </body>
 </html>
