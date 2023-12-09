@@ -115,7 +115,7 @@ for (i in seq_len(nrow(met_departments))) {
 firstfl
 ```
 
-### First Floor Barplot
+### First Floor: Department Object Totals
 
 ```{r, echo=FALSE}
 library(leaflet)
@@ -189,7 +189,7 @@ for (i in seq_len(nrow(met_departments))) {
 secondfl
 ```
 
-### Second Floor Barplot
+### Second Floor: Department Object Totals
 
 ```{r, echo=FALSE}
 library(leaflet)
@@ -264,7 +264,7 @@ for (i in seq_len(nrow(met_departments))) {
 gfl
 ```
 
-### Floor G Barplot
+### Floor G: Department Object Totals
 
 ```{r, echo=FALSE}
 library(leaflet)
