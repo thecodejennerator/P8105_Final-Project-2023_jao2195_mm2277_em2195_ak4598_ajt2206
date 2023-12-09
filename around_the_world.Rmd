@@ -1,27 +1,31 @@
 ---
-title: "Discovering Inside The Met"
+title: "Exhibit D: "
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
+    orientation: column
     vertical_layout: fill
 ---
-```{r, echo=FALSE, message=FALSE}
+
+```{r setup, include=FALSE}
 library(flexdashboard)
 library(tidyverse)
 library(plotly)
+library(leaflet)
 library(sf)
-library(shiny)
 library(rnaturalearth)
 library(rsconnect)
+library(wesanderson)  
+library(viridis)
+library(wesanderson)
 library(dplyr)
-
+library(RColorBrewer)
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
 load("data/met.RData")
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE}
 met_country <- met |> 
 mutate(country = case_when(
     country == "Central Turkey" ~ "Turkey",
@@ -34,7 +38,7 @@ mutate(country = case_when(
     country == "Western Australia" ~ "Australia",
     country == "England" ~ "United Kingdom",
     country == "England|England" ~ "United Kingdom",
-    country == "Crotia(former Yugoslavia)" ~"Crotia",
+    country == "Croatia (former Yugoslavia)" ~"Crotia",
     country == "Western France" ~ "France", 
     country == "Southern Netherlands" ~ "Netherlands",
     country == "Southern Netherland" ~ "Netherlands", 
@@ -46,322 +50,190 @@ mutate(country = case_when(
     country == "Republic of the Marshall Islands" ~ "Marshall Isl",
     country == "Republic of Guinea-Bissau" ~ "Guinea-Bissau",
     country == "Republic of Benin" ~ "Benin",
+    country == "Czech Republic" ~ "Czech Rep.",
     country == "Northern Iran"  ~"Iran",
     country == "Northwestern Iran"  ~"Iran",
     country == "Northwest Iran"  ~"Iran",
     country == "Northwestern Iran" ~"Iran",
     country == "Northern India" ~ "India",
     country == "Nothern France" ~ "France", 
+    country == "Cook Islands" ~ "Cook Is.",
+    country == "Democratic Republic of the Congo" ~ "Dem. Rep. Congo", 
+    country == "Gemany" ~ "Germany",
+    country == "Myanmar (formerly Burma)" ~ "Mynmar",
+    country == "New Guinea" ~ "Papua New Guinea", 
+    country == "Republic of  Cameroon" ~ "Cameroon",
+    country == "United States|United States" ~ "United States", 
+    country == "Costa Rica|Costa Rica" ~"Costa Rica",
+    country == "Burkina Faso (formerly Upper Volta)" ~ "Burkina Faso",
+    country == "Unknown" ~ "NA",
     TRUE ~ as.character(country)
   ), 
   country = str_replace(country, "present-day ", ""))
 
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-object_counts <- met |> 
-  group_by(country, object_name, department) |> 
+```{r, echo=FALSE, message=FALSE}
+object_counts <- met_country |> 
+  group_by(country, object_name) |> 
   summarise(n_objects = n()) |> 
-  group_by(country,department) |> 
-  summarise(total_objects = sum(n_objects, na.rm = TRUE))
-
+  group_by(country) |> 
+  summarise(total_objects = sum(n_objects, na.rm = TRUE)) 
 
 world <- ne_countries(scale = "medium", returnclass = "sf")
 
-world <- left_join(world, object_counts, by = c("name" = "country"))
+world_df <- left_join(world, object_counts, by = c("name" = "country"))
 world2 <- left_join(object_counts, world, by = c("country" = "name"))
 
 world2 <- world2 |> 
   filter(is.na(scalerank))
 ```
 
-Column {data-width=600}
+
+Row {data-width=650}
 -----------------------------------------------------------------------
-Column {.tabset .tabset-fade}
--------------------------------------
-### First Floor
 
-```{r, echo=FALSE}
-library(leaflet)
+### Number of Objects by Country
 
-met_departments <- data.frame(
-  department_name = c("The American Wing", "European Sculpture and Decorative Arts", "Modern and Contemporary Art", "Egyptian Art", "Greek and Roman Art", "Medieval Art", "Arms and Armor"),
-  lat = c(40.780611, 40.779861, 40.778778, 40.780167, 40.778444, 40.779583, 40.780083),
-  lng = c(-73.963361, -73.963250, -73.964667, -73.962167, -73.963306, -73.963694, -73.963000),
-  department_info = c("1844", "4256", "1478", "2875", "3420", "764", "1351")
+```{r}
+
+world_df <- st_transform(world_df, 4326)
+
+pal <- colorNumeric(
+  palette = "YlOrRd", 
+  domain = world_df$total_objects,
+  na.color = "transparent"
 )
+world_df <- st_transform(world_df, 4326)
 
-firstfl <- leaflet() %>%
-  addTiles() %>%
-  setView(lng = -73.963402, lat = 40.779434, zoom = 15)
+wes_anderson_palette <- c("#8FBEDC", "#F4D6A1", "#D7C9A7", "#D16E5A", "#B3CC57")
 
-for (i in seq_len(nrow(met_departments))) {
-  firstfl <- firstfl %>%
-    addMarkers(
-      lat = met_departments$lat[i],
-      lng = met_departments$lng[i],
-      popup = paste("Department: ", met_departments$department_name[i], "<br>",
-                    "Number of Objects: ", met_departments$department_info[i]),
-      options = popupOptions(
-        maxWidth = 300,
-        closeOnClick = TRUE
-      )
-    )
-}
+map <- leaflet(world_df, width = "50%", height = "50%") |> 
+  addTiles() |> 
+  addPolygons(
+    fillColor = ~pal(total_objects),
+    weight = 1,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.8,
+    highlight = highlightOptions(
+      weight = 2,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+    ),
+    label = ~paste(name, ": ", total_objects)
+  )  |> 
+  addLegend(
+    "bottomright",
+    title = "Total Objects",
+    pal = colorNumeric(palette = wes_anderson_palette, domain = world_df$total_objects, na.color = "transparent"),
+    values = ~total_objects,
+    opacity = 0.7
+  )
 
-firstfl
+map
+
+
+
 ```
+ 
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
 
 ### Barplot
 
-```{r, echo=FALSE}
-library(leaflet)
-library(dplyr)
-library(plotly)
+```{r}
 
-met_departments <- data.frame(
-  department_name = c("The American Wing", "European Sculpture and Decorative Arts", "Modern and Contemporary Art", "Egyptian Art", "Greek and Roman Art", "Medieval Art", "Arms and Armor"),
-  lat = c(40.780611, 40.779861, 40.778778, 40.780167, 40.778444, 40.779583, 40.780083),
-  lng = c(-73.963361, -73.963250, -73.964667, -73.962167, -73.963306, -73.963694, -73.963000),
-  department_info = c("1844", "4256", "1478", "2875", "3420", "764", "1351")
+top_countries <- object_counts |> 
+  arrange(desc(total_objects)) |> 
+  head(20)
+
+# Set a color palette
+palette <- brewer.pal(20, "YlOrRd")
+
+# Use colorNumeric to create a color palette based on total_objects
+color_palette <- colorNumeric(
+  palette = palette,
+  domain = top_countries$total_objects,
+  na.color = "transparent"
 )
 
-met_departments <- met_departments %>%
-  mutate(Floor = case_when(
-    grepl("first floor", tolower(department_name)) ~ "First Floor",
-    grepl("second floor", tolower(department_name)) ~ "Second Floor",
-    grepl("the cloisters", tolower(department_name)) ~ "The Cloisters",
-    TRUE ~ "Other"
-  ))
-
-barplot_data <- object_counts %>%
-  filter(department %in% met_departments$department_name)
-
-
-bar_plot <- plot_ly(barplot_data, x = ~department, y = ~total_objects, type = "bar") %>%
+# Create the plot
+plot_ly(
+  data = top_countries, 
+  x = ~country, 
+  y = ~total_objects, 
+  type = "bar",
+  marker = list(color = ~color_palette(total_objects))
+) |> 
+  add_text(
+    text = ~total_objects,
+    position = "top",
+    showlegend = FALSE
+  ) |> 
   layout(
-    title = "First Floor",
-    xaxis = list(title = "Department"),
-    yaxis = list(title = "Number of Objects")
+    title = "Top 20 Countries by Number of Objects",
+    xaxis = list(title = "Country", categoryorder = "total ascending"),
+    yaxis = list(title = "Number of Objects"),
+    showlegend = FALSE  # Hide legend if desired
   )
 
-# Show the plot
-bar_plot
-
 ```
+ 
 
-Column {data-width=300}
+
+Column {data-width=350}
 -----------------------------------------------------------------------
-Column {.tabset .tabset-fade}
--------------------------------------
-### Second Floor
-
-```{r, echo=FALSE}
-library(leaflet)
-
-
-met_departments <- data.frame(
-  department_name = c("Islamic Art", "Ancient Near Eastern Art", "Drawings and Prints", "Photographs", "Musical Instruments", "Asian Art", "European Paintings", "The American Wing"),
-  lat = c(40.778222, 40.778611, 40.778778, 40.778833, 40.780056, 40.779694, 40.779861, 40.780250),
-  lng = c(-73.963500, -73.963083, -73.963639,-73.963833,-73.963056, -73.962472,  -73.963556, -73.963361),
-  department_info = c("1599", "618", "17.146K", "3663", "506", "3773", "286", "1844" )
-)
-
-
-secondfl <- leaflet() %>%
-  addTiles() %>%
-  setView(lng = -73.963402, lat = 40.779434, zoom = 15)
-
-
-for (i in seq_len(nrow(met_departments))) {
-  secondfl <- secondfl %>%
-    addMarkers(
-      lat = met_departments$lat[i],
-      lng = met_departments$lng[i],
-      popup = paste("Department: ", met_departments$department_name[i], "<br>",
-                    "Number of Objects: ", met_departments$department_info[i]),
-      options = popupOptions(
-        maxWidth = 300,
-        closeOnClick = TRUE
-      )
-    )
-}
-
-secondfl
-```
 
 ### Barplot
 
-```{r, echo=FALSE}
-library(leaflet)
-library(dplyr)
-library(plotly)
-
-
-met_departments <- data.frame(
-  department_name = c("Islamic Art", "Ancient Near Eastern Art", "Drawings and Prints", "Photographs", "Musical Instruments", "Asian Art", "European Paintings", "American Wing"),
-  lat = c(40.778222, 40.778611, 40.778778, 40.778833, 40.780056, 40.779694, 40.779861, 40.780250),
-  lng = c(-73.963500, -73.963083, -73.963639, -73.963833, -73.963056, -73.962472, -73.963556, -73.963361),
-   department_info = c("1599", "618", "17.146K", "3663", "506", "3773", "286", "1844" )
-)
-
-met_departments <- met_departments %>%
-  mutate(Floor = case_when(
-    grepl("first floor", tolower(department_name)) ~ "First Floor",
-    grepl("second floor", tolower(department_name)) ~ "Second Floor",
-    grepl("the cloisters", tolower(department_name)) ~ "The Cloisters",
-    TRUE ~ "Other"
-  ))
-
-barplot_data <- object_counts %>%
-  filter(department %in% met_departments$department_name)
-
-second <- plot_ly(barplot_data, x = ~department, y = ~total_objects, type = "bar") %>%
-  layout(
-    title = "Second Floor",
-    xaxis = list(title = "Department"),
-    yaxis = list(title = "Number of Objects")
+```{r}
+world2 <- world2 %>%
+  mutate(
+    category = case_when(
+      grepl("or|probably|\\?", tolower(country)) ~ "Uncertain",
+      grepl("\\|,| and", country) ~ "Multiple Countries",
+      grepl(",", country) ~ "Multiple Countries",
+      grepl("and", country) ~ "Multiple Countries",
+      TRUE ~ "Other"
+    )
   )
 
-# Show the plot
-second
+world2 <- world2 |> 
+  count(category)
+
+wes_palette <- wes_palette("Moonrise2", n = 3)
 
 
-```
-
-Column {data-width=300}
------------------------------------------------------------------------
-Column {.tabset .tabset-fade}
--------------------------------------
-### Floor G
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(magrittr)
-library(leaflet)
-
-met_departments <- data.frame(
-  department_name = c("Robert Lehman Collection", "Costume Institute"),
-  lat = c(40.77984, 40.780194),
-  lng = c(-73.96422, -73.961944),
-  department_info = c("241", "3226")
-)
-
-
-gfl <- leaflet() %>%
-  addTiles() %>%
-  setView(lng = -73.963402, lat = 40.779434, zoom = 15)
-
-# Add markers for each department
-for (i in seq_len(nrow(met_departments))) {
-  gfl <- gfl |> 
-    addMarkers(
-      lat = met_departments$lat[i],
-      lng = met_departments$lng[i],
-      popup = paste("Department: ", met_departments$department_name[i], "<br>",
-                    "Number of Objects: ", met_departments$department_info[i]),
-      options = popupOptions(
-        maxWidth = 300,
-        closeOnClick = TRUE
-      )
-    )
-}
-
-gfl
-```
-
-### Barplot
-
-```{r, echo=FALSE}
-library(leaflet)
-library(dplyr)
-library(plotly)
-
-
-met_departments <- data.frame(
-  department_name = c("Robert Lehman Collection", "Costume Institute"),
-  lat = c(40.77984, 40.780194),
-  lng = c(-73.96422, -73.961944),
-  department_info = c("241", "3226")
-)
-
-
-met_departments <- met_departments %>%
-  mutate(Floor = case_when(
-    grepl("first floor", tolower(department_name)) ~ "First Floor",
-    grepl("second floor", tolower(department_name)) ~ "Second Floor",
-    grepl("floor g", tolower(department_name)) ~ "Floor G or B1",
-    grepl("the cloisters", tolower(department_name)) ~ "The Cloisters",
-    TRUE ~ "Other"
-  ))
-
-barplot_data <- object_counts %>%
-  filter(department %in% met_departments$department_name)
-
-plotg <- plot_ly(barplot_data, x = ~department, y = ~total_objects, type = "bar") %>%
+plot_ly(
+  data = world2,
+  x = ~category,
+  y = ~n,  # 'n' is the count column created by count
+  type = 'bar',
+  marker = list(color = wes_palette, line = list(color = 'black'))
+) |> 
   layout(
-    title = "Floor G",
-    xaxis = list(title = "Department"),
-    yaxis = list(title = "Number of Objects")
+    title = "Number of Objects without a Certain Country",
+    xaxis = list(title = "Category"),
+    yaxis = list(title = "Total")
   )
 
 
-plotg
-
-
 ```
 
-Column {data-width=300}
+
 -----------------------------------------------------------------------
-Column {.tabset .tabset-fade}
--------------------------------------
-### The Cloisters
+### Ask, Discover and Learn
 
-```{r, echo=FALSE}
-met_departments <- data.frame(
-  department_name = c("The Cloisters"),
-  lat = c(40.8649),
-  lng = c(-73.9317),
-  department_info = c("218")
-)
+You are inside the MET and enjoying your trip. You go from one department to another. You start to wonder how items are in each department because you are the Eygptian Art section and you realize that you need more than one day to explore this section. You start to guess that Egypt might have the highest number of items in the MET. Okay, but what about other countries? 
 
+Well, you are right!
+Compared to other countries, Egypt was the country with most of the objects. Meanwhile, United States was in the second place of the chart. Iran takes the third place with most of the object in the MET.
 
-cloisters <- leaflet() %>%
-  addTiles() %>%
-  setView(lng = -73.9317, lat = 40.8649, zoom = 15)
-
-
-for (i in seq_len(nrow(met_departments))) {
-  cloisters <- cloisters %>%
-    addMarkers(
-      lat = met_departments$lat[i],
-      lng = met_departments$lng[i],
-      popup = paste("Department: ", met_departments$department_name[i], "<br>",
-                    "Number of Objects: ", met_departments$department_info[i]),
-      options = popupOptions(
-        maxWidth = 300,
-        closeOnClick = TRUE
-      )
-    )
-}
-
-cloisters
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+But wait! 
+Now, you might be wondering how the MET keeps track of the origin of each item. Surely, it must be challenging for MET employees to document the details of every item over the years. Perhaps, in some cases, the location of certain items was never determined from the beginning. And you're correct! The location of 93 items in the MET collection is uncertain, indicating that these items were recorded as being from two or three countries, or the experts were unsure about the specific country, providing multiple possibilities. For instance, some items are recorded as being from Afghanistan or Iran, and some are recorded as possibly from Syria. Additionally, there are items recorded as belonging to two countries, reflecting the historical changes in borders over the years. One last thing before you go, the country of 40840 items in the MET is not available. Interesting, right! 

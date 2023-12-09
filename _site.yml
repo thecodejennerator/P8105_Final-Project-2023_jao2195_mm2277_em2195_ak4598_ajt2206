@@ -7,15 +7,17 @@ navbar:
     href: about.html
   - text: "Exhibitions"
     menu:
-    - text: "The Data"
+    - text: "Exhibit A: The Data"
       href: the_data.html
-    - text: "Exploring the Met's Departments"
+    - text: "Exhibit B: Exploring the Met's Departments"
       href: exploring_departments.html
-    - text: "The Met's Growing Collection"
+    - text: "Exhibit C: The Met's Growing Collection"
       href: growing_collection_dashboard.html
-    - text: "Art Around the World"
+    - text: "Exhibit D: Discovering Inside the Met"
+      href: inside_the_met.html
+    - text: "Exhibit E: Art Around the World"
       href: around_the_world.html
-    - text: "Special Exhibitions: Egyptian Art"
+    - text: "Special Exhibition: Egyptian Art"
       href: https://lakerss12.shinyapps.io/shiny_app/
   - text: "Project Report"
     href: project_report.html
