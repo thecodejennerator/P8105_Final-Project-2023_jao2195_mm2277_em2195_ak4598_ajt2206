@@ -307,7 +307,7 @@ However, after merging, it became clear that the `country` variable in our data 
 
 Continuing with our art theme, the Met took some LARGE creative liberties when it described the `subregion` in which artifacts in Egypt were found. Unfortunately, the regions and subregions that the Met identified were not what the Egyptian government themselves self-identified as regions and subregions within their country. 
 
-As such, some (archeological) digging was required to map Egypt. First, we snagged a shapefile of First-Level Administrative Districts from a [UTexas library] (https://geodata.lib.utexas.edu/catalog/stanford-bb409wq6265). To better streamline our repositories, we decided to upload and then save the `EGY_adm1.shp` as an RData file and keep only the modified file for quicker loading.
+As such, some (archeological) digging was required to map Egypt. First, we snagged a shapefile of First-Level Administrative Districts from a [UTexas library](https://geodata.lib.utexas.edu/catalog/stanford-bb409wq6265). To better streamline our repositories, we decided to upload and then save the `EGY_adm1.shp` as an RData file and keep only the modified file for quicker loading.
 
 Using the code below, we decided to upload and then save the `EGY_adm1.shp` as an RData file and keep only the modified file to streamline our reposiories and speed up loading time:
 
