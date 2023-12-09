@@ -13,7 +13,7 @@
 
 <title>Exhibition A: The Data</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -418,8 +418,15 @@ div.tocify {
 <h1>Data Collection and Cleaning</h1>
 <div id="data-source" class="section level3">
 <h3>Data Source</h3>
-<p>The Met offers open access to data of its collection. It can be found
-<a href="https://github.com/metmuseum/openaccess">here</a>, for anyone
+<p>Since its beginning in 1870, The Metropolitan Museum (The Met) has
+acquired and displayed over 5,000 years worth of art work from around
+the world.</p>
+<p>Thankfully for us data scientists, The Met offers open access to data
+of its collection. They did this to encourage interaction with the
+museum’s collection, and to help people around the world to use the
+wealth of data they have stored on an impressive number of artefacts.
+The dataset can be found <a
+href="https://github.com/metmuseum/openaccess">here</a>, for anyone
 interested in running their own analyses or reproducing ours.</p>
 </div>
 <div id="generating-our-sample" class="section level3">
@@ -443,13 +450,13 @@ code to create the same subset we did from The Met’s raw data file
 -   `met_10 &lt;- sample_n(MetOBjects, nrow(MetOBjects)*.10)`
 
 -   `save(met_10, file = &quot;data/met_10.RData&quot;)`</code></pre>
-<p>Once we had our 10% sample, we embarked on some data cleaning.</p>
-<div
-id="first-we-looked-into-which-variables-were-the-most-complete.-the-following-table-shows-the-completeness-for-all-variables."
+<p>Once we had our 10% sample (amounting to 48,495 observations), we
+embarked on some data cleaning.</p>
+<div id="first-we-looked-into-which-variables-were-the-most-complete."
 class="section level4">
-<h4>First, we looked into which variables were the most complete. The
-following table shows the % completeness for all variables.</h4>
-<p>Across the 48495 observations, <code>object_name</code> and
+<h4>First, we looked into which variables were the most complete.</h4>
+<p>The following table shows the % completeness for all variables.</p>
+<p>Across all observations, <code>object_name</code> and
 <code>accession_year</code> were most complete. <code>department</code>
 was 100% complete. This informed which analytic questions we could
 answer.</p>
@@ -516,9 +523,8 @@ data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2)))
 <p>Based on the missing data table, and our decision to focus on objects
 and years, we once again limited the dataset to those observations with
 complete object and year data - resulting in a final analytic dataset
-with 47984 observations.</p>
-<p>Based on the missing data, we chose the following variables to work
-with:</p>
+with 47,984 observations and 54 variables.</p>
+<p>All in all, we chose the following variables to work with:</p>
 <ul>
 <li><code>is_highlight</code>: When “true” indicates a popular and
 important artwork in the collection</li>
@@ -541,7 +547,31 @@ was completed</li>
 <li><code>dynasty</code>: Dynasty (a succession of rulers of the same
 line or family) under which an object was created</li>
 </ul>
-<p>As we transported ourselves to Ancient Egypt and the Met’s many
+</div>
+<div id="second-we-took-a-closer-look-at-the-variables-of-interest."
+class="section level4">
+<h4>Second, we took a closer look at the variables of interest.</h4>
+<p>We noticed that the values in <code>object_name</code> were far too
+detailed for our purpose. For example, who needs to differentiated
+between a relief fragment from the <em>Tomb of Maketre</em> and a relief
+fragment form the <em>Tomb of Nespekashuty</em>? If you want to, don’t
+run this code. But we consolidated object types, like <em>reliefs</em>,
+to create better summaries.</p>
+<pre class="r"><code>met &lt;- met %&gt;%
+  mutate(object_name = ifelse(
+    grepl(&quot;Textile&quot;, object_name), &quot;Textile&quot;,
+    ifelse(grepl(&quot;Painting&quot;, object_name), &quot;Painting&quot;,
+    ifelse(grepl(&quot;Relief&quot;, object_name), &quot;Relief&quot;,
+    ifelse(grepl(&quot;Print&quot;, object_name), &quot;Print&quot;, 
+           ifelse(grepl(&quot;aseball card&quot;, object_name), &quot;Baseball card&quot;, 
+                  ifelse(grepl(&quot;Vase&quot;, object_name), &quot;Vase&quot;, 
+                         ifelse(grepl(&quot;rnament&quot;, object_name), &quot;Vase&quot;, 
+                                ifelse(grepl(&quot;arring&quot;, object_name), &quot;Earring&quot;, 
+                                       ifelse(grepl(&quot;ecklace&quot;, object_name), &quot;Necklace&quot;, 
+                                              ifelse(grepl(&quot;hotograph&quot;, object_name), &quot;Photograph&quot;, 
+                                                     ifelse(grepl(&quot;tatue&quot;, object_name), &quot;Statue&quot;, 
+           object_name))))))))))))</code></pre>
+<p>Yet, as we transported ourselves to Ancient Egypt and the Met’s many
 excavations in the area, we had to take some additional steps to dust
 off the data without hurting the artifacts. <code>Dynasty</code> was a
 key variable for the Egyptian data, as the Egyptian Art Department is
