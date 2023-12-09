@@ -25,8 +25,6 @@ navbar:
     href: curators.html
   - icon: fa-link
     href: https://www.metmuseum.org/
-  - icon: fa-envelope fa-lg
-    href: jao2195@cumc.columbia.edu
   - icon: fa-github fa-lg
     href: https://github.com/thecodejennerator/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206
 output:
