@@ -47,7 +47,7 @@ Once we decided to explore The Met with data. We asked these initial questions:
 * *Where does art come from across culture, dynasties, time, and beyond?*
 * *How can we explore the Met more easily?*
 
-The Met's data as overwhelming as The Met, we had to narrow down our focus. Although the database contains **a lot** of data. It also lacked data in certain variables. We decided to work with the variables with the most complete data and developed the following questions:
+The Met's data as overwhelming as The Met, we had to narrow down our focus. Although the database contains **a lot** of data, it also lacked data in certain variables. We decided to work with the variables with the most complete data and developed the following questions:
 
 * *What kind of objects does each department hold?*
 * *With Egyptian Art being so popular, what do its objects tell us?*
@@ -152,10 +152,40 @@ Some other minor cleaning of the Egyptian data also occurred for object creation
 
 ## Department digging
 
+As we explored the many departments at The Met, the department with the most objects is _Drawings and Prints_ with 4 times as many objects as the next department!  (Interestingly enough, works on paper can only be in exhibition ~3 months at a time due to their fragility.) Yet that changes when looking at the most highlighted objects, or popular pieces of artwork, as the department with the most highlighted number of objects is _The American Wing_. Close behind _The American Wing_, _Asian Art_ comes in second with the most highlighted objects.
+
+```{r out.width='100%'}
+met |> 
+  count(department) |> 
+  mutate(department = fct_reorder(department, n)) |> 
+  plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
+  layout(title = 'Department by number of objects',
+         xaxis = list(title = 'Department'), 
+         yaxis = list(title = 'Number of Objects'),
+         showlegend = FALSE)
+```
+
+```{r out.width='100%'}
+met |> 
+  filter(is_highlight == TRUE) |>
+  count(department) |> 
+  mutate(department = fct_reorder(department, n)) |> 
+  plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
+  layout(title = 'Department by number of highlighted objects',
+         xaxis = list(title = 'Department'), 
+         yaxis = list(title = 'Number of Highlighted Objects'),
+         showlegend = FALSE)
+```
+
+As we explore each department and the objects they hold, we find that _Drawings and Prints_ mostly contains drawings and prints (no surprise there). In _Drawings and Prints_, prints has more than triple the number of objects than the other objects. _Photographs_ also mainly contains photographs (again, not shocking and 3 times the number of objects compared to the other objects). The most common object was a piece in both _Asian Art_ and _European Sculpture and Decorative Arts_.
+
+Unlike any other department, _Greek and Roman Art_ mostly contains Kylix fragments (nearly 8 times any other object!). Kylix fragments, or vessels, are specific to Greek and Roman culture. Again, unlike any other department, the _Egyptian Art_ department has objects like reliefs, or painted scenes, and scarabs, or beetle shaped amulets, specific to Egyptian culture.
+
+The only department with only two types of objects (paintings and drawings) was _European Paintings_. Finally, let's discuss a collection close to us at CUMC: _The Cloisters_. This collection mostly contains panel, Pilgrim's badge, and capital. Most of the art displayed at _The Cloisters_ is in fact part of _The Medieval Art_ department.
 
 ## Trends analysis
 
-As the Met's collection contains many unknown or NA values, we decided to use the variables with the most complete data. We also decided that the best way to depict the Met would be with visuals worthy of being in the Met itself. Because the Met's database mainly contained categorical variables, we mainly focused on the quantity of objects, cultures, and object types. We made sure to use the one continuous variable we had (`accession_year`) to depict the Met over time. 
+As The Met's collection contains many unknown or NA values, we decided to use the variables with the most complete data. We also decided that the best way to depict the Met would be with visuals worthy of being in the Met itself. Because The Met's database mainly contained categorical variables, we mainly focused on the quantity of objects, cultures, and object types. We made sure to use the one continuous variable we had (`accession_year`) to depict the Met over time. 
 
 When browsing through The Met dataset, we immediately noticed the completeness of the year variable, `accession_year`, which represents the year that a specific object was acquired by the museum. The following plot shows the distribution of acquisition years in our data - quite impressive!
 
@@ -316,7 +346,6 @@ Once again, _the Costume Institute_ has been the most impressive! We think we kn
 
 ## Mapping
 
-
 ## Special deep-dives
 
 Entering into the data analysis of the Egyptian Art Department, `dynasty` was identified as the most important variable to focus on. The Egyptian Arts Department is unique among Met Collections in that for art of its age, it is far more complete information wise than other contemporary regions. Nevertheless, many of these artifacts were 3000 to 4000 years old, so the data was not perfect. As such, a focus on `dynasty` required a high amount of data cleaning as described above. Many artifacts that could be roughly placed timeline wise needed to be placed into the overfill category due to lack of specificity.
@@ -331,18 +360,18 @@ shape_file <- st_read("data/EGY_adm1.shp")
 
 # Discussion
 
-What were your findings? Are they what you expect? What insights into the data can you make?
 
 ## Findings and Conclusions
 
-As we explored the many departments at The Met, the department with the most objects is Drawings and Prints with 4 times as many objects as the next department!  (Interestingly enough, works on paper can only be in exhibition ~3 months at a time due to their fragility.) Yet that changes when looking at the most highlighted objects, or popular pieces of artwork, as the department with the most highlighted number of objects is The American Wing. Close behind The American Wing, Asian Art comes in second with the most highlighted objects.
+We found that objects varied department to department. Some departments were very specific to a culture (such as _Egyptian Art_ and _Greek and Roman Art_). Other departments are more specific to a specific kind of object (such as _Drawings and Prints_ and _European Paintings_). The largest department by far is _Drawings and Prints_ with over 17k of objects (in our 10% sample, meaning even more owned by The Met!). _The Cloisters_ being the smallest department as it is a different museum branch. 
 
 ## Challenges 
 
+Our biggest challenge was working with such a large database (solved by taking a 10% sample) and largely working with categorical variables. There was only so much that can be done in terms of graphs due to the nature of the data. We felt that visuals were the most important way to showcase The Met and leaned into not only bar and line graphs but also mapping. 
 
 ## Limitations and Future Challenges
 
-
+Some limitations may include not using the true size of The Met Open Access data. 
 
 
 
