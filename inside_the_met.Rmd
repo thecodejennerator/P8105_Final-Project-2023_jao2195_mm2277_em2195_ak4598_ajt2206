@@ -1,5 +1,5 @@
 ---
-title: "Exhibit D: Discovering Inside The Met"
+title: "Discovering Inside the Met"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns

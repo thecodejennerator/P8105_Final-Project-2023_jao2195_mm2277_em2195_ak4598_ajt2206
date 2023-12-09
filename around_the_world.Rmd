@@ -1,5 +1,5 @@
 ---
-title: "Exhibit E: Art Around the World"
+title: "A Globally-Sourced Collection"
 output: 
   flexdashboard::flex_dashboard:
     orientation: column
@@ -95,7 +95,7 @@ world2 <- world2 |>
 Column {data-width=60%}
 -----------------------------------------------------------------------
 
-### Number of Objects by Country
+### Where Met Objects Originate
 
 ```{r, echo= FALSE, warning=FALSE, message=FALSE}
 

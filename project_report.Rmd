@@ -279,11 +279,11 @@ This is likely a result of a large acquisition of collectible trading cards prod
 
 ### Big Years at the Met
 
-This led us to explore not just trends in object acquisitions, but also "big" years in the Met's history. With a little data wrangling, we were able to identify three types of standout years, by department: 1. When it had the highest number of objects 2. When it represented the highest number of unique cultures 3. When it represented the highest number of (known) woman artists
+This led us to explore not just trends in object acquisitions, but also "big" years in the Met's history. With a little data wrangling, we were able to identify three types of standout years, by department: 1. When it had the highest number of objects 2. When it represented the greatest number of unique cultures 3. When it represented the highest number of (known) woman artists
 
-We created three plots to visualize these "big" years across departments. It turned out each department at the Met has quite the different story.
+We created three plots to visualize these "big" years across departments. It turned out that each department at the Met has quite the different story.
 
-#### Departments at their largest
+#### Departments at Their Largest
 
 _In which year did each department have the most growth?_
 
@@ -309,7 +309,7 @@ met %>%
 
 This plot is not too surprising since it shows more clearly what we were interpreting from the trend lines. But now we can see that three departments have had more recent growth: _Greek and Roman Art_, _the Costume Institute_, and _Photographs_. Maybe we should hurry over to those departments on our next Met visit.
 
-#### Departments at their most culturally diverse
+#### Departments at Their Most Culturally Diverse
 
 _In which year was each department most representative of cultures from around the world?_
 
@@ -336,9 +336,9 @@ met %>%
   hide_legend()
 ```
 
-Interestingly, departments have not peaked in their representation-factor in recent years. Most were most diverse between the years of 1880 and 1980. But once again, _the Costume Institute_ is looking the most interesting for a present-day visit...
+Interestingly, departments have not peaked in their representation-factor in recent years. Many were most diverse between the years of 1880 and 1980. But once again, _the Costume Institute_ is looking the most interesting for a present-day visit...
 
-#### Departments at their most representative of women artists
+#### Departments at Their Most Representative of Women Artists
 
 _In which year was each department most representative of women artists?_
 
@@ -379,7 +379,7 @@ met %>%
 
 Once again, _the Costume Institute_ has been the most impressive! We think we know exactly which department we're going to first.
 
-## Mapping
+## Geolocating Departments and Met Artwork
 
 ## Special deep-dives
 
