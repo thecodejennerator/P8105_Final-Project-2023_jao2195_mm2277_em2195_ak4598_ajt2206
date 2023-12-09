@@ -11,12 +11,13 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 1 START ######### -->
+# Jennifer Osei
 <div style="text-align:center;">
   <img src="images/artify_Jennifer_Osei.jpg" style="width:35%;">
   <p style="font-size: smaller;">Jennifer in Vincent Van Gogh style</p>
 </div>
 
-# Jennifer Osei
+
 
 *MS Biostatistics | Theory and Methods* <br> 
 
@@ -27,12 +28,12 @@ We are a group of Masters & PhD students at Columbia University who worked dilig
 
 
 <!-- ####### BLOCK 2 START ######### -->
+# Melike Aksoy
 <div style="text-align:center;">
   <img src="images/melike.JPG" style="width:35%;">
   <p style="font-size: smaller;">Melike in Impressionist Style</p>
 </div>
 
-# Melike Aksoy
 
 *MPH Biostatistics | Advanced Epidemiology* <br> 
 

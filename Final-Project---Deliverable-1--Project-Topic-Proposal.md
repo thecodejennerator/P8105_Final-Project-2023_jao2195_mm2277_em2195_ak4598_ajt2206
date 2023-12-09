@@ -3,15 +3,7 @@ Proposal
 ================
 **Team:** Jennifer Osei, Melike Aksoy, Emily Murphy, Aleya Khalifa, Andy
 Turner, Diana Hernandez <br>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-**Date:** Friday, December 08, 2023 01:50 PM
-=======
-**Date:** Friday, December 08, 2023 12:24 PM
->>>>>>> Stashed changes
-=======
-**Date:** Friday, December 08, 2023 01:57 PM
->>>>>>> refs/remotes/origin/main
+**Date:** Friday, December 08, 2023 02:35 PM
 
 # Deliverable 1: Team Registration and Project Topic Proposal
 
