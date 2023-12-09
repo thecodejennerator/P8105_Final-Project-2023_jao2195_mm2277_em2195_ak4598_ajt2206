@@ -4,6 +4,8 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    navbar:
+      - {icon: "fa-home", href: "./index.html", align: right }
 ---
 ```{r, echo=FALSE, message=FALSE}
 library(flexdashboard)
@@ -75,7 +77,7 @@ world2 <- world2 |>
   filter(is.na(scalerank))
 ```
 
-Column {data-width=600}
+Column {data-width=100%}
 -----------------------------------------------------------------------
 Column {.tabset .tabset-fade}
 -------------------------------------
