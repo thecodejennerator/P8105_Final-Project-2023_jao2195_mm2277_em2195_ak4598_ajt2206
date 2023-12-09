@@ -13,7 +13,7 @@
 
 <title>Exhibition A: The Data</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -352,19 +352,19 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="the_data.html">Exhibit A: The Data</a>
+      <a href="the_data.html">Exhibition A: The Data</a>
     </li>
     <li>
-      <a href="exploring_departments.html">Exhibit B: Exploring the Met's Departments</a>
+      <a href="exploring_departments.html">Exhibition B: Exploring the Met's Departments</a>
     </li>
     <li>
-      <a href="growing_collection_dashboard.html">Exhibit C: The Met's Growing Collection</a>
+      <a href="growing_collection_dashboard.html">Exhibition C: The Met's Growing Collection</a>
     </li>
     <li>
-      <a href="inside_the_met.html">Exhibit D: Discovering Inside the Met</a>
+      <a href="inside_the_met.html">Exhibition D: Discovering Inside the Met</a>
     </li>
     <li>
-      <a href="around_the_world.html">Exhibit E: Art Around the World</a>
+      <a href="around_the_world.html">Exhibition E: Art Around the World</a>
     </li>
     <li>
       <a href="https://lakerss12.shinyapps.io/shiny_app/">Special Exhibition: Egyptian Art</a>
@@ -417,10 +417,8 @@ div.tocify {
 </div>
 
 
-<div id="data-collection-and-cleaning" class="section level1">
-<h1>Data Collection and Cleaning</h1>
-<div id="data-source" class="section level3">
-<h3>Data Source</h3>
+<div id="data-source" class="section level2">
+<h2>Data Source</h2>
 <p>Since its beginning in 1870, The Metropolitan Museum (The Met) has
 acquired and displayed over 5,000 years worth of art work from around
 the world.</p>
@@ -432,14 +430,14 @@ The dataset can be found <a
 href="https://github.com/metmuseum/openaccess">here</a>, for anyone
 interested in running their own analyses or reproducing ours.</p>
 </div>
-<div id="generating-our-sample" class="section level3">
-<h3>Generating our Sample</h3>
+<div id="generating-our-sample" class="section level2">
+<h2>Generating our Sample</h2>
 <p>The Met dataset consists of over 400,000 artistic pieces. If you
 think the Met is overwhelming to get through now - just imagine if all
 of the artworks in storage were also on display. Sadly a dataset of this
 size is too much even for us art aficionados, so we decided to divide
-and conquer (which fittingly is how many of the artifacts from around
-the world ended up in an American Art Museum).</p>
+and conquer (which, fittingly, is how many of the artifacts from around
+the world ended up in an American art museum).</p>
 <p>A dataset of this size is far too big to handle, as any analysis
 would take an excessively long time to process. Given this scale, we
 decided that it would be wise to just work with a smaller, more
@@ -455,82 +453,83 @@ code to create the same subset we did from The Met’s raw data file
 -   `save(met_10, file = &quot;data/met_10.RData&quot;)`</code></pre>
 <p>Once we had our 10% sample (amounting to 48,495 observations), we
 embarked on some data cleaning.</p>
-<div id="first-we-looked-into-which-variables-were-the-most-complete."
-class="section level4">
-<h4>First, we looked into which variables were the most complete.</h4>
+</div>
+<div id="checking-for-completeness" class="section level2">
+<h2>Checking for Completeness</h2>
+<p>First, we looked into which variables were the most complete, based
+percentage of works having data recorded for that characteristic.</p>
 <p>The following table shows the % completeness for all variables.</p>
-<p>Across all observations, <code>object_name</code> and
-<code>accession_year</code> were most complete. <code>department</code>
-was 100% complete. This informed which analytic questions we could
-answer.</p>
 <pre class="r"><code>met_10 &lt;- met_10 %&gt;% 
   janitor::clean_names()
 
 data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %&gt;%
-  magrittr::set_colnames(&quot;Completeness&quot;)</code></pre>
+  magrittr::set_colnames(&quot;Completeness&quot;) |&gt; 
+  arrange(desc(Completeness))</code></pre>
 <pre><code>##                         Completeness
 ## object_number                 100.00
 ## is_highlight                  100.00
 ## is_timeline_work              100.00
 ## is_public_domain              100.00
 ## object_id                     100.00
-## gallery_number                 10.40
 ## department                    100.00
-## accession_year                 99.28
+## object_begin_date             100.00
+## object_end_date               100.00
+## link_resource                 100.00
+## repository                    100.00
+## credit_line                    99.88
 ## object_name                    99.55
+## accession_year                 99.28
+## medium                         98.54
+## object_date                    97.19
 ## title                          94.12
-## culture                        42.74
-## period                         18.97
-## dynasty                         4.84
-## reign                           2.24
-## portfolio                       5.56
+## dimensions                     84.40
+## classification                 83.66
 ## constituent_id                 57.99
 ## artist_role                    57.99
 ## artist_prefix                  57.99
 ## artist_display_name            57.99
-## artist_display_bio             57.55
-## artist_suffix                  57.98
 ## artist_alpha_sort              57.99
 ## artist_nationality             57.99
 ## artist_begin_date              57.99
 ## artist_end_date                57.99
-## artist_gender                  22.12
+## artist_suffix                  57.98
+## artist_display_bio             57.55
 ## artist_ulan_url                46.65
 ## artist_wikidata_url            46.02
-## object_date                    97.19
-## object_begin_date             100.00
-## object_end_date               100.00
-## medium                         98.54
-## dimensions                     84.40
-## credit_line                    99.88
-## geography_type                 12.50
-## city                            6.71
-## state                           0.55
-## county                          1.72
-## country                        15.63
-## region                          6.57
-## subregion                       4.65
-## locale                          3.28
-## locus                           1.61
-## excavation                      3.45
-## river                           0.47
-## classification                 83.66
-## rights_and_reproduction         4.87
-## link_resource                 100.00
-## object_wikidata_url            14.30
-## metadata_date                   0.00
-## repository                    100.00
+## culture                        42.74
 ## tags                           39.78
 ## tags_aat_url                   39.78
-## tags_wikidata_url              39.78</code></pre>
-<p>Based on the missing data table, and our decision to focus on objects
+## tags_wikidata_url              39.78
+## artist_gender                  22.12
+## period                         18.97
+## country                        15.63
+## object_wikidata_url            14.30
+## geography_type                 12.50
+## gallery_number                 10.40
+## city                            6.71
+## region                          6.57
+## portfolio                       5.56
+## rights_and_reproduction         4.87
+## dynasty                         4.84
+## subregion                       4.65
+## excavation                      3.45
+## locale                          3.28
+## reign                           2.24
+## county                          1.72
+## locus                           1.61
+## state                           0.55
+## river                           0.47
+## metadata_date                   0.00</code></pre>
+<p>Across all observations, <code>object_name</code> and
+<code>accession_year</code> were some of the most complete.
+<code>department</code> was 100% complete. This informed which analytic
+questions we could answer.</p>
+<p>Based on the missing data table and our decision to focus on objects
 and years, we once again limited the dataset to those observations with
 complete object and year data - resulting in a final analytic dataset
 with 47,984 observations and 54 variables.</p>
 <p>All in all, we chose the following variables to work with:</p>
 <ul>
-<li><code>is_highlight</code>: When “true” indicates a popular and
-important artwork in the collection</li>
 <li><code>department</code>: Indicates The Met’s curatorial department
 responsible for the artwork</li>
 <li><code>accession_year</code>: Year the artwork was acquired</li>
@@ -544,22 +543,23 @@ found</li>
 Region, but less specific than Locale, where the artwork was created or
 found</li>
 <li><code>object_begin_date</code>: Date indicating the year the artwork
-was started to be created</li>
+was started</li>
 <li><code>object_end_date</code>: Date indicating the year the artwork
 was completed</li>
 <li><code>dynasty</code>: Dynasty (a succession of rulers of the same
 line or family) under which an object was created</li>
 </ul>
 </div>
-<div id="second-we-took-a-closer-look-at-the-variables-of-interest."
-class="section level4">
-<h4>Second, we took a closer look at the variables of interest.</h4>
-<p>We noticed that the values in <code>object_name</code> were far too
-detailed for our purpose. For example, who needs to differentiated
+<div id="cleaning-up-categorization" class="section level2">
+<h2>Cleaning Up Categorization</h2>
+<p>With the scope of our analytic dataset decided, we now turned our
+attention to the actual contents of the included variables. First, we
+noticed that the values in <code>object_name</code> were far too
+detailed for our purposes. For example, who needs to differentiate
 between a relief fragment from the <em>Tomb of Maketre</em> and a relief
 fragment form the <em>Tomb of Nespekashuty</em>? If you want to, don’t
-run this code. But we consolidated object types, like <em>reliefs</em>,
-to create better summaries.</p>
+run the code below. But we consolidated object types, like
+<em>reliefs</em>, to create simpler and clearer summaries.</p>
 <pre class="r"><code>met &lt;- met %&gt;%
   mutate(object_name = ifelse(
     grepl(&quot;Textile&quot;, object_name), &quot;Textile&quot;,
@@ -574,26 +574,30 @@ to create better summaries.</p>
                                               ifelse(grepl(&quot;hotograph&quot;, object_name), &quot;Photograph&quot;, 
                                                      ifelse(grepl(&quot;tatue&quot;, object_name), &quot;Statue&quot;, 
            object_name))))))))))))</code></pre>
-<p>Yet, as we transported ourselves to Ancient Egypt and the Met’s many
+<p>As we transported ourselves to Ancient Egypt and the Met’s many
 excavations in the area, we had to take some additional steps to dust
 off the data without hurting the artifacts. <code>Dynasty</code> was a
-key variable for the Egyptian data, as the Egyptian Art Department is
-the only Department in the Met to have fairly well-identified Dynasties,
-we felt it was important to include it. However, instead of keeping to
-the traditional 30 Dynasties of Egypt, many of the observations were
-coded as “Dynasty 1-5” or “second half 11.” We deep cleaned the table.
-Strategy was that if a Dynasty was easily identifiable from the name
-then we recoded the value to said Dynasty, if the value was of a
-consecutive dynasty ex: “Dynasty 12-13” then we kept the value as said
-Dynasty but only if that specific value was common in the data
-(n&gt;20). This was to prevent having 50+ dynasty ranges and making
-visualization tedious. Moreover, for larger Dynastic Ranges (or low
-artifact count consecutive dynasties) these were just recoded as Dynasty
-Range. Any other values were coded as NA.</p>
+key variable for the Egyptian data; because the Egyptian Art Department
+is the only Department in the Met to have fairly well-identified
+dynasties, we felt it was important to include it. However, instead of
+keeping to the traditional 30 Dynasties of Egypt, many of the
+observations were coded as “Dynasty 1-5” or “second half 11.”</p>
+<p>To harmonize the <code>Dynasty</code> variable, we used the following
+strategy:</p>
+<ul>
+<li>If the intended dynasty was easily identifiable from the name, we
+recoded the variable to said dynasty</li>
+<li>If the value was of a consecutive dynasty (for example, “Dynasty
+12-13”), we kept the value the same, but only if that specific value was
+common in the data (n&gt;20). This was to prevent having 50+ dynasty
+ranges and making visualization tedious.</li>
+<li>If the value was of an infrequently occurring consecutive dynasty,
+or for larger dynastic range, we recoded the variable to “Dynasty
+Range”</li>
+<li>Any other values were coded as NA</li>
+</ul>
 <p>Some other minor cleaning of the Egyptian data also occurred for
 object creation dates.</p>
-</div>
-</div>
 </div>
 
 <br><br>
