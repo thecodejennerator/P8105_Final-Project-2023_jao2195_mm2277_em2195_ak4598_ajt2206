@@ -4,6 +4,8 @@ output:
   flexdashboard::flex_dashboard:
     orientation: column
     vertical_layout: fill
+    navbar:
+      - {icon: "fa-home", href: "./index.html", align: right }
 ---
 
 ```{r setup, include=FALSE}
@@ -90,7 +92,7 @@ world2 <- world2 |>
 ```
 
 
-Column {data-width=650}
+Column {data-width=60%}
 -----------------------------------------------------------------------
 
 ### Number of Objects by Country
@@ -108,7 +110,8 @@ world_df <- st_transform(world_df, 4326)
 
 wes_anderson_palette <- c("#8FBEDC", "#F4D6A1", "#D7C9A7", "#D16E5A", "#B3CC57")
 
-map <- leaflet(world_df, width = "50%", height = "50%") |> 
+map <- leaflet(world_df, width = "50%", height = "50%") |>
+  setView(lng = 0, lat = 0, zoom = 2) |>
   addTiles() |> 
   addPolygons(
     fillColor = ~pal(total_objects),
@@ -142,7 +145,7 @@ map
  
 
 
-Row {data-width=350}
+Row {data-width=40%}
 -----------------------------------------------------------------------
 
 ### Top 20 Countries by Number of Objects
@@ -223,8 +226,7 @@ plot_ly(
 
 ```
 
-Column {data-width=150}
------------------------------------------------------------------------
+
 ### Ask, Discover and Learn
 
 You are inside the MET and enjoying your trip. You go from one department to another. You start to wonder how items are in each department because you are the Eygptian Art section and you realize that you need more than one day to explore this section. You start to guess that Egypt might have the highest number of items in the MET. Okay, but what about other countries? 
