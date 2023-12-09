@@ -1,5 +1,5 @@
 ---
-title: "Exhibit D: "
+title: "Exhibit E: Art Around the World"
 output: 
   flexdashboard::flex_dashboard:
     orientation: column
@@ -95,7 +95,7 @@ Row {data-width=650}
 
 ### Number of Objects by Country
 
-```{r}
+```{r, echo= FALSE, warning=FALSE, message=FALSE}
 
 world_df <- st_transform(world_df, 4326)
 
@@ -147,7 +147,7 @@ Column {data-width=350}
 
 ### Barplot
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 top_countries <- object_counts |> 
   arrange(desc(total_objects)) |> 
@@ -192,7 +192,7 @@ Column {data-width=350}
 
 ### Barplot
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 world2 <- world2 %>%
   mutate(
     category = case_when(
