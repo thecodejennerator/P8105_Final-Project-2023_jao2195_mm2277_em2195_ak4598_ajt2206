@@ -63,7 +63,7 @@ output:
   <p>
     <h2 style="background-color: rgba(244, 223, 190, 0.6); padding: 10px; color: black;">
       <font size="6">
-        <a href="https://example.com" style="color: black;"> Click here </a> to find out why we chose to do this project !
+        <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/about.html" style="color: black;"> Click here </a> to find out why we chose to do this project !
       </font>
     </h2>
   </p>
