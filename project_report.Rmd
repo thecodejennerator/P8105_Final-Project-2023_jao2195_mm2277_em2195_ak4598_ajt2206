@@ -270,11 +270,16 @@ If we take a look at the top 10 artists in that department in that year, we see 
 met %>% filter(accession_year == 1963 & department == "Drawings and Prints") %>% group_by(artist_display_name) %>% summarize(n = n()) %>% arrange(desc(n)) %>% slice_max(n, n=10)
 ```
 
-Pretty interesting since the National Institutes for Health released their report on Smoking and Health in 1964! It must have been a hot topic in 1963.
+This is likely a result of a large acquisition of collectible trading cards produced by tobacco companies in the late 1800s and early 1900s. With the National Institutes for Health releasing their notable report on Smoking and Health the following year in 1964, it's possible that these tobacco companies were attempting to entrench themselves in American artistic culture and generate goodwill to combat growing criticism.
 
-### Big years at The Met
+<div style="text-align:center;">
+  <img src="images/trading_cards.jpeg" style="width:100%;">
+  <p style="font-size: smaller;">Collectible trading cards, by Honest Long Cut Tobacco, Miners Extra Tobacco, American Tobacco Company, and Kinney Brothers Tobacco Company (1901 - 1912)</p>
+</div>
 
-This led us to explore not just trends in object acquisitions, but also "big" years in The Met's history. With a little data wrangling, we were able to identify three types of standout years, by department: 1. When it had the highest number of objects 2. When it represented the highest number of unique cultures 3. When it represented the highest number of (known) woman artists
+### Big Years at the Met
+
+This led us to explore not just trends in object acquisitions, but also "big" years in the Met's history. With a little data wrangling, we were able to identify three types of standout years, by department: 1. When it had the highest number of objects 2. When it represented the highest number of unique cultures 3. When it represented the highest number of (known) woman artists
 
 We created three plots to visualize these "big" years across departments. It turned out each department at the Met has quite the different story.
 
