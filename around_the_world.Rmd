@@ -190,7 +190,7 @@ plot_ly(
  
 
 
-### Number of Objects without a Certain Country
+### Objects Not Attributed to a Specific Country
 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -219,7 +219,7 @@ plot_ly(
   marker = list(color = wes_palette, line = list(color = 'black'))
 ) |> 
   layout(
-    xaxis = list(title = "Category"),
+    xaxis = list(title = "Non-descript Country Source Category"),
     yaxis = list(title = "Total")
   )
 
@@ -227,12 +227,10 @@ plot_ly(
 ```
 
 
-### Ask, Discover and Learn
+### Global Origins of Met Objects
 
-You are inside the MET and enjoying your trip. You go from one department to another. You start to wonder how many items are in each department because you are the Egyptian Art section and you realize that you need more than one day to explore this section. You start to guess that Egypt might have the highest number of items in the MET. Okay, but what about other countries? 
+You are inside the Met and enjoying your trip. You go from one department to another. Soon, you realize you've spent an exceptionally long time in the Egyptian Art section, and there are still rooms to go. How big is this place? You start to get a sense that everything in the museum might come from Egypt. Well, you're almost right! Compared to other countries, Egypt does blow the rest out of the water when it comes to counting the number of works originated to each location. The United States takes second place on the podium, while Iran takes third place. 
 
-Well, you are right!
-Compared to other countries, Egypt was the country with most of the objects. Meanwhile, United States was in the second place of the chart. Iran takes the third place with most of the objects in the MET.
+But wait! Now, you might be wondering how the Met keeps track of the origin of each item. Surely, it must be challenging for Met employees to document the details of every item over the years. Perhaps, in some cases, the location of certain items was never determined from the beginning. And you're correct! The location of 93 items in the Met collection is uncertain, indicating that these items were recorded as being from two or three countries, or the experts were unsure about the specific country, providing multiple possibilities. For instance, some items are recorded as being from Afghanistan or Iran, and some are recorded as possibly from Syria. Additionally, there are items recorded as belonging to two countries, reflecting the historical changes in borders over the years. 
 
-But wait! 
-Now, you might be wondering how the MET keeps track of the origin of each item. Surely, it must be challenging for MET employees to document the details of every item over the years. Perhaps, in some cases, the location of certain items was never determined from the beginning. And you're correct! The location of 93 items in the MET collection is uncertain, indicating that these items were recorded as being from two or three countries, or the experts were unsure about the specific country, providing multiple possibilities. For instance, some items are recorded as being from Afghanistan or Iran, and some are recorded as possibly from Syria. Additionally, there are items recorded as belonging to two countries, reflecting the historical changes in borders over the years. One last thing before you go,  40,840 items in the MET Collection have no country affiliation. Interesting, right! 
+Notably, there's a large pool of 40,840 items in the Met's collection which have no location information whatsoever, as their country data is simply listed as "Not Available." 
