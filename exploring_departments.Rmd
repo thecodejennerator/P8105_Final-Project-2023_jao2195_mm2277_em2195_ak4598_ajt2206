@@ -1,5 +1,5 @@
 ---
-title: "Exhibition B: Exploring the Met's Departments"
+title: "Exploring the Met's Departments"
 output: 
   html_document:
     toc: true
