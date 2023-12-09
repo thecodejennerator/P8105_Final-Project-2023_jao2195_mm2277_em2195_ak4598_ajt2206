@@ -98,7 +98,8 @@ met_10 <- met_10 %>%
 
 data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %>%
   magrittr::set_colnames("Completeness") |> 
-  arrange(desc(Completeness))
+  arrange(desc(Completeness)) |> 
+  head(15)
 ```
 
 Across all observations, `object_name` and `accession_year` were some of the most complete. `department` was 100% complete. This informed which analytic questions we could answer.
@@ -153,20 +154,22 @@ Some other minor cleaning of the Egyptian data also occurred for object creation
 
 ## Departmental Digging
 
-As we explored the many departments at the Met, the found that the department with the most objects is _Drawings and Prints_, with 4 times as many objects as the next largest department! This, of course, might be explained by the small and easily storable dimensions of most prints, in comparison to statues or reliefs (interestingly, works on paper can only be exhibited for ~3 months at a time due to their fragility).
+The Met holds many collections, from Modern and Contemporary Art to Arms and Armor. Click [here](https://www.metmuseum.org/about-the-met/collection-areas) to learn more about each department, or collection area.
+
+As we explored the many departments at the Met, the found that the department with the most objects is [_Drawings and Prints_](https://www.metmuseum.org/about-the-met/collection-areas/drawings-and-prints), with 4 times as many objects as the next largest department! This, of course, might be explained by the small and easily storable dimensions of most prints, in comparison to statues or reliefs (interestingly, works on paper can only be exhibited for ~3 months at a time due to their fragility).
 
 ```{r out.width='100%'}
 met |> 
   count(department) |> 
   mutate(department = fct_reorder(department, n)) |> 
   plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
-  layout(title = 'Number of Objects Per Department',
+  layout(title = 'Number of objects per department',
          xaxis = list(title = 'Department'), 
-         yaxis = list(title = 'Number of Objects'),
+         yaxis = list(title = 'Number of objects'),
          showlegend = FALSE)
 ```
 
-But, when focusing specially on highlighted objects (essentially, popular artworks), the rankings change, with _The American Wing_ being the department with the most objects. Close behind _The American Wing_, _Asian Art_ comes in second with the most highlighted objects.
+But, when focusing specially on highlighted objects (essentially, popular artworks), the rankings change, with [_The American Wing_](https://www.metmuseum.org/about-the-met/collection-areas/the-american-wing) being the department with the most objects. Close behind _The American Wing_, [_Asian Art_](https://www.metmuseum.org/about-the-met/collection-areas/asian-art) comes in second with the most highlighted objects.
 
 ```{r out.width='100%'}
 met |> 
@@ -174,13 +177,13 @@ met |>
   count(department) |> 
   mutate(department = fct_reorder(department, n)) |> 
   plot_ly(x = ~department, y = ~n, color = ~department, type = "bar", colors = mypal) |>
-  layout(title = 'Number of Highlighted Objects Per Department',
+  layout(title = 'Number of highlighted objects per department',
          xaxis = list(title = 'Department'), 
-         yaxis = list(title = 'Number of Highlighted Objects'),
+         yaxis = list(title = 'Number of highlighted objects'),
          showlegend = FALSE)
 ```
 
-As we explore each department and the objects they hold, we find that _Drawings and Prints_ mostly contains drawings and prints (no surprise there). In _Drawings and Prints_, prints outnumber other objects by more than 300%. _Photographs_ also mainly contains photographs (again, unsurprisingly, and with photographs outnumbering other objects in the department 3 to 1). The most common object is a piece in both _Asian Art_ and _European Sculpture and Decorative Arts_.
+As we explore each department and the objects they hold, we find that _Drawings and Prints_ mostly contains drawings and prints (no surprise there). In Drawings and Prints, the number of prints is more than triple the count of any other object types.[_Photographs_](https://www.metmuseum.org/about-the-met/collection-areas/photographs) also mainly contains photographs (again, unsurprisingly, and with photographs outnumbering other objects in the department 3 to 1). A "piece" is the most common object in both _Asian Art_ and [_European Sculpture and Decorative Arts_](https://www.metmuseum.org/about-the-met/collection-areas/european-sculpture-and-decorative-arts).
 
 <div style="text-align:center;">
   <img src="images/van_gogh_print.jpeg" style="width:100%;">
@@ -201,32 +204,34 @@ In the _Egyptian Art_ Department, unique objects include reliefs, or painted sce
   <p style="font-size: smaller;">Winged Scarab (664 – 332 BC)</p>
 </div>
 
-The only department with only two types of objects is _European Paintings_, as it contains only paintings and drawings. Finally, let's discuss a collection close to us at the CUMC campus: [The Cloisters](https://www.metmuseum.org/visit/plan-your-visit/met-cloisters). The Cloisters collection largely consists of panel, Pilgrim's badge, and capital-type works. Most of the art displayed at _The Cloisters_ is in fact part of _The Medieval Art_ Department.
+The only department with only two types of objects is _European Paintings_, as it contains only paintings and drawings. Finally, let's discuss a collection close to us at the CUMC campus: [The Cloisters](https://www.metmuseum.org/visit/plan-your-visit/met-cloisters). The Cloisters collection largely consists of panel, Pilgrim's badge, and capital-type works. Most of the art displayed at The Cloisters is in fact part of _The Medieval Art_ Department.
 
 <div style="text-align:center;">
   <img src="images/cloisters.jpeg" style="width:100%;">
   <p style="font-size: smaller;">The Met Cloisters</p>
 </div>
 
-## Trends analysis
+For a department-by-department breakdown of the most common objects, including plots for each of the Met's many departments, see the [Exploring the Met's Departments](exploring_departments.html) page. 
 
-As The Met's collection contains many unknown or NA values, we decided to use the variables with the most complete data. We also decided that the best way to depict the Met would be with visuals worthy of being in the Met itself. Because The Met's database mainly contained categorical variables, we mainly focused on the quantity of objects, cultures, and object types. We made sure to use the one continuous variable we had (`accession_year`) to depict the Met over time. 
+## The Met's Changing Collection
 
-When browsing through The Met dataset, we immediately noticed the completeness of the year variable, `accession_year`, which represents the year that a specific object was acquired by the museum. The following plot shows the distribution of acquisition years in our data - quite impressive!
+Because the Met database mainly contained categorical variables, we largely focused our investigation on the quantity of objects, cultures, and object types. But, while working on data cleaning, we immediately noticed the completeness of the continuous year variable, `accession_year`, which represents the year that a specific object was acquired by the museum. As one of the main questions driving our investigation was about how The Met has changed in the 150+ years it's been open, we knew we could use this variable to examine trends over time. 
+
+The following plot shows the distribution of acquisition years in our data - quite impressive!
 
 ```{r}
 ggplot(met, aes(x = accession_year)) + 
   geom_histogram(color = "#0B775E", fill = "#a7ba42", binwidth = 10) +
   scale_x_continuous(breaks = seq(1860, 2030, by = 10)) +
-  labs(title = "Distribution of the year objects were acquired",
+  labs(title = "Distribution of objects acquired per year",
        y = "Number of objects", 
        x = "Year") + 
   theme_classic()
 ```
 
-### Growth over time
+### Growth Over Time
 
-This prompted us to take a deeper dive and look at the growth over time by department. For example, did all of them have a spike in object acquisitions in the 1960s and 2010s? For this, we build an interactive plot which you can also find in Exhibit C: The Met's Growing Collection.
+This prompted us to take a deeper dive and look at the growth over time by department. For example, did all of them have a spike in object acquisitions in the 1960s and 2010s? For this, we built an interactive plot which you can also find in [Exhibition C: The Met's Growing Collection](growing_collection_dashboard.html).
 
 ```{r, message=FALSE}
 met %>%
@@ -246,15 +251,15 @@ met %>%
          showlegend = FALSE)
 ```
 
-Now, we can hover over or zoom into parts of the trend line that look interesting. For example, what happened in 2011 with Greek and Roman Art? A google search revealed nothing, so maybe it was just a particularly productive year for that department's curator. More interestingly, however, is the year 1963, in which the department of Drawings and Prints acquired over 4,000 objects.
+Now, we can hover over or zoom into parts of the trend line that look interesting. For example, what happened in 2011 with Greek and Roman Art? A Google search revealed no answers, so maybe it was just a particularly productive year for that department's curator. More interestingly, however, is the year 1963, in which the department of Drawings and Prints acquired over 4,000 objects.
 
 *What happened in the Drawings and Prints department in 1963?*
 
-Well, first we searched the world wide web. Turns out, [the _Mona Lisa_ was added to The Met in 1963!](https://www.metmuseum.org/perspectives/videos/2021/1/from-the-vaults-leonardo-da-vinci-mona-lisa)
+Well, first we searched the world wide web. Turns out, [the _Mona Lisa_ was shown at The Met in 1963!](https://www.metmuseum.org/perspectives/videos/2021/1/from-the-vaults-leonardo-da-vinci-mona-lisa)
 
 <div style="text-align:center;">
   <img src="images/Mona-Lisa.jpeg" style="width:100%;">
-  <p style="font-size: smaller;"><em>A crowd forms around the Mona Lisa (1963)</em></p>
+  <p style="font-size: smaller;">A crowd forms around the Mona Lisa (1963)</p>
 </div>
 
 But that can't be the reason for the uptick in objects acquired. The _Mona Lisa_ is just one painting. 
