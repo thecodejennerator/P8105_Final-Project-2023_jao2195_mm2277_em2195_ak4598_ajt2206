@@ -76,6 +76,7 @@ world2 <- left_join(object_counts, world, by = c("country" = "name"))
 world2 <- world2 |> 
   filter(is.na(scalerank))
 ```
+HELLO! Please select the floor you want to tour to see different departments of the Met. This page includes the information about department locations and number of total objects in each department. If you want to compare the number of object between different departments, check out our bar plots. When you want to see the total number of objects from the department that you are interested in, please click on the location pin. Enjoy!
 
 Column {data-width=100%}
 -----------------------------------------------------------------------
