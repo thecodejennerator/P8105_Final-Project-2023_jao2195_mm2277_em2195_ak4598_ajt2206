@@ -72,17 +72,17 @@ output:
 </html>
 
 
-<center><h1 class="highlight"> <font size="10"> <b> Exhibits </font> </h1 class="highlight"> 
+<center><h1 class="highlight"> <font size="10"> <b> Exhibitions </font> </h1 class="highlight"> 
 
 <left>
   <p>
     <h2 style="background-color: rgba(244, 223, 190, 0.6); padding: 10px; color: black;">
-        <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/the_data.html" style="color: black;"> Click here </a> to learn more about Exhibit A: The Data! <br>
-         <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/exploring_departments.html" style="color: black;"> Click here </a> to learn more about Exhibit B: Exploring the Met's Departments! <br>
-          <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/growing_collection_dashboard.html" style="color: black;"> Click here </a> to learn more about Exhibit C: Them Met's Growing Collection! <br>
+        <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/the_data.html" style="color: black;"> Click here </a> to learn more about Exhibition A: The Data! <br>
+         <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/exploring_departments.html" style="color: black;"> Click here </a> to learn more about Exhibition B: Exploring the Met's Departments! <br>
+          <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/growing_collection_dashboard.html" style="color: black;"> Click here </a> to learn more about Exhibition C: Them Met's Growing Collection! <br>
            <a href="https://thecodejennerator.github.io/P8105_Final-Project-2023_jao2195_mm2277_em2195_ak4598_ajt2206/around_the_world.html" style="color: black;"> 
-      Click here </a> to learn more about Exhibit D: Art Around the World! <br>
-           <a href="https://lakerss12.shinyapps.io/shiny_app/" style="color: black;"> Click here </a> to learn more about our Special Exhibit: Egyptian Royalty <br>
+      Click here </a> to learn more about Exhibition D: Art Around the World! <br>
+           <a href="https://lakerss12.shinyapps.io/shiny_app/" style="color: black;"> Click here </a> to learn more about our Special Exhibition: Egyptian Royalty <br>
       </font>
     </h2>
   </p>
@@ -118,7 +118,7 @@ output:
 </html>
     
   <!-- Page Goodbye-->
-<center><h1 class="highlight"> <font size="10"> <b> We hope you enjoyed your virtual visit to The Art of Data Science: The Met Museum! Come and Visit Us Again!  </font> </h1 class="highlight">  </center>
+<center><h1 class="highlight"> <font size="10"> <b> We hope you enjoyed your virtual visit to The Art of Data Science: The Met Museum. Come and visit us again!  </font> </h1 class="highlight">  </center>
 
    <!-- Some Art Images -->
     <img src="images/greek_statue.jpeg" alt="Description of the image" style="width:     300px; height: auto;">
