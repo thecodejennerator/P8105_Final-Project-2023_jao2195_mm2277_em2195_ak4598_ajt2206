@@ -3,6 +3,8 @@ output:
   flexdashboard::flex_dashboard:
     vertical_layout: scroll
     theme: cosmo
+    navbar:
+      - {icon: "fa-home", href: "./index.html", align: right }
 runtime: shiny
 ---
 

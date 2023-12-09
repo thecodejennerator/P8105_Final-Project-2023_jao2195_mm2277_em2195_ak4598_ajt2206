@@ -458,62 +458,24 @@ percentage of works having data recorded for that characteristic.</p>
 
 data.frame(sapply(met_10, function(x) round(sum(!is.na(x))/nrow(met_10)*100,2))) %&gt;%
   magrittr::set_colnames(&quot;Completeness&quot;) |&gt; 
-  arrange(desc(Completeness))</code></pre>
-<pre><code>##                         Completeness
-## object_number                 100.00
-## is_highlight                  100.00
-## is_timeline_work              100.00
-## is_public_domain              100.00
-## object_id                     100.00
-## department                    100.00
-## object_begin_date             100.00
-## object_end_date               100.00
-## link_resource                 100.00
-## repository                    100.00
-## credit_line                    99.88
-## object_name                    99.55
-## accession_year                 99.28
-## medium                         98.54
-## object_date                    97.19
-## title                          94.12
-## dimensions                     84.40
-## classification                 83.66
-## constituent_id                 57.99
-## artist_role                    57.99
-## artist_prefix                  57.99
-## artist_display_name            57.99
-## artist_alpha_sort              57.99
-## artist_nationality             57.99
-## artist_begin_date              57.99
-## artist_end_date                57.99
-## artist_suffix                  57.98
-## artist_display_bio             57.55
-## artist_ulan_url                46.65
-## artist_wikidata_url            46.02
-## culture                        42.74
-## tags                           39.78
-## tags_aat_url                   39.78
-## tags_wikidata_url              39.78
-## artist_gender                  22.12
-## period                         18.97
-## country                        15.63
-## object_wikidata_url            14.30
-## geography_type                 12.50
-## gallery_number                 10.40
-## city                            6.71
-## region                          6.57
-## portfolio                       5.56
-## rights_and_reproduction         4.87
-## dynasty                         4.84
-## subregion                       4.65
-## excavation                      3.45
-## locale                          3.28
-## reign                           2.24
-## county                          1.72
-## locus                           1.61
-## state                           0.55
-## river                           0.47
-## metadata_date                   0.00</code></pre>
+  arrange(desc(Completeness)) |&gt; 
+  head(15)</code></pre>
+<pre><code>##                   Completeness
+## object_number           100.00
+## is_highlight            100.00
+## is_timeline_work        100.00
+## is_public_domain        100.00
+## object_id               100.00
+## department              100.00
+## object_begin_date       100.00
+## object_end_date         100.00
+## link_resource           100.00
+## repository              100.00
+## credit_line              99.88
+## object_name              99.55
+## accession_year           99.28
+## medium                   98.54
+## object_date              97.19</code></pre>
 <p>Across all observations, <code>object_name</code> and
 <code>accession_year</code> were some of the most complete.
 <code>department</code> was 100% complete. This informed which analytic
@@ -547,13 +509,16 @@ line or family) under which an object was created</li>
 <div id="cleaning-up-categorization" class="section level2">
 <h2>Cleaning Up Categorization</h2>
 <p>With the scope of our analytic dataset decided, we now turned our
-attention to the actual contents of the included variables. First, we
-noticed that the values in <code>object_name</code> were far too
-detailed for our purposes. For example, who needs to differentiate
-between a relief fragment from the <em>Tomb of Maketre</em> and a relief
-fragment form the <em>Tomb of Nespekashuty</em>? If you want to, don’t
-run the code below. But we consolidated object types, like
-<em>reliefs</em>, to create simpler and clearer summaries.</p>
+attention to the actual contents of the included variables.</p>
+<div id="object-name" class="section level3">
+<h3>Object Name</h3>
+<p>First, we noticed that the values in <code>object_name</code> were
+far too detailed for our purposes. For example, who needs to
+differentiate between a relief fragment from the <em>Tomb of
+Maketre</em> and a relief fragment form the <em>Tomb of
+Nespekashuty</em>? If you want to, don’t run the code below. But we
+consolidated object types, like <em>reliefs</em>, to create simpler and
+clearer summaries.</p>
 <pre class="r"><code>met &lt;- met %&gt;%
   mutate(object_name = ifelse(
     grepl(&quot;Textile&quot;, object_name), &quot;Textile&quot;,
@@ -568,6 +533,9 @@ run the code below. But we consolidated object types, like
                                               ifelse(grepl(&quot;hotograph&quot;, object_name), &quot;Photograph&quot;, 
                                                      ifelse(grepl(&quot;tatue&quot;, object_name), &quot;Statue&quot;, 
            object_name))))))))))))</code></pre>
+</div>
+<div id="dynasty" class="section level3">
+<h3>Dynasty</h3>
 <p>As we transported ourselves to Ancient Egypt and the Met’s many
 excavations in the area, we had to take some additional steps to dust
 off the data without hurting the artifacts. <code>Dynasty</code> was a
@@ -730,6 +698,55 @@ object creation dates.</p>
     dynasty = ifelse(is.na(dynasty), &quot;No Dynasty Specified&quot;, dynasty),
   dynasty = factor(dynasty, levels = c(&quot;Dynasty 1&quot;, &quot;Dynasty 2&quot;, &quot;Dynasty 3&quot;, &quot;Dynasty 4&quot;, &quot;Dynasty 5&quot;, &quot;Dynasty 6&quot;, &quot;Dynasty 8&quot;, &quot;Dynasty 9&quot;, &quot;Dynasty 11&quot;, &quot;Dynasty 12&quot;, &quot;Dynasty 12-13&quot;, &quot;Dynasty 13&quot;, &quot;Dynasty 14&quot;, &quot;Dynasty 15&quot;, &quot;Dynasty 17&quot;, &quot;Dynasty 17-18&quot;, &quot;Dynasty 18&quot;, &quot;Dynasty 19&quot;, &quot;Dynasty 19-20&quot;, &quot;Dynasty 20&quot;, &quot;Dynasty 21&quot;, &quot;Dynasty 22&quot;, &quot;Dynasty 23&quot;, &quot;Dynasty 24&quot;, &quot;Dynasty 25&quot;, &quot;Dynasty 26&quot;, &quot;Dynasty 27&quot;, &quot;Dynasty 30&quot;, &quot;Dynasty Range&quot;, &quot;NA&quot;)),
   dyn_number = ifelse(is.na(dynasty), 30, as.numeric(dynasty)))</code></pre>
+</div>
+<div id="country" class="section level3">
+<h3>Country</h3>
+<p>Geolocating the source of artworks and depicting them on a world map
+required some additional data management. This began with merged our
+already-prepped Met data with world data from <code>rnaturalearth</code>
+package. This world data contains information about countries and
+locations such as longitudes and latitudes.</p>
+<p>However, after merging, it became clear that the <code>country</code>
+variable in our data need some additional cleaning, as some countries
+were coded in a different format than the world data dataset. This
+difference created more missing data on countries and total number of
+objects. In order to resolve the issue, we updated the name of the
+countries in our Met data to match the names of countries in the world
+data. We also pulled out the subset of the remaining objects with
+attributed countries that didn’t match country names in the world data,
+so that we could investigate these non-matches in their own plot.</p>
+</div>
+<div id="egyptian-subregion" class="section level3">
+<h3>Egyptian Subregion</h3>
+<p>Continuing with our art theme, the Met took some LARGE creative
+liberties when it described the <code>subregion</code> in which
+artifacts in Egypt were found. Unfortunately, the regions and subregions
+that the Met identified were not what the Egyptian government themselves
+self-identified as regions and subregions within their country.</p>
+<p>As such, some (archeological) digging was required to map Egypt.
+First, we snagged a shapefile of First-Level Administrative Districts
+from a [UTexas library] (<a
+href="https://geodata.lib.utexas.edu/catalog/stanford-bb409wq6265"
+class="uri">https://geodata.lib.utexas.edu/catalog/stanford-bb409wq6265</a>).
+To better streamline our repositories, we decided to upload and then
+save the <code>EGY_adm1.shp</code> as an RData file and keep only the
+modified file for quicker loading.</p>
+<p>Using the code below, we decided to upload and then save the
+<code>EGY_adm1.shp</code> as an RData file and keep only the modified
+file to streamline our reposiories and speed up loading time:</p>
+<pre><code>-   `library(sf)`
+
+-   `shape_file &lt;- st_read(&quot;data/EGY_adm1.shp&quot;)`</code></pre>
+<p>Thankfully the file was in Polygon form, so we had a map - now to get
+to the real artifacts. Due to the general ugliness of the
+regions/subregions data, we decided to use the subregions data and
+simply find the latitude and longitudes for the areas. To make sure we
+finished this task before being mummified, we restricted the data to
+only subregions with more than 10 artifact numbers. Sadly, the resulting
+data for artifacts is point data rather than polygons, but it would
+still be useful for our later mapping of artefacts by Egyptian
+region.</p>
+</div>
 </div>
 
 <br><br>

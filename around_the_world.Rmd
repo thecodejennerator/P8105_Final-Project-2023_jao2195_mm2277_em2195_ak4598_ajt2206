@@ -181,8 +181,8 @@ plot_ly(
     showlegend = FALSE
   ) |> 
   layout(
-    xaxis = list(title = "Country", categoryorder = "total ascending"),
-    yaxis = list(title = "Number of Objects"),
+    xaxis = list(categoryorder = "total ascending"),
+    yaxis = list(title = "# of Objects"),
     showlegend = FALSE  # Hide legend if desired
   )
 
