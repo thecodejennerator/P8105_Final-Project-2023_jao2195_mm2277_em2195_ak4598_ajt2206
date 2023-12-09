@@ -1,5 +1,5 @@
 ---
-title: "Discovering Inside The Met"
+title: "Exhibit D: Discovering Inside The Met"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -112,7 +112,7 @@ for (i in seq_len(nrow(met_departments))) {
 firstfl
 ```
 
-### Barplot
+### First Floor Barplot
 
 ```{r, echo=FALSE}
 library(leaflet)
@@ -150,10 +150,6 @@ bar_plot
 
 ```
 
-Column {data-width=300}
------------------------------------------------------------------------
-Column {.tabset .tabset-fade}
--------------------------------------
 ### Second Floor
 
 ```{r, echo=FALSE}
@@ -190,7 +186,7 @@ for (i in seq_len(nrow(met_departments))) {
 secondfl
 ```
 
-### Barplot
+### Second Floor Barplot
 
 ```{r, echo=FALSE}
 library(leaflet)
@@ -229,10 +225,6 @@ second
 
 ```
 
-Column {data-width=300}
------------------------------------------------------------------------
-Column {.tabset .tabset-fade}
--------------------------------------
 ### Floor G
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -269,7 +261,7 @@ for (i in seq_len(nrow(met_departments))) {
 gfl
 ```
 
-### Barplot
+### Floor G Barplot
 
 ```{r, echo=FALSE}
 library(leaflet)
@@ -310,10 +302,7 @@ plotg
 
 ```
 
-Column {data-width=300}
------------------------------------------------------------------------
-Column {.tabset .tabset-fade}
--------------------------------------
+
 ### The Cloisters
 
 ```{r, echo=FALSE}
