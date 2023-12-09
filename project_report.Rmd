@@ -383,6 +383,8 @@ Our biggest challenge was working with such a large database (solved by taking a
 
 Creating maps with The Met data was challenging because some of the countries were not recorded well. In same cases, the records include old country names or designate certain territories as countries, or they were coded as a region of a country. Since the data is mostly categorical, we were limited at what to include in the map. The variables that we were interested in including our analysis were `culture`, `reign`, `dynasty`, `is_highlight`, `accession_year`, `object_name`, `subregion`, and `object_end_date`. The only variables that we could use in our maps were the `country` and `object_name`.
 
+A minor challenge that came up was when creating `plotly` graphs for each department and their objects and it made the Exploring The Met's departments page very slow. We decided the best action would be to change from `plotly` to `ggplot` bar graphs for the department specific graphs.
+
 ## Limitations and Future Challenges
 
 Some limitations may include not using the true size of The Met Open Access data. 
