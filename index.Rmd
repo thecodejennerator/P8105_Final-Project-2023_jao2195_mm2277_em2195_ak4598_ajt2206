@@ -57,6 +57,21 @@ output:
 
 <center> <h1 class="highlight"> <font size="10"> <b> Welcome to The Art of Data Science: <br> The Met Museum </h1 class="highlight"> </font> 
 
+ <!-- Project Screencast-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Art of Data Science Screencast</title>
+</head>
+<body>
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/Rf5k0mM-GZg" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+</body>
+</html>
+
+ <!-- Project Metivation-->
 <center><h1 class="highlight"> <font size="10"> <b> Project "Met"ivation </font> </h1 class="highlight">
 
 <center>
@@ -147,7 +162,6 @@ output:
       <a href="https://p8105.com/">here.</a>.
    </p>
    </body>
-   
 
    <!-- QR CODE To Website -->
     <img src="images/website_QR_Code.png" alt="Description of the image" style="width:     300px; height: auto;">
