@@ -163,8 +163,8 @@ output:
    </p>
    </body>
 
-   <!-- QR CODE To Website -->
-    <img src="images/website_QR_Code.png" alt="Description of the image" style="width:     300px; height: auto;">
+   <!-- QR CODE To Website (Removed) -->
+
    
 </body>
 </html>
